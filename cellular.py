@@ -5,22 +5,6 @@ from wdg_wealth import WdgWealth
 from wdg_specs import WdgSpecs
 import collections
 
-neighbourSynonyms = ('neighbours', 'neighbors', 'neighbour', 'neighbor')
-
-
-class Cell:
-    def __getattr__(self, key):
-        if key in neighbourSynonyms:
-            pts = [
-                self.world.getPointInDirection(self.x, self.y, dir)
-                for dir in range(self.world.directions)
-            ]
-            ns = tuple([self.world.grid[y][x] for (x, y) in pts])
-            for n in neighbourSynonyms:
-                self.__dict__[n] = ns
-            return ns
-        raise AttributeError(key)
-
 
 class Agent:
     def __setattr__(self, key, val):

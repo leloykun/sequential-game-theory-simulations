@@ -1,5 +1,5 @@
 NEARBY = [(0, -1), (1, 0), (0, 1), (-1, 0), (0, 0)]
-
+NEIGHBOUR_SYNONYMS = ('neighbours', 'neighbors', 'neighbour', 'neighbor')
 COLOR_CODE = ['#332532', '#644D52', '#F77A52', '#FF974F', '#A49A87']
 
 ID                   = 0
