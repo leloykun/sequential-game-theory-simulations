@@ -6,7 +6,7 @@ class WdgSpecs():
     def display(cls, agents, age):
         data = []
         for agent in agents:
-            data.append(agent.getSpecialization()+1)
+            data.append(agent.get_specialization()+1)
             
         fig, ax = pl.subplots(1,1)
         
