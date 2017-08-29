@@ -10,7 +10,7 @@ from person import *
 from cell import Cell
 
 
-world = cellular.World(Cell, directions=8, filename=settings.ENVIRONMENT)
+world = cellular.World(Cell, directions=8, filename=settings.MAP)
 world.age = 0
 
 
