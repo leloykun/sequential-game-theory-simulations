@@ -1,8 +1,8 @@
 import random
 import sys
 
-from wdg_wealth import WdgWealth
-from wdg_specs import WdgSpecs
+from widgets.wealth_dist import WdgWealth
+from widgets.specs_dist import WdgSpecs
 import collections
 
 
