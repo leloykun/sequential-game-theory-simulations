@@ -156,6 +156,10 @@ class PygameDisplay:
     def make_title(self):
         text = 'age: %d' % self.world.age
         extra = []
+        if self.world.eaten is not None:
+            extra.append('eaten=%d' % self.world.eaten)
+        if self.world.fed is not None:
+            extra.append('fed=%d' % self.world.fed)
         if self.paused:
             extra.append('paused')
         if self.updateEvery != 1:

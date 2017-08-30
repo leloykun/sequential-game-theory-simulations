@@ -68,7 +68,7 @@ class World:
             for i in range(min(self.width, len(self.data[j]))):
                 self.grid[j][i].load(self.data[j][i])
     
-    def update(self):
+    def update(self, eaten=None, fed=None):
         #print("update world")
         if hasattr(self.Cell, 'update'):
             for agent in self.agents:
@@ -84,12 +84,15 @@ class World:
             self.display.redraw()
         else:
             for agent in self.agents:
-                print(agent)
                 old_cell = agent.cell
                 agent.update()
                 if old_cell != agent.cell:
                     self.display.redrawCell(old_cell.x, old_cell.y)
                 self.display.redrawCell(agent.cell.x, agent.cell.y)
+        
+        self.eaten = eaten
+        self.fed = fed
+        
         self.display.update()
         self.age += 1
     
