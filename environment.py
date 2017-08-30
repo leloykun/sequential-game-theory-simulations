@@ -11,12 +11,13 @@ class Environment:
         self.world.display.activate(size=30)
         self.world.display.delay = 1
     
-    def add_agent(self, agent):
+    def add_agent(self, agent, cell=None):
         agent.env = self
         agent.world = self.world
         agent.id = self.get_next_id()
-        if agent.cell is None:
-            agent.cell = self.get_random_avail_cell()
+        if cell is None:
+            cell = self.get_random_avail_cell()
+        agent.cell = cell
         
         self.world.agents.append(agent)
         self.agents.append(agent)
@@ -34,8 +35,8 @@ class Environment:
                 return cell
     
     def update(self):
-        print("update env")
-        self.world.update()
+        #print("update env")
+        self.world.update(self.world.mouse.eaten, self.world.mouse.fed)
     
     def get_data(self):
         pass
