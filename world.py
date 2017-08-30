@@ -69,7 +69,7 @@ class World:
                 self.grid[j][i].load(self.data[j][i])
     
     def update(self):
-        print("update world")
+        #print("update world")
         if hasattr(self.Cell, 'update'):
             for agent in self.agents:
                 agent.update()
@@ -83,7 +83,6 @@ class World:
                     cell.__dict__, self.backup[j][i] = self.backup[j][i], cell.__dict__
             self.display.redraw()
         else:
-            print("second")
             for agent in self.agents:
                 print(agent)
                 old_cell = agent.cell
