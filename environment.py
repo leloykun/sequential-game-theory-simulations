@@ -8,6 +8,7 @@ class Environment:
         self.database = []
         self.data_output = ""
         
+    def show(self):
         self.world.display.activate(size=30)
         self.world.display.delay = 1
     

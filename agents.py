@@ -129,7 +129,7 @@ class Mouse(Agent):
             self.world.cheese.cell = self.env.get_random_avail_cell()
         
         state = self.calc_state()
-        print(state)
+        #print(state)
         action = self.ai.chooseAction(state)
         self.last_state = state
         self.last_action = action
