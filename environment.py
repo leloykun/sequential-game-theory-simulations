@@ -18,6 +18,7 @@ class Environment:
         if agent.cell is None:
             agent.cell = self.get_random_avail_cell()
         
+        self.world.agents.append(agent)
         self.agents.append(agent)
         
     def get_next_id(self):
@@ -33,6 +34,7 @@ class Environment:
                 return cell
     
     def update(self):
+        print("update env")
         self.world.update()
     
     def get_data(self):

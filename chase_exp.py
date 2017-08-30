@@ -10,17 +10,20 @@ if __name__ == '__main__':
     env = Environment(world=World(map='worlds/waco.txt', Cell=Casual))
     
     # add 5 mice
-    for _ in range(5):
-        env.add_agent(Mouse())
+    for _ in range(1):
+        mouse = Mouse()
+        env.add_agent(mouse)
+        env.world.mouse = mouse
     
     # add 1 cat
     for _ in range(1):
-        env.add_agent(Cat())
+        cat = Cat()
+        env.add_agent(cat)
+        env.world.cat = cat
     
 
     
     # for 10_000 training ages
     for _ in range(10000):
         env.update()
-        env.world.display.paused = True
     
