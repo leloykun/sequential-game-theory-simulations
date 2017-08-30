@@ -69,6 +69,7 @@ class World:
                 self.grid[j][i].load(self.data[j][i])
     
     def update(self):
+        print("update world")
         if hasattr(self.Cell, 'update'):
             for agent in self.agents:
                 agent.update()
@@ -82,14 +83,44 @@ class World:
                     cell.__dict__, self.backup[j][i] = self.backup[j][i], cell.__dict__
             self.display.redraw()
         else:
+            print("second")
             for agent in self.agents:
+                print(agent)
                 old_cell = agent.cell
                 agent.update()
                 if old_cell != agent.cell:
-                    self.display.redraw_cell(old_cell.x, old_cell.y)
-                self.display.redraw_cell(agent.cell.x, agent.cell.y)
+                    self.display.redrawCell(old_cell.x, old_cell.y)
+                self.display.redrawCell(agent.cell.x, agent.cell.y)
         self.display.update()
         self.age += 1
+    
+    def getPointInDirection(self, x, y, dir):
+        if self.num_dir == 8:
+            dx, dy = [(0, -1), (1, -1), (
+                1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)][dir]
+        elif self.num_dir == 4:
+            dx, dy = [(0, -1), (1, 0), (0, 1), (-1, 0)][dir]
+        elif self.num_dir == 6:
+            if y % 2 == 0:
+                dx, dy = [(1, 0), (0, 1), (-1, 1), (-1, 0),
+                          (-1, -1), (0, -1)][dir]
+            else:
+                dx, dy = [(1, 0), (1, 1), (0, 1), (-1, 0),
+                          (0, -1), (1, -1)][dir]
+
+        x2 = x + dx
+        y2 = y + dy
+
+        if x2 < 0:
+            x2 += self.width
+        if y2 < 0:
+            y2 += self.height
+        if x2 >= self.width:
+            x2 -= self.width
+        if y2 >= self.height:
+            y2 -= self.height
+
+        return (x2, y2)
     
     def make_cell(self, x, y):
         return self.Cell(self, x, y)
