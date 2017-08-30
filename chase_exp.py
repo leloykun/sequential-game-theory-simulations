@@ -2,6 +2,7 @@ from world import World
 from cells import Casual
 from environment import Environment
 
+from agents import Cheese
 from agents import Mouse
 from agents import Cat
 
@@ -21,7 +22,9 @@ if __name__ == '__main__':
         env.add_agent(cat)
         env.world.cat = cat
     
-
+    cheese = Cheese()
+    env.add_agent(cheese)
+    env.world.cheese = cheese
     
     # for 10_000 training ages
     for _ in range(10000):

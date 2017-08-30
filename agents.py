@@ -80,6 +80,12 @@ class Agent:
         self.world = world
         self.cell  = cell
 
+class Cheese(Agent):
+    colour = 'yellow'
+    
+    def update(self):
+        pass
+        
 class Mouse(Agent):
     alpha = 0.2
     gamma = 0.9
@@ -97,9 +103,7 @@ class Cat(Agent):
     colour = 'red'
     
     def update(self):
-        print("update cat")
         cell = self.cell
-        print(cell)
         if cell != self.world.mouse.cell:
             self.goTowards(self.world.mouse.cell)
             while cell == self.cell:
