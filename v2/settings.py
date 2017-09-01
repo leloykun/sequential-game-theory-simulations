@@ -32,7 +32,7 @@ TO_DISPLAY_AVE_POS = True
 LEN_TRAINING_AGE = 10000
 
 OUTPUT_LOCATION = "tests/test/"
-ENVIRONMENT = 'worlds/smallbox3.txt'
+MAP = '../worlds/smallbox3.txt'
 FILENAMES = [
     'std_out', 'resEnt', 'ineqGini', 'resOfAgents', 'specsOfAgents',
     'numberOfAgents', 'trading', 'avePos', 'netRes'
