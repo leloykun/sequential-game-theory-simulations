@@ -16,7 +16,10 @@ class Cell:
                 self.__dict__[n] = ns
             return ns
         raise AttributeError(key)
-
+    
+    def num_agents(self):
+        return len(self.agents)
+    
     def colour(self):
         if self.wall:
             return 'black'
