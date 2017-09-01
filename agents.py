@@ -91,7 +91,10 @@ class Cheese(Agent):
     colour = 'yellow'
     
     def update(self):
-        pass
+        if self.move:
+            cell = self.cell
+            while cell == self.cell:
+                self.goInDirection(random.randrange(self.world.num_dir))
         
 class Mouse(Agent):
     colour = 'grey'
@@ -114,7 +117,7 @@ class Mouse(Agent):
         state = self.calc_state()
         reward = -1
         
-        if self.cell == self.world.cat.cell:
+        '''if self.cell == self.world.cat.cell:
             self.eaten += 1
             reward = -100
             if self.last_state is not None:
@@ -122,7 +125,7 @@ class Mouse(Agent):
             
             self.last_state = None
             self.cell = self.env.get_random_avail_cell()
-            return
+            return'''
         
         if self.cell == self.world.cheese.cell:
             self.fed += 1
@@ -138,13 +141,13 @@ class Mouse(Agent):
         self.goInDirection(action)
         
     def calc_state(self):
-        cat = self.world.cat
+        #cat = self.world.cat
         cheese = self.world.cheese
         def cell_value(cell):
-            if cat.cell is not None and (cell.x == cat.cell.x and
+            '''if cat.cell is not None and (cell.x == cat.cell.x and
                                          cell.y == cat.cell.y):
-                return 3
-            elif cheese.cell is not None and (cell.x == cheese.cell.x and
+                return 3'''
+            if cheese.cell is not None and (cell.x == cheese.cell.x and
                                               cell.y == cheese.cell.y):
                 return 2
             elif cell.wall:
