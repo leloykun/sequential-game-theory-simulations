@@ -23,6 +23,7 @@ def sim(alpha, gamma, training_age):
     env.add_agent(mouse)
     mouse.ai.alpha = alpha/10
     mouse.ai.gamma = gamma/10
+    mouse.ai.temp  = 0.4
     env.world.mouse = mouse
     
     cat = Cat()
@@ -48,26 +49,32 @@ def sim(alpha, gamma, training_age):
     #print(alpha/10, gamma/10, env.world.eaten, env.world.fed, end - start)
 
 if __name__ == '__main__':
-    start = time.time()
+    training_ages = 10**5
+    runs = 3
     
-    try:
-        for alpha in range(11):
-            for gamma in range(11):
-                #sim(alpha, gamma, 10**4)
-                _thread.start_new_thread(sim, (alpha, gamma, 10**5))
-    except:
-        print("Error: unable to start thread")
-    
-    while done != 121:
-        pass
-    
-    to_save = ""
-    for i in range(11):
-        for j in range(11):
-            eaten, fed = results[i][j]
-            to_save += "%d %d %d %d\n" % (i, j, eaten, fed)
-    savefile = open("data.txt", 'w')
-    savefile.write(to_save)
-    savefile.close()
-    
-    print("run time:", time.time() - start)
+    for run in range(1, runs + 1):
+        start = time.time()
+        results = [[(0, 0) for _ in range(11)] for _ in range(11)]
+        done = 0
+        
+        try:
+            for alpha in range(11):
+                for gamma in range(11):
+                    #sim(alpha, gamma, training_ages)
+                    _thread.start_new_thread(sim, (alpha, gamma, training_ages))
+        except:
+            print("Error: unable to start thread")
+
+        while done != 121:
+            pass
+
+        to_save = ""
+        for i in range(11):
+            for j in range(11):
+                eaten, fed = results[i][j]
+                to_save += "%d %d %d %d\n" % (i, j, eaten, fed)
+        savefile = open("docs/experiments/2/data" + str(run) + ".txt", 'w')
+        savefile.write(to_save)
+        savefile.close()
+
+        print("run time:", time.time() - start)
