@@ -5,9 +5,10 @@ from qlearn import QLearn
 '''lookcells = [(1, 1), (1, 0), (1, -1), 
              (0, 1), (0, 0), (0, -1),
              (-1, 1), (-1, 0), (-1, -1)]'''
+eyesight = 2
 lookcells = []
-for i in range(-3, 3):
-    for j in range(-3, 3):
+for i in range(-eyesight, eyesight):
+    for j in range(-eyesight, eyesight):
         lookcells.append((i, j))
         
 class Agent:
