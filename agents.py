@@ -5,12 +5,18 @@ from qlearn import QLearn
 '''lookcells = [(1, 1), (1, 0), (1, -1), 
              (0, 1), (0, 0), (0, -1),
              (-1, 1), (-1, 0), (-1, -1)]'''
-eyesight = 2
-lookcells = []
-for i in range(-eyesight, eyesight):
-    for j in range(-eyesight, eyesight):
-        lookcells.append((i, j))
+visual_depth = 2
+'''lookcells = []
         
+def calc_lookcells():
+    global lookcells
+    lookcells = []
+    for i in range(-visual_depth, visual_depth + 1):
+        for j in range(-visual_depth, visual_depth + 1):
+            lookcells.append((i, j))
+
+calc_lookcells()'''
+            
 class Agent:
     def __setattr__(self, key, val):
         if key == 'cell':
@@ -141,12 +147,13 @@ class Mouse(Agent):
         self.goInDirection(action)
         
     def calc_state(self):
-        #cat = self.world.cat
-        cheese = self.world.cheese
+        cheese = self.world.cheese  
+        '''#cat = self.world.cat
+        
         def cell_value(cell):
-            '''if cat.cell is not None and (cell.x == cat.cell.x and
+            if cat.cell is not None and (cell.x == cat.cell.x and
                                          cell.y == cat.cell.y):
-                return 3'''
+                return 3
             if cheese.cell is not None and (cell.x == cheese.cell.x and
                                               cell.y == cheese.cell.y):
                 return 2
@@ -155,7 +162,13 @@ class Mouse(Agent):
             else:
                 return 0
         return tuple([cell_value(self.world.get_wrapped_cell(self.cell.x + j, self.cell.y + i))
-                      for i,j in lookcells])
+                      for i,j in lookcells])'''
+        if abs(self.cell.x - cheese.cell.x) <= visual_depth and \
+           abs(self.cell.y - cheese.cell.y) <= visual_depth:
+            return ((self.cell.x - cheese.cell.x), (self.cell.y - cheese.cell.y))
+        else:
+            # default
+            return (100, 100)
         
     def get_date(self):
         pass
