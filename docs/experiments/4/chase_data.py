@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
     
 num_data_files = 5
-bounds = [i for i in range(100, 150 + 1)]
-layers = 2
+bounds = [i for i in range(0, 200 + 1)]
+layers = 5
 steps = 10
 
 for depth in range(1, 5):
@@ -35,7 +35,7 @@ for depth in range(1, 5):
         plt.ylabel("Learning Rate")
         
         # TODO: make this uniform
-        plt.colorbar(boundaries=bounds, spacing='uniform', label='Agent Performance', ticks=[], extend='max')
+        plt.colorbar(boundaries=bounds, spacing='uniform', label='Agent Performance', ticks=[],  extend='max')
         plt.tight_layout()
         plt.savefig(str(depth) + "/plot" + str(layer + 1))
         plt.close()
