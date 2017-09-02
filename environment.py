@@ -37,7 +37,7 @@ class Environment:
     
     def update(self):
         #print("update env")
-        self.world.update(self.world.mouse.eaten, self.world.mouse.fed)
+        self.world.update(self.world.mouse.eaten, self.world.mouse.score)
     
     def get_data(self):
         pass
