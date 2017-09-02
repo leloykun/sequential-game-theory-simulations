@@ -163,6 +163,7 @@ class Mouse(Agent):
                 return 0
         return tuple([cell_value(self.world.get_wrapped_cell(self.cell.x + j, self.cell.y + i))
                       for i,j in lookcells])'''
+        # TODO: consider wrapping here
         if abs(self.cell.x - cheese.cell.x) <= visual_depth and \
            abs(self.cell.y - cheese.cell.y) <= visual_depth:
             return ((self.cell.x - cheese.cell.x), (self.cell.y - cheese.cell.y))
