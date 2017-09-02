@@ -7,9 +7,9 @@ import agents
 import time
 import multiprocessing
 
-trials = 1000
+trials = 50
 steps = 10
-runs = 1 #10
+runs = 5
 
 def worker(params):
     start = time.time()
@@ -35,7 +35,7 @@ def worker(params):
     
     data = []
     
-    env.show()
+    #env.show()
     global trials, steps
     env.world.fed = 0
     prev_fed = 0
@@ -55,27 +55,29 @@ def to_text(data):
     return text
     
 if __name__ == '__main__':
-    agents.visual_depth = 2
-    for run in range(1, runs + 1):
-        start = time.time()
-        
-        params = []
-        for alpha in range(1):
-            for gamma in range(1):
-                params.append((alpha, gamma))
-        
-        '''pool = multiprocessing.Pool(4)
-        result = pool.map(func=worker, iterable=params)
-        pool.close()'''
-        worker((0.9, 0.9))
-        
-        #print(result)
-        
-        to_save = ""
-        for alpha, gamma, age in result:
-            to_save += "%d %d %s\n" % (alpha, gamma, to_text(age))
-        savefile = open("docs/experiments/4/" + str(depth) + "/data" + str(run) + ".txt", 'w')
-        savefile.write(to_save)
-        savefile.close()
+    for depth in range(1, 5):
+        agents.visual_depth = depth
+        print("visual depth:", agents.visual_depth)
+        for run in range(1, runs + 1):
+            start = time.time()
+            
+            params = []
+            for alpha in range(11):
+                for gamma in range(11):
+                    params.append((alpha, gamma))
+            
+            pool = multiprocessing.Pool(4)
+            result = pool.map(func=worker, iterable=params)
+            pool.close()
+            #worker((0.9, 0.9))
+            
+            #print(result)
+            
+            to_save = ""
+            for alpha, gamma, age in result:
+                to_save += "%d %d %s\n" % (alpha, gamma, to_text(age))
+            savefile = open("docs/experiments/4/" + str(depth) + "/data" + str(run) + ".txt", 'w')
+            savefile.write(to_save)
+            savefile.close()
 
-        print(run, "run time:", time.time() - start, "secs")
+            print(run, "run time:", time.time() - start, "secs")

@@ -134,7 +134,7 @@ class QLearn:
             eprobs = self.getEProbs(state, ignore_walls=True)
 
             ran = random.random()
-            print(eprobs, ran)
+            #print(eprobs, ran)
 
             for a in self.actions:
                 if ran > eprobs[a]:

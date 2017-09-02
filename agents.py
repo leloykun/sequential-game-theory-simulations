@@ -143,9 +143,9 @@ class Mouse(Agent):
             self.ai.learn(self.last_state, self.last_action, reward, state)
         
         state = self.calc_state()
-        print(state)
-        print("q_values:")
-        print(self.ai.q)
+        #print(state)
+        #print("q_values:")
+        #print(self.ai.q)
         action = self.ai.chooseAction(state)
         self.last_state = state
         self.last_action = action

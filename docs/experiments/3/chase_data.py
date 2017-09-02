@@ -26,7 +26,7 @@ for depth in range(1, 5):
         #print(data)
         
         plt.imshow(temp, extent=[-0.5, 10.5,-0.5,10.5], origin='lower', 
-                   interpolation='nearest', cmap='Blues') #BrBG
+                   interpolation='nearest', vmin=80, vmax=170, cmap='Blues') #BrBG
                    
         plt.title("QLearning Parameters vs. Agent Performance\nVisual Depth = "+str(depth)+" || Layer: "+str(layer+1))
         plt.xlabel("Discount Rate")
