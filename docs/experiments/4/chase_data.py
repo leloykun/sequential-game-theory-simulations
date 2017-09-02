@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
     
 num_data_files = 5
 bounds = [i for i in range(0, 200 + 1)]
-layers = 5
+layers = 10
 steps = 10
 
 for depth in range(1, 5):
