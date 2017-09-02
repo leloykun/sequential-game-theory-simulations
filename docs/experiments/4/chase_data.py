@@ -2,8 +2,9 @@ import time
 import numpy as np
 import matplotlib.pyplot as plt
     
+max_val = 150
 num_data_files = 5
-bounds = [i for i in range(0, 200 + 1)]
+bounds = [i for i in range(0, max_val + 1)]
 layers = 10
 steps = 10
 
@@ -23,19 +24,19 @@ for depth in range(1, 5):
         temp = [[0 for _ in range(11)] for _ in range(11)]
         for alpha in range(11):
             for gamma in range(11):
-                temp[alpha][gamma] = (data[alpha][gamma][layer] - (data[alpha][gamma][layer-1] if layer > 0 else 0)) / steps
+                temp[alpha][gamma] = max_val - (data[alpha][gamma][layer] - (data[alpha][gamma][layer-1] if layer > 0 else 0)) / steps
         
         #print(data)
         
         plt.imshow(temp, extent=[-0.5, 10.5,-0.5,10.5], origin='lower', 
-                   interpolation='nearest', vmin=0, vmax=200, cmap='Blues') #BrBG
+                   interpolation='nearest', vmin=0, vmax=max_val, cmap='Blues') #BrBG
                    
         plt.title("QLearning Parameters vs. Agent Performance\nVisual Depth = "+str(depth)+" || Layer: "+str(layer+1))
         plt.xlabel("Discount Rate")
         plt.ylabel("Learning Rate")
         
         # TODO: make this uniform
-        plt.colorbar(boundaries=bounds, spacing='uniform', label='Agent Performance', ticks=[],  extend='max')
+        plt.colorbar(boundaries=bounds, spacing='uniform', label='Agent Performance', ticks=[],  extend='max', cmap='Blues_r')
         plt.tight_layout()
         plt.savefig(str(depth) + "/plot" + str(layer + 1))
         plt.close()
