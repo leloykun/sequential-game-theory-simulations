@@ -53,7 +53,7 @@ def to_text(data):
     return text
     
 if __name__ == '__main__':
-    print("start: trials=%d, steps=%d, runs=%d" % (timesteps, intervals, runs))
+    print("start: timesteps=%d, intervals=%d, runs=%d" % (timesteps, intervals, runs))
     start = time.time()
     
     params = []
