@@ -5,12 +5,18 @@ from qlearn import QLearn
 '''lookcells = [(1, 1), (1, 0), (1, -1), 
              (0, 1), (0, 0), (0, -1),
              (-1, 1), (-1, 0), (-1, -1)]'''
-eyesight = 2
-lookcells = []
-for i in range(-eyesight, eyesight):
-    for j in range(-eyesight, eyesight):
-        lookcells.append((i, j))
+visual_depth = 2
+'''lookcells = []
         
+def calc_lookcells():
+    global lookcells
+    lookcells = []
+    for i in range(-visual_depth, visual_depth + 1):
+        for j in range(-visual_depth, visual_depth + 1):
+            lookcells.append((i, j))
+
+calc_lookcells()'''
+            
 class Agent:
     def __setattr__(self, key, val):
         if key == 'cell':
@@ -91,7 +97,10 @@ class Cheese(Agent):
     colour = 'yellow'
     
     def update(self):
-        pass
+        if self.move:
+            cell = self.cell
+            while cell == self.cell:
+                self.goInDirection(random.randrange(self.world.num_dir))
         
 class Mouse(Agent):
     colour = 'grey'
@@ -103,6 +112,7 @@ class Mouse(Agent):
             alpha   = 0.9,
             gamma   = 0.9,
             epsilon = 0.1)
+        self.ai.agent = self
         
         self.eaten = 0
         self.fed   = 0
@@ -114,7 +124,7 @@ class Mouse(Agent):
         state = self.calc_state()
         reward = -1
         
-        if self.cell == self.world.cat.cell:
+        '''if self.cell == self.world.cat.cell:
             self.eaten += 1
             reward = -100
             if self.last_state is not None:
@@ -122,15 +132,20 @@ class Mouse(Agent):
             
             self.last_state = None
             self.cell = self.env.get_random_avail_cell()
-            return
+            return'''
         
         if self.cell == self.world.cheese.cell:
             self.fed += 1
             reward = 50
             self.world.cheese.cell = self.env.get_random_avail_cell()
         
+        if self.last_state is not None:
+            self.ai.learn(self.last_state, self.last_action, reward, state)
+        
         state = self.calc_state()
         #print(state)
+        #print("q_values:")
+        #print(self.ai.q)
         action = self.ai.chooseAction(state)
         self.last_state = state
         self.last_action = action
@@ -138,13 +153,14 @@ class Mouse(Agent):
         self.goInDirection(action)
         
     def calc_state(self):
-        cat = self.world.cat
-        cheese = self.world.cheese
+        cheese = self.world.cheese  
+        '''#cat = self.world.cat
+        
         def cell_value(cell):
             if cat.cell is not None and (cell.x == cat.cell.x and
                                          cell.y == cat.cell.y):
                 return 3
-            elif cheese.cell is not None and (cell.x == cheese.cell.x and
+            if cheese.cell is not None and (cell.x == cheese.cell.x and
                                               cell.y == cheese.cell.y):
                 return 2
             elif cell.wall:
@@ -152,7 +168,14 @@ class Mouse(Agent):
             else:
                 return 0
         return tuple([cell_value(self.world.get_wrapped_cell(self.cell.x + j, self.cell.y + i))
-                      for i,j in lookcells])
+                      for i,j in lookcells])'''
+        # TODO: consider wrapping here
+        if abs(self.cell.x - cheese.cell.x) <= visual_depth and \
+           abs(self.cell.y - cheese.cell.y) <= visual_depth:
+            return ((self.cell.x - cheese.cell.x), (self.cell.y - cheese.cell.y))
+        else:
+            # default
+            return (100, 100)
         
     def get_date(self):
         pass

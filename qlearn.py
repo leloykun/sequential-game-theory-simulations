@@ -1,5 +1,5 @@
 import random
-
+import math
 
 class QLearn:
     def __init__(self, actions, temp=5,
@@ -81,7 +81,7 @@ class QLearn:
                 Graining of Perception Hunter Game as an Example"
                     Ito, A. & Kanabuchi, M.
         '''
-        import math
+        
         if state in self.states:
             eprobs = self.getEProbs(state)
             newSRE = -sum(
@@ -131,10 +131,10 @@ class QLearn:
 
         # Boltzmann
         elif type == 1:
-            eprobs = self.getEProbs(state)
+            eprobs = self.getEProbs(state, ignore_walls=True)
 
             ran = random.random()
-            # print(eprobs, ran)
+            #print(eprobs, ran)
 
             for a in self.actions:
                 if ran > eprobs[a]:
@@ -192,18 +192,20 @@ class QLearn:
         eProb(state, action) = ---------------------
                                (sum of all eValues)
     '''
-
-    def getEProbs(self, state):
-        import math
-        eValues = [
-            math.exp(self.getQ(state, a) / self.temp) 
-            for a in self.actions
-        ]
+    
+    def is_wall(self, action):
+        cell = self.agent.world.getPointInDirection(self.agent.cell.x, self.agent.cell.y, action)
+        return self.agent.world.get_cell(cell[0], cell[1]).wall
+        
+    def getEProbs(self, state, ignore_walls=False):
+        eValues = []
+        for action in self.actions:
+            if ignore_walls and self.is_wall(action):
+                eValues.append(0)
+            else:
+                eValues.append(math.exp(self.getQ(state, action) / self.temp)) 
         total = sum(eValues)
         return [eValue / total for eValue in eValues]
-
-
-import math
 
 
 def ff(f, n):
