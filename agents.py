@@ -112,6 +112,7 @@ class Mouse(Agent):
             alpha   = 0.9,
             gamma   = 0.9,
             epsilon = 0.1)
+        self.ai.agent = self
         
         self.eaten = 0
         self.fed   = 0
@@ -138,8 +139,13 @@ class Mouse(Agent):
             reward = 50
             self.world.cheese.cell = self.env.get_random_avail_cell()
         
+        if self.last_state is not None:
+            self.ai.learn(self.last_state, self.last_action, reward, state)
+        
         state = self.calc_state()
-        #print(state)
+        print(state)
+        print("q_values:")
+        print(self.ai.q)
         action = self.ai.chooseAction(state)
         self.last_state = state
         self.last_action = action
