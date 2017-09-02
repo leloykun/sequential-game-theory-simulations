@@ -8,15 +8,15 @@ from environment import Environment
 
 import agents
 
-trials = int(sys.argv[1]) if len(sys.argv) > 1 else 100
-steps  = int(sys.argv[2]) if len(sys.argv) > 2 else 10
-runs   = int(sys.argv[3]) if len(sys.argv) > 3 else 5
+timesteps = int(sys.argv[1]) if len(sys.argv) > 1 else 10000
+intervals = int(sys.argv[2]) if len(sys.argv) > 2 else 100
+runs      = int(sys.argv[3]) if len(sys.argv) > 3 else 1
 
 def worker(params):
     start = time.time()
-    
     alpha, gamma = params
-    env = Environment(world=World(map='worlds/box10x10.txt', Cell=Casual))
+    
+    env = Environment(world=World(map='worlds/box20x10.txt', Cell=Casual))
     
     mouse = agents.Mouse()
     env.add_agent(mouse)
@@ -29,24 +29,21 @@ def worker(params):
     env.add_agent(cat)
     env.world.cat = cat'''
     
-    cheese = agents.Cheese()
+    '''cheese = agents.Cheese()
     env.add_agent(cheese)
     cheese.move = True
-    env.world.cheese = cheese
+    env.world.cheese = cheese'''
     
     data = []
     
     #env.show()
-    global trials, steps
-    env.world.fed = 0
-    prev_fed = 0
-    while env.world.fed < trials:
+    global timesteps, intervals
+    for now in range(timesteps):
         env.update()
         
-        if env.world.fed is not prev_fed and (env.world.fed + 1) % steps == 0:
-            data.append(env.world.age)
-        prev_fed = env.world.fed
-
+        if (now + 1) % intervals == 0:
+            data.append(env.world.mouse.score)
+    
     return (alpha, gamma, tuple(data))
 
 def to_text(data):
@@ -56,30 +53,24 @@ def to_text(data):
     return text
     
 if __name__ == '__main__':
-    print("start: trials=%d, steps=%d, runs=%d" % (trials, steps, runs))
-    for depth in range(1, 5):
-        agents.visual_depth = depth
-        print("visual depth:", agents.visual_depth)
-        for run in range(1, runs + 1):
-            start = time.time()
-            
-            params = []
-            for alpha in range(11):
-                for gamma in range(11):
-                    params.append((alpha, gamma))
-            
-            pool = multiprocessing.Pool(4)
-            result = pool.map(func=worker, iterable=params)
-            pool.close()
-            #worker((0.9, 0.9))
-            
-            #print(result)
-            
-            to_save = ""
-            for alpha, gamma, age in result:
-                to_save += "%d %d %s\n" % (alpha, gamma, to_text(age))
-            savefile = open("docs/experiments/4/" + str(depth) + "/data" + str(run) + ".txt", 'w')
-            savefile.write(to_save)
-            savefile.close()
+    print("start: trials=%d, steps=%d, runs=%d" % (timesteps, intervals, runs))
+    start = time.time()
+    
+    params = []
+    for r in range(runs):
+        params.append((0.5, 0.5))
+    
+    pool = multiprocessing.Pool(4)
+    results = pool.map(func=worker, iterable=params)
+    pool.close()
+    
+    #print(result)
+    
+    for r in range(1, runs + 1):
+        print(results[r - 1])
+        _, _, res = results[r - 1]
+        savefile = open("docs/experiments/5/data"+str(r)+".txt", 'w')
+        savefile.write(to_text(res))
+        savefile.close()
 
-            print(run, "run time:", time.time() - start, "secs")
+    print("run time:", time.time() - start, "secs")
