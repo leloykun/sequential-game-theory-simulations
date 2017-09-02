@@ -115,37 +115,27 @@ class Mouse(Agent):
         self.ai.agent = self
         
         self.eaten = 0
-        self.fed   = 0
+        self.score = 0
         
         self.last_action = None
         self.last_state  = None
     
     def update(self):
         state = self.calc_state()
-        reward = -1
-        
-        '''if self.cell == self.world.cat.cell:
-            self.eaten += 1
-            reward = -100
-            if self.last_state is not None:
-                self.ai.learn(self.last_state, self.last_action, reward, state)
-            
-            self.last_state = None
-            self.cell = self.env.get_random_avail_cell()
-            return'''
-        
-        if self.cell == self.world.cheese.cell:
-            self.fed += 1
-            reward = 50
-            self.world.cheese.cell = self.env.get_random_avail_cell()
+        reward, _ = state
+        self.score += reward
         
         if self.last_state is not None:
             self.ai.learn(self.last_state, self.last_action, reward, state)
         
         state = self.calc_state()
+        
+        #print(self.cell.x, self.cell.y)
+        #print(self.score)
         #print(state)
         #print("q_values:")
         #print(self.ai.q)
+        
         action = self.ai.chooseAction(state)
         self.last_state = state
         self.last_action = action
@@ -153,31 +143,13 @@ class Mouse(Agent):
         self.goInDirection(action)
         
     def calc_state(self):
-        cheese = self.world.cheese  
-        '''#cat = self.world.cat
-        
-        def cell_value(cell):
-            if cat.cell is not None and (cell.x == cat.cell.x and
-                                         cell.y == cat.cell.y):
-                return 3
-            if cheese.cell is not None and (cell.x == cheese.cell.x and
-                                              cell.y == cheese.cell.y):
-                return 2
-            elif cell.wall:
-                return 1
-            else:
-                return 0
-        return tuple([cell_value(self.world.get_wrapped_cell(self.cell.x + j, self.cell.y + i))
-                      for i,j in lookcells])'''
-        # TODO: consider wrapping here
-        if abs(self.cell.x - cheese.cell.x) <= visual_depth and \
-           abs(self.cell.y - cheese.cell.y) <= visual_depth:
-            return ((self.cell.x - cheese.cell.x), (self.cell.y - cheese.cell.y))
+        day = self.world.age % 100
+        if day < 50:
+            return (self.cell.y - 10, 0)
         else:
-            # default
-            return (100, 100)
-        
-    def get_date(self):
+            return (11 - self.cell.y, 1)
+            
+    def get_data(self):
         pass
     
 class Cat(Agent):
