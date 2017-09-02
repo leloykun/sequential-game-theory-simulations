@@ -11,6 +11,7 @@ import agents
 timesteps = int(sys.argv[1]) if len(sys.argv) > 1 else 10000
 intervals = int(sys.argv[2]) if len(sys.argv) > 2 else 100
 runs      = int(sys.argv[3]) if len(sys.argv) > 3 else 1
+show      = int(sys.argv[4]) if len(sys.argv) > 4 else 0
 
 def worker(params):
     start = time.time()
@@ -36,8 +37,9 @@ def worker(params):
     
     data = []
     
-    #env.show()
-    global timesteps, intervals
+    global timesteps, intervals, show    
+    if show == 1:
+        env.show()
     for now in range(timesteps):
         env.update()
         
@@ -67,7 +69,7 @@ if __name__ == '__main__':
     #print(result)
     
     for r in range(1, runs + 1):
-        print(results[r - 1])
+        #print(results[r - 1])
         _, _, res = results[r - 1]
         savefile = open("docs/experiments/5/data"+str(r)+".txt", 'w')
         savefile.write(to_text(res))
