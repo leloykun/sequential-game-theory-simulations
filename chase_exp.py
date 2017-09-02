@@ -1,15 +1,16 @@
+import sys
+import time
+import multiprocessing
+
 from world import World
 from cells import Casual
 from environment import Environment
 
 import agents
 
-import time
-import multiprocessing
-
-trials = 50
-steps = 10
-runs = 5
+trials = int(sys.argv[1]) if len(sys.argv) > 1 else 100
+steps  = int(sys.argv[2]) if len(sys.argv) > 2 else 10
+runs   = int(sys.argv[3]) if len(sys.argv) > 3 else 5
 
 def worker(params):
     start = time.time()
@@ -55,6 +56,7 @@ def to_text(data):
     return text
     
 if __name__ == '__main__':
+    print("start: trials=%d, steps=%d, runs=%d" % (trials, steps, runs))
     for depth in range(1, 5):
         agents.visual_depth = depth
         print("visual depth:", agents.visual_depth)
