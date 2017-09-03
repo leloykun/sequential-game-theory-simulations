@@ -31,7 +31,7 @@ for depth in range(1, 5):
         plt.imshow(temp, extent=[-0.5, 10.5,-0.5,10.5], origin='lower', 
                    interpolation='nearest', vmin=0, vmax=max_val, cmap='Blues') #BrBG
                    
-        plt.title("QLearning Parameters vs. Agent Performance\nVisual Depth = "+str(depth)+" || Layer: "+str(layer+1))
+        plt.title("QLearning Parameters vs. Agent Performance\nVisual Depth = "+str(depth)+" || Training Period: "+str(layer+1))
         plt.xlabel("Discount Rate")
         plt.ylabel("Learning Rate")
         
