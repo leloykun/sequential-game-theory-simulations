@@ -131,9 +131,10 @@ class QLearn:
 
         # Boltzmann
         elif type == 1:
-            eprobs = self.getEProbs(state, ignore_walls=True)
+            eprobs = self.getEProbs(state, ignore_obstacles=True)
 
             ran = random.random()
+            action = random.choice(self.actions)
             #print(eprobs, ran)
 
             for a in self.actions:
@@ -193,14 +194,15 @@ class QLearn:
                                (sum of all eValues)
     '''
     
-    def is_wall(self, action):
+    def is_valid(self, action):
         cell = self.agent.world.getPointInDirection(self.agent.cell.x, self.agent.cell.y, action)
-        return self.agent.world.get_cell(cell[0], cell[1]).wall
+        return not self.agent.world.get_cell(cell[0], cell[1]).wall
+         
         
-    def getEProbs(self, state, ignore_walls=False):
+    def getEProbs(self, state, ignore_obstacles=False):
         eValues = []
         for action in self.actions:
-            if ignore_walls and self.is_wall(action):
+            if ignore_obstacles and not self.is_valid(action):
                 eValues.append(0)
             else:
                 eValues.append(math.exp(self.getQ(state, action) / self.temp)) 

@@ -1,0 +1,2 @@
+start: timesteps=10000, intervals=100, runs=1
+run time: 1.5940911769866943 secs
