@@ -37,7 +37,7 @@ def worker(params):
         else:
             return 1
 
-    alpha, gamma = params
+    alpha, gamma, run = params
 
     env = Environment(world=World(map='worlds/box20x10.txt', Cell=Casual))
 
@@ -76,7 +76,14 @@ def worker(params):
             print(mouse.ai.aveSRE, calcARE(mouse))
             print()'''
 
-    return (data_qvalues, data_states, data_sre)
+    with open("docs/experiments/6/"+str(run)+"qvalues.txt", 'w') as f:
+        f.write(data_qvalues)
+    with open("docs/experiments/6/"+str(run)+"states.txt", 'w') as f:
+        f.write(data_states)
+    with open("docs/experiments/6/"+str(run)+"sre.txt", 'w') as f:
+        f.write(data_sre)
+            
+    return None
 
 
 def to_text(data):
@@ -93,20 +100,10 @@ if __name__ == '__main__':
 
     params = []
     for run in range(runs):
-        params.append((0.5, 0.5))
+        params.append((0.5, 0.5, run+1))
 
     pool = multiprocessing.Pool(4)
     results = pool.map(func=worker, iterable=params)
     pool.close()
-
-    for r in range(1, runs + 1):
-        # print(results[r - 1])
-        data_qvalues, data_states, data_sre = results[r - 1]
-        with open("docs/experiments/6/"+str(r)+"qvalues.txt", 'w') as f:
-            f.write(data_qvalues)
-        with open("docs/experiments/6/"+str(r)+"states.txt", 'w') as f:
-            f.write(data_states)
-        with open("docs/experiments/6/"+str(r)+"sre.txt", 'w') as f:
-            f.write(data_sre)
 
     print("runtimme:", time.time() - start, "secs")
