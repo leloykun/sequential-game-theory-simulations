@@ -64,12 +64,12 @@ def worker(params):
             d = mouse.ai.q[qkey]
             data_qvalues += " ".join(map(str, [a, b, c, d])) + "\n"
 
-            data_states += "states: " + str(len(mouse.ai.states)) + "\n"
+        data_states += "states: " + str(len(mouse.ai.states)) + "\n"
         for state in mouse.ai.states:
             a, b = state
             data_states += " ".join(map(str, [a, b])) + "\n"
 
-            data_sre += str(mouse.ai.aveSRE) + " " + str(calcARE(mouse)) + "\n"
+        data_sre += str(mouse.ai.aveSRE) + " " + str(calcARE(mouse)) + "\n"
 
         '''if now < 100:
             print("states:", mouse.ai.states)
