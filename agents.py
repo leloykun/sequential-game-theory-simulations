@@ -122,7 +122,7 @@ class Mouse(Agent):
     
     def update(self):
         state = self.calc_state()
-        reward, _ = state
+        reward = state[0]
         self.score += reward
         
         if self.last_state is not None:

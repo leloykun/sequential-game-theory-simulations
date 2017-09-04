@@ -35,9 +35,11 @@ class Environment:
             if not (cell.wall or cell.num_agents() > 0):
                 return cell
     
-    def update(self):
+    def update(self, losses=None, wins=None):
+        if losses is None:      losses = self.world.mouse.eaten
+        if wins is None:        wins = self.world.mouse.fed
         #print("update env")
-        self.world.update(self.world.mouse.eaten, self.world.mouse.score)
+        self.world.update(losses, wins)
     
     def get_data(self):
         pass
