@@ -17,7 +17,8 @@ if __name__ == '__main__':
     with open(sims_list) as f:
         sims_list = f.readlines()
         for sim in sims_list:
-            sim = sim[:-1]
-            sim = importlib.import_module('sims.' + sim + '.' + sim)
-            # TODO get params from list
-            sim.run(100, 10, 10)
+            sim, *params = sim.split()
+            #print(sim, params)
+            if sim != "#":
+                sim = importlib.import_module('sims.' + sim + '.' + sim)
+                sim.run(params)

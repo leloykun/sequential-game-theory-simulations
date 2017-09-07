@@ -1,1 +1,2 @@
-cat-mouse
+# cat-mouse 100 10 10
+cat-mouse-cheese 100 5
