@@ -30,9 +30,8 @@ class QLearn:
         return self.q.get((state, action), 0.0)
 
     def learnQ(self, state, action, reward, value):
-        '''
-            Q-learning:
-                Q(s, a) += alpha * (reward(s,a) + max(Q(s')) - Q(s,a))
+        '''  Q-learning Formula:
+            Q(s, a) += alpha * (reward(s,a) + gamma * max(Q(s')) - Q(s,a))
         '''
 
         oldv = self.q.get((state, action), None)
@@ -44,7 +43,7 @@ class QLearn:
         self.recalc_ARE(state, reward)
 
     def recalc_ARE(self, state, reward):
-        '''
+        '''  Learning Residual Entropy
             TODO: update this to take into account diff ways of
                   measuring SRE
 
@@ -218,16 +217,11 @@ class QLearn:
 
     def learn(self, state1, action1, reward, state2):
         maxqnew = max([self.getQ(state2, a) for a in self.actions])
-        self.learnQ(state1, action1, reward,
-                    reward + self.gamma * maxqnew)
+        self.learnQ(state1, action1, reward, reward + self.gamma * maxqnew)
 
     def getEProbs(self, state, ignore_obstacles=False):
-        '''
-            return the probabilities of selecting each action
-            using the boltzmann distribution:
-
-            eValue(state, action) = e ^ (Q(state, action) / temp)
-
+        ''' Probability of selecting each action on given state:
+            eValue(state, action) = e ** (Q(state, action)/temp)
                                    eValue(state, action)
             eProb(state, action) = ---------------------
                                    (sum of all eValues)
@@ -235,7 +229,7 @@ class QLearn:
 
         def going_to_obstacle(action):
             cell = self.agent.world.getPointInDirection(
-                    self.agent.cell.x, self.agent.cell.y, action)
+                   self.agent.cell.x, self.agent.cell.y, action)
             return self.agent.world.get_cell(cell[0], cell[1]).wall
 
         eValues = []
