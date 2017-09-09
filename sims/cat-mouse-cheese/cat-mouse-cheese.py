@@ -148,7 +148,7 @@ class Cat(Agent):
 
 def worker(params):
     alpha, gamma, timesteps, interval = params
-    
+
     env = Environment(world=World(map='worlds/waco.txt', Cell=CasualCell))
 
     mouse = Mouse()
