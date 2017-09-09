@@ -128,7 +128,12 @@ def worker(params):
 def ord(n):
     return str(n)+("th" if 4<=n%100<=20 else {1:"st",2:"nd",3:"rd"}.get(n%10, "th"))
 
-def run(trials=100, steps=10, runs=5):
+def process(params):
+    return map(int, params)
+
+def run(params):
+    trials, steps, runs = process(params)
+
     print("cat-mouse starting...")
     print("trials = %d,  steps = %d,  runs = %d" % (trials, steps, runs))
     sim_start = time.time()
