@@ -16,19 +16,19 @@ max_visual_depth = 4
 
 class CasualCell(Cell):
     wall = False
-    
+
     def colour(self):
         if self.wall:
             return 'black'
         else:
             return 'white'
-    
+
     def load(self, data):
         if data == 'X':
             self.wall = True
         else:
             self.wall = False
-    
+
     def num_agents(self):
         return len(self.agents)
 
@@ -98,33 +98,33 @@ class Cat(Agent):
 
 def worker(params):
     alpha, gamma, trials, steps = params
-    
+
     env = Environment(world=World(map='worlds/box10x10.txt', Cell=CasualCell))
-    
+
     cat = Cat()
     env.add_agent(cat)
     cat.ai.alpha = alpha/10
     cat.ai.gamma = gamma/10
     cat.ai.temp = 0.4
     env.world.cat = cat
-    
+
     mouse = Mouse()
     env.add_agent(mouse)
     mouse.move = True
     env.world.mouse = mouse
-    
+
     env.world.fed = 0
     prev_fed = 0
     result = [alpha, gamma]
     while env.world.fed < trials:
         env.update(0, env.world.cat.fed)
-        
+
         if env.world.fed is not prev_fed and (env.world.fed + 1) % steps == 0:
             result.append(env.world.age)
         prev_fed = env.world.fed
-    
+
     return result
-    
+
 def ord(n):
     return str(n)+("th" if 4<=n%100<=20 else {1:"st",2:"nd",3:"rd"}.get(n%10, "th"))
 
@@ -132,23 +132,23 @@ def run(trials=100, steps=10, runs=5):
     print("cat-mouse starting...")
     print("trials = %d,  steps = %d,  runs = %d" % (trials, steps, runs))
     sim_start = time.time()
-    
+
     for depth in range(1, max_visual_depth + 1):
         Cat.visual_depth = depth
         print("   visual depth:", Cat.visual_depth)
-        
+
         for run in range(1, runs + 1):
             run_start = time.time()
-            
+
             params = []
             for alpha in range(11):
                 for gamma in range(11):
                     params.append((alpha, gamma, trials, steps))
-            
+
             pool = multiprocessing.Pool(4)
             results = pool.map(func=worker, iterable=params)
             pool.close()
-            
+
             to_save = ""
             for result in results:
                 to_save += ' '.join(map(str, result)) + '\n'
@@ -156,9 +156,9 @@ def run(trials=100, steps=10, runs=5):
             savefile.write(to_save)
             savefile.close()
             # print(worker((5, 5, depth, run)))
-            
+
             print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
-    
+
     print("cat-mouse finished...")
     print("overall runtime:", time.time() - sim_start, "secs")
     print()

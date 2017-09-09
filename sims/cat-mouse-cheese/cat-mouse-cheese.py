@@ -172,14 +172,14 @@ def worker(params):
     wins = []
     for now in range(1, timesteps + 1):
         env.update(mouse.eaten, mouse.fed)
-        
+
         if now % interval == 0:
             losses.append(mouse.eaten)
             wins.append(mouse.fed)
-    
+
     losses = " ".join(map(str, losses))
     wins = " ".join(map(str, wins))
-    
+
     return str(alpha) + " " + str(gamma) + " " + losses + " " + wins
 
 def ord(n):
