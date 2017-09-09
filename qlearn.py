@@ -135,7 +135,7 @@ class QLearn:
 
             ran = random.random()
             action = random.choice(self.actions)
-            #print(eprobs, ran)
+            # print(eprobs, ran)
 
             for a in self.actions:
                 if ran > eprobs[a]:
