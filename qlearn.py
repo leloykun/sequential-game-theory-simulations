@@ -22,13 +22,12 @@ class QLearn:
         self.temp = temp
 
         self.epsilon = epsilon  # exploration constant
-        self.alpha = alpha  # discount constant
-        self.gamma = gamma
+        self.alpha = alpha      # learning rate
+        self.gamma = gamma      # discount rate
         self.actions = actions
 
     def getQ(self, state, action):
         return self.q.get((state, action), 0.0)
-        # return self.q.get((state, action), 1.0)
 
     def learnQ(self, state, action, reward, value):
         '''
@@ -99,6 +98,7 @@ class QLearn:
                  Graining of Perception Hunter Game as an Example"
                     Ito, A. & Kanabuchi, M.
         '''
+
         eprobs = self.getEProbs(state)
         new_sre = - sum([eprob * math.log10(eprob) for eprob in eprobs]) / \
             math.log10(len(self.actions))
