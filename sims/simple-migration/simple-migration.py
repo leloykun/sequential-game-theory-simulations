@@ -11,6 +11,7 @@ from environment import Environment
 
 
 sim_name = 'simple-migration'
+output_dir = 'sims/' + sim_name + '/data/'
 
 
 class CasualCell(Cell):
@@ -69,7 +70,7 @@ class Mouse(Agent):
 
 
 def worker(params):
-    alpha, gamma, temp, timesteps, interval = params
+    alpha, gamma, temp_power, timesteps, run = params
 
     env = Environment(world=World(map='worlds/box20x10.txt', Cell=CasualCell))
 
@@ -77,47 +78,47 @@ def worker(params):
     env.add_agent(mouse)
     mouse.ai.alpha = alpha/10
     mouse.ai.gamma = gamma/10
-    mouse.ai.temp = temp
+    mouse.ai.temp = 2**temp_power
     env.world.mouse = mouse
 
     scores = []
+    positions = []
+    res_ent = []
 
     # env.show()
     for now in range(1, timesteps + 1):
-        env.update(0, env.world.mouse.score)
+        env.update(0, mouse.score)
 
-        if now % interval == 0:
-            scores.append(env.world.mouse.score)
+        scores.append(mouse.score)
+        positions.append(mouse.cell.y)
+        res_ent.append(str(mouse.ai.stat_ARE) + " " + str(mouse.ai.dyna_ARE))
 
-    return str(temp) + ' ' + ' '.join(map(str, scores))
+    with open(output_dir + str(temp_power) + "/" + str(run) + "scores.txt", 'w') as f:
+        f.write(' '.join(map(str, scores)))
 
-def ord(n):
-    return str(n)+("th" if 4<=n%100<=20 else {1:"st",2:"nd",3:"rd"}.get(n%10, "th"))
+    with open(output_dir + str(temp_power) + "/" + str(run) + "pos.txt", 'w') as f:
+        f.write(' '.join(map(str, positions)))
+
+    with open(output_dir + str(temp_power) + "/" + str(run) + "res_ent.txt", 'w') as f:
+        f.write('\n'.join(map(str, res_ent)))
 
 def process(params):
     return map(int, params)
 
 def run(params):
-    timesteps, interval, runs, temp_powers = process(params)
+    timesteps, runs, temp_powers = process(params)
 
     print("cat-mouse-cheese starting...")
     print("timesteps = %d,  runs = %d" % (timesteps, runs))
     sim_start = time.time()
 
+    params = []
     for run in range(1, runs + 1):
-        run_start = time.time()
-
-        params = []
         for power in range(-temp_powers, temp_powers + 1):
-            params.append((0.5, 0.5, 2**power, timesteps, interval))
+            params.append((0.5, 0.5, power, timesteps, run))
 
-        with multiprocessing.Pool(4) as pool:
-            results = pool.map(func=worker, iterable=params)
-
-        with open('sims/' + sim_name + '/data/run' + str(run) + '.txt', 'w') as f:
-            f.write('\n'.join(results))
-
-        print("  ", ord(run), "runtime:", time.time() - run_start, "secs")
+    with multiprocessing.Pool(4) as pool:
+        pool.map(func=worker, iterable=params)
 
     print("cat-mouse-cheese finished...")
     print("overall runtime:", time.time() - sim_start, "secs")

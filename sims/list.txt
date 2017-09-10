@@ -1,3 +1,3 @@
 # cat-mouse 100 10 10
 # cat-mouse-cheese 10000 100 10
-simple-migration 10000 1000 10 5
+simple-migration 10000 10 5
