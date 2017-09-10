@@ -214,6 +214,8 @@ class QLearn:
 
             action = self.actions[i]
             return action
+        elif type == 3:
+            return random.choice(self.actions)
 
     def learn(self, state1, action1, reward, state2):
         maxqnew = max([self.getQ(state2, a) for a in self.actions])
