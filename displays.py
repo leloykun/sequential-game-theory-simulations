@@ -3,6 +3,7 @@ import time
 import pygame
 import collections
 
+
 class PygameDisplay:
     activated = False
     paused = False
@@ -10,10 +11,10 @@ class PygameDisplay:
     updateEvery = 1
     delay = 0
     screen = None
-    
+
     def __init__(self, world):
         self.world = world
-    
+
     def activate(self, size=4):
         self.size = size
         pygame.init()
@@ -24,9 +25,11 @@ class PygameDisplay:
         if PygameDisplay.screen is None \
                 or PygameDisplay.screen.get_width() != w \
                 or PygameDisplay.screen.get_height() != h:
-            PygameDisplay.screen = pygame.display.set_mode((w, h), pygame.RESIZABLE, 32)
+            PygameDisplay.screen = pygame.display.set_mode(
+                (w, h), pygame.RESIZABLE, 32)
         self.activated = True
-        self.defaultColour = self.getColour(self.world.grid[0][0].__class__())
+        self.defaultColour = self.getColour(
+            self.world.grid[0][0].__class__())
         self.redraw()
 
     def redraw(self):
@@ -51,7 +54,8 @@ class PygameDisplay:
                     c = self.getColour(cell)
                 if c != self.defaultColour:
                     try:
-                        self.screen.fill(c, (sx, sy, self.size, self.size))
+                        self.screen.fill(c,
+                                         (sx, sy, self.size, self.size))
                     except TypeError:
                         print(('Error: invalid colour:', c))
                 sx += self.size
@@ -150,9 +154,10 @@ class PygameDisplay:
 
     def saveImage(self, filename=None):
         if filename is None:
-            filename = 'animations/test/' + '%03d.png' % (self.world.age + 1)
+            filename = 'animations/test/' + '%03d.png' % (self.world.age +
+                                                          1)
         pygame.image.save(self.screen, filename)
-    
+
     def make_title(self):
         text = 'age: %d' % self.world.age
         extra = []
@@ -170,5 +175,3 @@ class PygameDisplay:
         if len(extra) > 0:
             text += ' [%s]' % ', '.join(extra)
         return text
-            
-            
