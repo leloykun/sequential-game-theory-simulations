@@ -52,7 +52,8 @@ class Mouse(Agent):
         self.score += reward
 
         if self.last_state is not None:
-            self.ai.learn(self.last_state, self.last_action, reward, state)
+            self.ai.learn(self.last_state, self.last_action, reward,
+                          state)
 
         action = self.ai.chooseAction(state)
         self.last_state = state
@@ -71,7 +72,8 @@ class Mouse(Agent):
 def worker(params):
     alpha, gamma, temp_power, timesteps, run = params
 
-    env = Environment(world=World(map='worlds/box20x10.txt', Cell=CasualCell))
+    env = Environment(world=World(
+        map='worlds/box20x10.txt', Cell=CasualCell))
 
     mouse = Mouse()
     env.add_agent(mouse)
@@ -90,18 +92,18 @@ def worker(params):
 
         scores.append(mouse.score)
         positions.append(mouse.cell.y)
-        res_ent.append(str(mouse.ai.stat_ARE) + " " + str(mouse.ai.dyna_ARE))
+        res_ent.append(
+            str(mouse.ai.stat_ARE) + " " + str(mouse.ai.dyna_ARE))
 
-    with open(output_dir + str(temp_power) + "/" + str(run) + "scores.txt",
-              'w') as f:
+    output_dir_dir = output_dir + str(temp_power) + "/" + str(run)
+
+    with open(output_dir_dir + "scores.txt", 'w') as f:
         f.write(' '.join(map(str, scores)))
 
-    with open(output_dir + str(temp_power) + "/" + str(run) + "pos.txt",
-              'w') as f:
+    with open(output_dir_dir + "pos.txt", 'w') as f:
         f.write(' '.join(map(str, positions)))
 
-    with open(output_dir + str(temp_power) + "/" + str(run) + "res_ent.txt",
-              'w') as f:
+    with open(output_dir_dir + "res_ent.txt", 'w') as f:
         f.write('\n'.join(map(str, res_ent)))
 
 

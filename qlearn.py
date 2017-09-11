@@ -5,7 +5,8 @@ import math
 class QLearn:
     max_states = 40
 
-    def __init__(self, actions, temp=5, epsilon=0.1, alpha=0.2, gamma=0.9):
+    def __init__(self, actions, temp=5, epsilon=0.1, alpha=0.2,
+                 gamma=0.9):
 
         self.q = {}
 
@@ -156,7 +157,8 @@ class QLearn:
                 maxCount = q.count(maxQ)
                 if maxCount > 1:
                     best = [
-                        i for i in range(len(self.actions)) if q[i] == maxQ
+                        i for i in range(len(self.actions))
+                        if q[i] == maxQ
                     ]
                     i = random.choice(best)
                 else:
@@ -201,7 +203,9 @@ class QLearn:
             # we select a random one among them
             count = q.count(maxQ)
             if count > 1:
-                best = [i for i in range(len(self.actions)) if q[i] == maxQ]
+                best = [
+                    i for i in range(len(self.actions)) if q[i] == maxQ
+                ]
                 i = random.choice(best)
             else:
                 i = q.index(maxQ)
@@ -213,7 +217,8 @@ class QLearn:
 
     def learn(self, state1, action1, reward, state2):
         maxqnew = max([self.getQ(state2, a) for a in self.actions])
-        self.learnQ(state1, action1, reward, reward + self.gamma * maxqnew)
+        self.learnQ(state1, action1, reward,
+                    reward + self.gamma * maxqnew)
 
     def getEProbs(self, state, ignore_obstacles=False):
         ''' Probability of selecting each action on given state:
@@ -233,7 +238,8 @@ class QLearn:
             if ignore_obstacles and going_to_obstacle(action):
                 eValues.append(0)
             else:
-                eValues.append(math.exp(self.getQ(state, action) / self.temp))
+                eValues.append(
+                    math.exp(self.getQ(state, action) / self.temp))
         total = sum(eValues)
         return [eValue / total for eValue in eValues]
 
