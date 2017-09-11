@@ -5,8 +5,7 @@ import math
 class QLearn:
     max_states = 40
 
-    def __init__(self, actions, temp=5,
-                 epsilon=0.1, alpha=0.2, gamma=0.9):
+    def __init__(self, actions, temp=5, epsilon=0.1, alpha=0.2, gamma=0.9):
 
         self.q = {}
 
@@ -22,8 +21,8 @@ class QLearn:
         self.temp = temp
 
         self.epsilon = epsilon  # exploration constant
-        self.alpha = alpha      # learning rate
-        self.gamma = gamma      # discount rate
+        self.alpha = alpha  # learning rate
+        self.gamma = gamma  # discount rate
         self.actions = actions
 
     def getQ(self, state, action):
@@ -117,7 +116,6 @@ class QLearn:
             self.dyna_SRE[state] = new_sre
             self.dyna_ARE = (self.dyna_ARE * (len(self.states) - 1) +
                              self.dyna_SRE[state]) / len(self.states)
-
         '''  older version:
         if state in self.states:
             eprobs = self.getEProbs(state)
@@ -158,8 +156,7 @@ class QLearn:
                 maxCount = q.count(maxQ)
                 if maxCount > 1:
                     best = [
-                        i for i in range(len(self.actions))
-                        if q[i] == maxQ
+                        i for i in range(len(self.actions)) if q[i] == maxQ
                     ]
                     i = random.choice(best)
                 else:
@@ -204,10 +201,7 @@ class QLearn:
             # we select a random one among them
             count = q.count(maxQ)
             if count > 1:
-                best = [
-                    i for i in range(len(self.actions))
-                    if q[i] == maxQ
-                ]
+                best = [i for i in range(len(self.actions)) if q[i] == maxQ]
                 i = random.choice(best)
             else:
                 i = q.index(maxQ)
@@ -231,7 +225,7 @@ class QLearn:
 
         def going_to_obstacle(action):
             cell = self.agent.world.getPointInDirection(
-                   self.agent.cell.x, self.agent.cell.y, action)
+                self.agent.cell.x, self.agent.cell.y, action)
             return self.agent.world.get_cell(cell[0], cell[1]).wall
 
         eValues = []

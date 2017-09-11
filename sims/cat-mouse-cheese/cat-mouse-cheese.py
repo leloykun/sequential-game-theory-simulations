@@ -9,7 +9,6 @@ from world import World
 from qlearn import QLearn
 from environment import Environment
 
-
 sim_name = 'cat-mouse-cheese'
 max_visual_depth = 4
 
@@ -50,11 +49,7 @@ class Mouse(Agent):
 
     def __init__(self):
         self.ai = QLearn(
-            actions=list(range(8)),
-            temp = 5,
-            alpha = 0.5,
-            gamma = 0.5,
-            epsilon = 0.1)
+            actions=list(range(8)), temp=5, alpha=0.5, gamma=0.5, epsilon=0.1)
         self.ai.agent = self
 
         self.eaten = 0
@@ -119,6 +114,7 @@ class Mouse(Agent):
                 get_dist_to(self.world.cat))'''
         cat = self.world.cat
         cheese = self.world.cheese
+
         def cell_value(cell):
             if cat.cell is not None and (cell.x == cat.cell.x and
                                          cell.y == cat.cell.y):
@@ -130,9 +126,12 @@ class Mouse(Agent):
                 return 1
             else:
                 return 0
-        return tuple([cell_value(self.world.get_wrapped_cell(
-                        self.cell.x + j, self.cell.y + i))
-                        for i, j in self.lookcells])
+
+        return tuple([
+            cell_value(
+                self.world.get_wrapped_cell(self.cell.x + j, self.cell.y + i))
+            for i, j in self.lookcells
+        ])
 
 
 class Cat(Agent):
@@ -153,8 +152,8 @@ def worker(params):
 
     mouse = Mouse()
     env.add_agent(mouse)
-    mouse.ai.alpha = alpha/10
-    mouse.ai.gamma = gamma/10
+    mouse.ai.alpha = alpha / 10
+    mouse.ai.gamma = gamma / 10
     mouse.ai.temp = 0.5
     env.world.mouse = mouse
 
@@ -182,11 +181,18 @@ def worker(params):
 
     return str(alpha) + " " + str(gamma) + " " + losses + " " + wins
 
+
 def ord(n):
-    return str(n)+("th" if 4<=n%100<=20 else {1:"st",2:"nd",3:"rd"}.get(n%10, "th"))
+    return str(n) + ("th" if 4 <= n % 100 <= 20 else {
+        1: "st",
+        2: "nd",
+        3: "rd"
+    }.get(n % 10, "th"))
+
 
 def process(params):
     return map(int, params)
+
 
 def run(params):
     timesteps, interval, runs = process(params)
@@ -210,10 +216,12 @@ def run(params):
             with multiprocessing.Pool(4) as pool:
                 results = pool.map(worker, params)
 
-            with open("sims/" + sim_name + "/data/" + str(depth) + "/data" + str(run) + ".txt", 'w') as f:
+            with open("sims/" + sim_name + "/data/" + str(depth) + "/data" +
+                      str(run) + ".txt", 'w') as f:
                 f.write("\n".join(results))
 
-            print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
+            print("     ",
+                  ord(run), "runtime:", time.time() - run_start, "secs")
 
     print("cat-mouse-cheese finished...")
     print("overall runtime:", time.time() - sim_start, "secs")

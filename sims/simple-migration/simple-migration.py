@@ -9,7 +9,6 @@ from world import World
 from qlearn import QLearn
 from environment import Environment
 
-
 sim_name = 'simple-migration'
 output_dir = 'sims/' + sim_name + '/data/'
 
@@ -76,8 +75,8 @@ def worker(params):
 
     mouse = Mouse()
     env.add_agent(mouse)
-    mouse.ai.alpha = alpha/10
-    mouse.ai.gamma = gamma/10
+    mouse.ai.alpha = alpha / 10
+    mouse.ai.gamma = gamma / 10
     mouse.ai.temp = 2**temp_power
     env.world.mouse = mouse
 
@@ -93,17 +92,22 @@ def worker(params):
         positions.append(mouse.cell.y)
         res_ent.append(str(mouse.ai.stat_ARE) + " " + str(mouse.ai.dyna_ARE))
 
-    with open(output_dir + str(temp_power) + "/" + str(run) + "scores.txt", 'w') as f:
+    with open(output_dir + str(temp_power) + "/" + str(run) + "scores.txt",
+              'w') as f:
         f.write(' '.join(map(str, scores)))
 
-    with open(output_dir + str(temp_power) + "/" + str(run) + "pos.txt", 'w') as f:
+    with open(output_dir + str(temp_power) + "/" + str(run) + "pos.txt",
+              'w') as f:
         f.write(' '.join(map(str, positions)))
 
-    with open(output_dir + str(temp_power) + "/" + str(run) + "res_ent.txt", 'w') as f:
+    with open(output_dir + str(temp_power) + "/" + str(run) + "res_ent.txt",
+              'w') as f:
         f.write('\n'.join(map(str, res_ent)))
+
 
 def process(params):
     return map(int, params)
+
 
 def run(params):
     timesteps, runs, temp_powers = process(params)
