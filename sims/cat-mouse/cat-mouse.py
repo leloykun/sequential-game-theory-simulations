@@ -9,7 +9,6 @@ from world import World
 from qlearn import QLearn
 from environment import Environment
 
-
 sim_name = 'cat-mouse'
 max_visual_depth = 4
 
@@ -49,7 +48,7 @@ class Cat(Agent):
 
     def __init__(self):
         self.ai = QLearn(
-            actions=list(range(8)),     # world.num_dir = 8
+            actions=list(range(8)),  # world.num_dir = 8
             temp=5,
             alpha=0.9,
             gamma=0.9,
@@ -103,8 +102,8 @@ def worker(params):
 
     cat = Cat()
     env.add_agent(cat)
-    cat.ai.alpha = alpha/10
-    cat.ai.gamma = gamma/10
+    cat.ai.alpha = alpha / 10
+    cat.ai.gamma = gamma / 10
     cat.ai.temp = 0.4
     env.world.cat = cat
 
@@ -125,11 +124,18 @@ def worker(params):
 
     return result
 
+
 def ord(n):
-    return str(n)+("th" if 4<=n%100<=20 else {1:"st",2:"nd",3:"rd"}.get(n%10, "th"))
+    return str(n) + ("th" if 4 <= n % 100 <= 20 else {
+        1: "st",
+        2: "nd",
+        3: "rd"
+    }.get(n % 10, "th"))
+
 
 def process(params):
     return map(int, params)
+
 
 def run(params):
     trials, steps, runs = process(params)
@@ -157,12 +163,14 @@ def run(params):
             to_save = ""
             for result in results:
                 to_save += ' '.join(map(str, result)) + '\n'
-            savefile = open("sims/" + sim_name + "/data/" + str(depth) + "/data" + str(run) + ".txt", 'w')
+            savefile = open("sims/" + sim_name + "/data/" + str(depth) +
+                            "/data" + str(run) + ".txt", 'w')
             savefile.write(to_save)
             savefile.close()
             # print(worker((5, 5, depth, run)))
 
-            print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
+            print("     ",
+                  ord(run), "runtime:", time.time() - run_start, "secs")
 
     print("cat-mouse finished...")
     print("overall runtime:", time.time() - sim_start, "secs")
