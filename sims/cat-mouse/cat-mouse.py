@@ -71,7 +71,8 @@ class Cat(Agent):
             self.world.mouse.cell = self.env.get_random_avail_cell()
 
         if self.last_state is not None:
-            self.ai.learn(self.last_state, self.last_action, reward, state)
+            self.ai.learn(self.last_state, self.last_action, reward,
+                          state)
 
         state = self.calc_state()
 
@@ -86,7 +87,8 @@ class Cat(Agent):
         mouse = self.world.mouse
         if abs(self.cell.x - mouse.cell.x) <= self.visual_depth and \
            abs(self.cell.y - mouse.cell.y) <= self.visual_depth:
-            return ((self.cell.x - mouse.cell.x), (self.cell.y - mouse.cell.y))
+            return ((self.cell.x - mouse.cell.x),
+                    (self.cell.y - mouse.cell.y))
         else:
             # default
             return (100, 100)
@@ -98,7 +100,8 @@ class Cat(Agent):
 def worker(params):
     alpha, gamma, trials, steps = params
 
-    env = Environment(world=World(map='worlds/box10x10.txt', Cell=CasualCell))
+    env = Environment(world=World(
+        map='worlds/box10x10.txt', Cell=CasualCell))
 
     cat = Cat()
     env.add_agent(cat)
@@ -118,7 +121,8 @@ def worker(params):
     while env.world.fed < trials:
         env.update(0, env.world.cat.fed)
 
-        if env.world.fed is not prev_fed and (env.world.fed + 1) % steps == 0:
+        if env.world.fed is not prev_fed and (
+                env.world.fed + 1) % steps == 0:
             result.append(env.world.age)
         prev_fed = env.world.fed
 

@@ -49,7 +49,11 @@ class Mouse(Agent):
 
     def __init__(self):
         self.ai = QLearn(
-            actions=list(range(8)), temp=5, alpha=0.5, gamma=0.5, epsilon=0.1)
+            actions=list(range(8)),
+            temp=5,
+            alpha=0.5,
+            gamma=0.5,
+            epsilon=0.1)
         self.ai.agent = self
 
         self.eaten = 0
@@ -78,7 +82,8 @@ class Mouse(Agent):
             self.eaten += 1
             reward = -100
             if self.last_state is not None:
-                self.ai.learn(self.last_state, self.last_action, reward, state)
+                self.ai.learn(self.last_state, self.last_action, reward,
+                              state)
 
             self.last_state = None
             self.cell = self.env.get_random_avail_cell()
@@ -90,7 +95,8 @@ class Mouse(Agent):
             self.world.cheese.cell = self.env.get_random_avail_cell()
 
         if self.last_state is not None:
-            self.ai.learn(self.last_state, self.last_action, reward, state)
+            self.ai.learn(self.last_state, self.last_action, reward,
+                          state)
 
         state = self.calc_state()
         action = self.ai.chooseAction(state)
@@ -129,8 +135,8 @@ class Mouse(Agent):
 
         return tuple([
             cell_value(
-                self.world.get_wrapped_cell(self.cell.x + j, self.cell.y + i))
-            for i, j in self.lookcells
+                self.world.get_wrapped_cell(self.cell.x + j, self.cell.y +
+                                            i)) for i, j in self.lookcells
         ])
 
 
@@ -216,8 +222,8 @@ def run(params):
             with multiprocessing.Pool(4) as pool:
                 results = pool.map(worker, params)
 
-            with open("sims/" + sim_name + "/data/" + str(depth) + "/data" +
-                      str(run) + ".txt", 'w') as f:
+            with open("sims/" + sim_name + "/data/" + str(depth) + "/data"
+                      + str(run) + ".txt", 'w') as f:
                 f.write("\n".join(results))
 
             print("     ",
