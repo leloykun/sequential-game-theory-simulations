@@ -38,9 +38,9 @@ class Environment:
 
     def update(self, losses=None, wins=None):
         if losses is None:
-            losses = self.world.mouse.eaten
+            losses = 0
         if wins is None:
-            wins = self.world.mouse.fed
+            wins = 0
         # print("update env")
         self.world.update(losses, wins)
 
