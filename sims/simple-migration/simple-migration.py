@@ -85,6 +85,7 @@ def worker(params):
     scores = []
     positions = []
     res_ent = []
+    num_states = []
 
     # env.show()
     for now in range(1, timesteps + 1):
@@ -94,6 +95,7 @@ def worker(params):
         positions.append(mouse.cell.y)
         res_ent.append(
             str(mouse.ai.stat_ARE) + " " + str(mouse.ai.dyna_ARE))
+        num_states.append(len(mouse.ai.states))
 
     output_dir_dir = output_dir + str(temp_power) + "/" + str(run)
 
@@ -106,6 +108,8 @@ def worker(params):
     with open(output_dir_dir + "res_ent.txt", 'w') as f:
         f.write('\n'.join(map(str, res_ent)))
 
+    with open(output_dir_dir + "num_states", 'w') as f:
+        f.write(' '.join(map(str, num_states)))
 
 def process(params):
     return map(int, params)
