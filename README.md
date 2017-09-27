@@ -79,6 +79,20 @@ cat-mouse 100 10 10
 
 TODO: explain what the parameters are about
 
+## Details
+TODO
+### Reinforcement Learning
+TODO
+### Simulations on Specialization
+TODO
+### Simulations on Migration
+TODO
+### Simulations on Cooperation
+TODO
+
+## Results and Discussion
+TODO
+
 ## Developer
 - Franz Louis Cesista
 - Grade 12 student from Philippine Science High School - Eastern Visayas Campus
