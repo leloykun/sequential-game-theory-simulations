@@ -173,6 +173,7 @@ def worker(params):
     env.world.cheese = cheese
 
     # env.show()
+
     losses = []
     wins = []
     for now in range(1, timesteps + 1):

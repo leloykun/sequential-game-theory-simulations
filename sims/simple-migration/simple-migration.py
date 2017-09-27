@@ -87,7 +87,8 @@ def worker(params):
     res_ent = []
     num_states = []
 
-    # env.show()
+    env.show()
+
     for now in range(1, timesteps + 1):
         env.update(0, mouse.score)
 
