@@ -75,7 +75,7 @@ cat-mouse 100 10 10
 
 TODO: explain what the parameters are about
 
-## Author
+## Developer
 - Franz Louis Cesista
 - Grade 12 student from Philippine Science High School - Eastern Visayas Campus
 - Machine Learning enthusiast
