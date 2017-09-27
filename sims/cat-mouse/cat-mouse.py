@@ -115,6 +115,8 @@ def worker(params):
     mouse.move = True
     env.world.mouse = mouse
 
+    # env.show()
+
     env.world.fed = 0
     prev_fed = 0
     result = [alpha, gamma]
