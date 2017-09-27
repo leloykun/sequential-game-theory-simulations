@@ -1,6 +1,8 @@
 # Social Simulations with Reinforcement Learning
 Simulations on specialization, migration, and cooperation
 
+NOTE: This project is not finished yet. See the older version [here](https://github.com/leloykun/cultural-evolution/tree/master/miscSims).
+
 ## Gettting started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
