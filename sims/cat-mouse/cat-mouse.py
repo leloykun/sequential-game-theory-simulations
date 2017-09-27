@@ -12,7 +12,6 @@ from environment import Environment
 sim_name = 'cat-mouse'
 max_visual_depth = 4
 
-
 class CasualCell(Cell):
     wall = False
 
