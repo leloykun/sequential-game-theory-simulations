@@ -1,6 +1,8 @@
 # Social Simulations with Reinforcement Learning
 Simulations on specialization, migration, and cooperation
 
+<img src="https://github.com/leloykun/socialsims/blob/master/docs/experiments/4/1/plotloop.gif" alt="alt text" width="45%" height="45%"> <img src="https://github.com/leloykun/socialsims/blob/master/docs/experiments/6/1plot-both.png" alt="alt text" width="45%" height="45%">
+
 NOTE: This project is not finished yet. See the older version [here](https://github.com/leloykun/cultural-evolution/tree/master/miscSims). See deprecated simulations [here](https://github.com/leloykun/socialsims/tree/master/docs/experiments).
 
 ## Gettting started
