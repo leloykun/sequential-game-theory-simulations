@@ -45,4 +45,5 @@ def visualize(trials=100, steps=10, runs=10):
         print("visual depth", depth, "run time:", time.time() - start)
 
 if __name__ == '__main__':
+    trials, steps, runs = map(int, input("params: ").split())
     visualize()
