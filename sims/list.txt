@@ -1,3 +1,6 @@
+# 8*10*4 = 320 seconds:
 cat-mouse 10 1 10
+# 80*50*4 = 16000 seconds:
+# cat-mouse 100 1 50
 # cat-mouse-cheese 10000 100 10
 # simple-migration 10000 10 5
