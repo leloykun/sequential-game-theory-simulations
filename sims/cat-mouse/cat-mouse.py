@@ -181,8 +181,3 @@ def run(params):
     print("cat-mouse finished...")
     print("overall runtime:", time.time() - sim_start, "secs")
     print()
-    
-    print("visualizing data...")
-    data_visualizer = importlib.import_module('sims.' + sim_name + '.' + 'data_visualizer')
-    data_visualizer.visualize(trials, steps, runs)
-    print("")
