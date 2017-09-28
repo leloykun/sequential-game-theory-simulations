@@ -81,17 +81,23 @@ TODO: explain what the parameters are about
 
 ## Details
 TODO
+
 ### Reinforcement Learning
 TODO
+
 ### Simulations on Specialization
 TODO
+
 ### Simulations on Migration
 TODO
+
 ### Simulations on Cooperation
 TODO
 
 ## Results and Discussion
 TODO
+TODO use sklearn to analyze agent performance vs. qlearning parameters 
+(tho not sure wether I'll use logistic regression then graph the results or create a mathematical model with linear regression)
 
 ## Developer
 - Franz Louis Cesista
