@@ -12,23 +12,23 @@ sim_name = 'route-choice'
 class DriverWorld(World):
     agents = []
 
-    road_cap = [1, 9]
-    road_cnt = [0, 0]
-
-    def __init__(self):
-        pass
+    def __init__(self, road_cap):
+        self.road_cap = road_cap
+        self.num_roads = len(road_cap)
+        self.road_cnt = [0 for _ in range(self.num_roads)]
 
     def update(self):
-        self.road_cnt = [0, 0]
-        
+        self.road_cnt = [0 for _ in range(self.num_roads)]
+
         for agent in self.agents:
             agent.do_action()
-        print()
-        
-        for agent in self.agents:
-            agent.learn()
+        # print()
 
-        print(self.road_cnt)
+        total_rewards = 0
+        for agent in self.agents:
+            total_rewards += agent.learn()
+
+        print(str(total_rewards) + ' ' + ' '.join(map(str, self.road_cnt)))
 
 class Driver:
     cell = (0, 0)
@@ -36,7 +36,7 @@ class Driver:
     def __init__(self, _world):
         self.world = _world
     
-        self.ai = QLearn(actions=[0, 1])
+        self.ai = QLearn(actions=[0, 1, 2, 3])
         self.ai.agent = self
 
         self.last_action = None
@@ -50,11 +50,12 @@ class Driver:
         self.last_action = action
 
         self.world.road_cnt[action] += 1
-        print(action, end=" ")
+        # print(action, end=" ")
 
     def learn(self):
         reward = self.calc_reward()
         self.ai.learn(self.last_state, self.last_action, reward, self.state)
+        return reward
 
     def calc_reward(self):
         return self.world.road_cap[self.last_action] - \
@@ -70,10 +71,10 @@ def process(params):
 
 
 def run(params):
-    timesteps, num_drivers = process(params)
-    print(timesteps, num_drivers, "run nigger run")
+    timesteps, num_drivers, *road_cap = process(params)
+    # print(timesteps, num_drivers, "run nigger run")
     
-    world = DriverWorld()
+    world = DriverWorld(road_cap)
     for _ in range(num_drivers):
         agent = Driver(world)
         world.agents.append(agent)
