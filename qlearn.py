@@ -228,18 +228,17 @@ class QLearn:
                                    (sum of all eValues)
         '''
 
-        def going_to_obstacle(action):
+        '''def going_to_obstacle(action):
             cell = self.agent.world.getPointInDirection(
                 self.agent.cell.x, self.agent.cell.y, action)
-            return self.agent.world.get_cell(cell[0], cell[1]).wall
+            return self.agent.world.get_cell(cell[0], cell[1]).wall'''
 
         eValues = []
         for action in self.actions:
-            if ignore_obstacles and going_to_obstacle(action):
+            '''if ignore_obstacles and going_to_obstacle(action):
                 eValues.append(0)
-            else:
-                eValues.append(
-                    math.exp(self.getQ(state, action) / self.temp))
+            else:'''
+            eValues.append(math.exp(self.getQ(state, action) / self.temp))
         total = sum(eValues)
         return [eValue / total for eValue in eValues]
 
