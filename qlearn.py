@@ -5,8 +5,8 @@ import math
 class QLearn:
     max_states = 40
 
-    def __init__(self, actions, temp=5, epsilon=0.1, alpha=0.2,
-                 gamma=0.9):
+    def __init__(self, actions, temp=5, epsilon=0.1, alpha=0.5,
+                 gamma=0.5):
 
         self.q = {}
 
