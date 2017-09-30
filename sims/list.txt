@@ -4,4 +4,5 @@
 # cat-mouse 100 1 50
 # cat-mouse-cheese 10000 100 10
 # simple-migration 10000 10 5
-route-choice 1000 10
+# route-choice timesteps drivers [road capacities]
+route-choice 10000 100 10 20 30 40
