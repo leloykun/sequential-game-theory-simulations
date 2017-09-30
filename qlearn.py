@@ -228,6 +228,7 @@ class QLearn:
                                    (sum of all eValues)
         '''
 
+        #  readd this as necessary
         '''def going_to_obstacle(action):
             cell = self.agent.world.getPointInDirection(
                 self.agent.cell.x, self.agent.cell.y, action)
