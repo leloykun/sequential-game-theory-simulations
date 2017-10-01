@@ -118,30 +118,6 @@ class QLearn:
             self.dyna_SRE[state] = new_sre
             self.dyna_ARE = (self.dyna_ARE * (len(self.states) - 1) +
                              self.dyna_SRE[state]) / len(self.states)
-        '''  older version:
-        if state in self.states:
-            eprobs = self.getEProbs(state)
-            newSRE = -sum(
-                [eprob * math.log10(eprob) for eprob in eprobs]) \
-                / math.log10(len(self.actions))
-            delta = newSRE - self.dyna_SRE[state]
-
-            self.dyna_SRE[state] = newSRE
-            self.dyna_ARE += delta / len(self.states)
-
-        else:
-            self.states.add(state)
-
-            eValue = math.exp(reward / self.temp)
-            eSum = len(self.actions) - 1 + eValue
-            eX = eValue / eSum  # eprob when Q(S,a) == reward
-            e1 = 1 / eSum  # eprob when Q(S,a) == 0
-
-            self.dyna_SRE[state] = \
-                - ((len(self.actions) - 1) * (e1 * math.log10(e1)) \
-                + (eX * math.log10(eX))) / math.log10(len(self.actions))
-            self.dyna_ARE = (self.dyna_ARE * (len(self.states) - 1) \
-                        + self.dyna_SRE[state]) / len(self.states)'''
 
     def chooseAction(self, state, type=1):
         # Greedy Epsilon
@@ -230,13 +206,12 @@ class QLearn:
             eProb(state, action) = ---------------------
                                    (sum of all eValues)
         '''
-
         eValues = []
         for action in self.actions:
             c = getattr(self.agent, 'going_to_obstacle', None)
             if isinstance(c, collections.Callable):
                 if c(action):
-                    eValues.append(0)
+                    eValues.append(1)
                     continue
             eValues.append(math.exp(self.getQ(state, action) / self.temp))
         total = sum(eValues)
