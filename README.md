@@ -81,6 +81,7 @@ TODO: explain what the parameters are about
 
 ## Details
 TODO
+TODO move this part to 'wiki'
 
 ### Reinforcement Learning
 TODO
@@ -98,6 +99,8 @@ TODO
 TODO
 TODO use sklearn to analyze agent performance vs. qlearning parameters 
 (tho not sure wether I'll use logistic regression then graph the results or create a mathematical model with linear regression)
+TODO use seaborn facet grid to graph data
+TODO readd going-to-obstacles option
 
 ## Developer
 - Franz Louis Cesista

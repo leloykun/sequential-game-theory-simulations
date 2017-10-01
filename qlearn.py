@@ -1,12 +1,13 @@
-import random
 import math
+import random
+import collections
 
 
 class QLearn:
     max_states = 40
 
-    def __init__(self, actions, temp=5, epsilon=0.1, alpha=0.2,
-                 gamma=0.9):
+    def __init__(self, actions, temp=5, epsilon=0.1, alpha=0.5,
+                 gamma=0.5):
 
         self.q = {}
 
@@ -99,8 +100,8 @@ class QLearn:
         '''
 
         eprobs = self.getEProbs(state)
-        new_sre = - sum([eprob * math.log10(eprob) for eprob in eprobs]) / \
-            math.log10(len(self.actions))
+        new_sre = - sum([eprob * math.log(eprob) for eprob in eprobs]) / \
+            math.log(len(self.actions))
 
         # recalc static SRE and ARE
         stat_sre_delta = new_sre - self.stat_SRE.get(state, 1)
@@ -117,30 +118,6 @@ class QLearn:
             self.dyna_SRE[state] = new_sre
             self.dyna_ARE = (self.dyna_ARE * (len(self.states) - 1) +
                              self.dyna_SRE[state]) / len(self.states)
-        '''  older version:
-        if state in self.states:
-            eprobs = self.getEProbs(state)
-            newSRE = -sum(
-                [eprob * math.log10(eprob) for eprob in eprobs]) \
-                / math.log10(len(self.actions))
-            delta = newSRE - self.dyna_SRE[state]
-
-            self.dyna_SRE[state] = newSRE
-            self.dyna_ARE += delta / len(self.states)
-
-        else:
-            self.states.add(state)
-
-            eValue = math.exp(reward / self.temp)
-            eSum = len(self.actions) - 1 + eValue
-            eX = eValue / eSum  # eprob when Q(S,a) == reward
-            e1 = 1 / eSum  # eprob when Q(S,a) == 0
-
-            self.dyna_SRE[state] = \
-                - ((len(self.actions) - 1) * (e1 * math.log10(e1)) \
-                + (eX * math.log10(eX))) / math.log10(len(self.actions))
-            self.dyna_ARE = (self.dyna_ARE * (len(self.states) - 1) \
-                        + self.dyna_SRE[state]) / len(self.states)'''
 
     def chooseAction(self, state, type=1):
         # Greedy Epsilon
@@ -167,7 +144,7 @@ class QLearn:
 
         # Boltzmann
         elif type == 1:
-            eprobs = self.getEProbs(state, ignore_obstacles=True)
+            eprobs = self.getEProbs(state)
 
             ran = random.random()
             action = random.choice(self.actions)
@@ -215,31 +192,28 @@ class QLearn:
         elif type == 3:
             return random.choice(self.actions)
 
-    def learn(self, state1, action1, reward, state2):
+    def learn(self, state1, action1, reward, state2, print_q_after=False):
         maxqnew = max([self.getQ(state2, a) for a in self.actions])
         self.learnQ(state1, action1, reward,
                     reward + self.gamma * maxqnew)
+        if print_q_after:
+            print(self.q)
 
-    def getEProbs(self, state, ignore_obstacles=False):
+    def getEProbs(self, state):
         ''' Probability of selecting each action on given state:
             eValue(state, action) = e ** (Q(state, action)/temp)
                                    eValue(state, action)
             eProb(state, action) = ---------------------
                                    (sum of all eValues)
         '''
-
-        def going_to_obstacle(action):
-            cell = self.agent.world.getPointInDirection(
-                self.agent.cell.x, self.agent.cell.y, action)
-            return self.agent.world.get_cell(cell[0], cell[1]).wall
-
         eValues = []
         for action in self.actions:
-            if ignore_obstacles and going_to_obstacle(action):
-                eValues.append(0)
-            else:
-                eValues.append(
-                    math.exp(self.getQ(state, action) / self.temp))
+            c = getattr(self.agent, 'going_to_obstacle', None)
+            if isinstance(c, collections.Callable):
+                if c(action):
+                    eValues.append(1)
+                    continue
+            eValues.append(math.exp(self.getQ(state, action) / self.temp))
         total = sum(eValues)
         return [eValue / total for eValue in eValues]
 
