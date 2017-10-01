@@ -1,11 +1,12 @@
-# 8*10*4 = 320 seconds:
-# cat-mouse 10 1 10
-# 80*50*4 = 16000 seconds:
 # cat-mouse [runs] [trials] [steps]
 # cat-mouse 100 1 50
+# 
 # cat-mouse-cheese [runs] [timesteps] [interval]
 # cat-mouse-cheese 10 10000 100
+# 
 # simple-migration [runs] [timesteps] [temp_powers]
-# simple-migration 10 10000 5
+simple-migration 10 10000 5
+# 
 # route-choice [runs] [timesteps] [num_drivers] [[road capacities]]
-route-choice 4 100 100 10 20 30 40
+# route-choice 4 100 100 10 20 30 40
+# 
