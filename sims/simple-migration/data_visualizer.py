@@ -1,7 +1,7 @@
 import numpy as np
 import pylab as pl
 import copy
-import seaborn
+import seaborn as sns
 
 # pl.figure(figsize=(10, 10))
 runs = 10
@@ -25,8 +25,10 @@ for temp_power in range(-temp_powers, temp_powers + 1):
             if num_states[xc] != num_states[xc - 1]:
                 pl.axvline(x=xc, color='pink', linestyle='-', linewidth=1)
 
-        plot1 = pl.plot(time, data[0], c='#6677AA')
-        plot2 = pl.plot(time, data[1], c='#0000FF')
+        with sns.color_palette("PuBuGn_d"):
+            for i in range(2):
+                pl.plot(time, data[i])
+                # plot2 = pl.plot(time, data[1], c='#0000FF')
 
         pl.title('Residual Entropy over Time')
 

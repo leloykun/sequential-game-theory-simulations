@@ -1,5 +1,6 @@
 import time
 import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
     
 max_perf = 150
@@ -29,14 +30,14 @@ def visualize(trials=100, steps=10, runs=10):
             #print(data)
             
             plt.imshow(temp, extent=[-0.5, 10.5,-0.5,10.5], origin='lower', 
-                       interpolation='nearest', vmin=0, vmax=max_perf, cmap='Blues') #BrBG
+                       interpolation='nearest', vmin=0, vmax=max_perf, cmap=sns.light_palette("Navy", as_cmap=True)) #BrBG
                        
             plt.title("QLearning Parameters vs. Agent Performance\nVisual Depth = "+str(depth)+" || Training Period: "+str(layer+1))
             plt.xlabel("Discount Rate")
             plt.ylabel("Learning Rate")
             
             # TODO: make this uniform
-            plt.colorbar(boundaries=bounds, spacing='uniform', label='Agent Performance', ticks=[],  extend='max', cmap='Blues_r')
+            plt.colorbar(boundaries=bounds, spacing='uniform', label='Agent Performance', ticks=[],  extend='max')
             plt.tight_layout()
             plt.savefig("data/" + str(depth) + "/plot" + str(layer + 1))
             plt.close()
