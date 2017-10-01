@@ -87,7 +87,7 @@ def worker(params):
     res_ent = []
     num_states = []
 
-    env.show()
+    # env.show()
 
     for now in range(1, timesteps + 1):
         env.update(0, mouse.score)
@@ -109,7 +109,7 @@ def worker(params):
     with open(output_dir_dir + "res_ent.txt", 'w') as f:
         f.write('\n'.join(map(str, res_ent)))
 
-    with open(output_dir_dir + "num_states", 'w') as f:
+    with open(output_dir_dir + "num_states.txt", 'w') as f:
         f.write(' '.join(map(str, num_states)))
 
 def process(params):
