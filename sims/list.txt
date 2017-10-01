@@ -8,5 +8,5 @@
 # simple-migration 10 10000 5
 # 
 # route-choice [runs] [timesteps] [num_drivers] [[road capacities]]
-# route-choice 4 100 100 10 20 30 40
+route-choice 10 1000 100 10 20 30 40
 # 

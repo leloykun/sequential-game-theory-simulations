@@ -9,7 +9,6 @@ def visualize(runs=10):
         
         print('data/dist/' + str(run) + 'run.txt')
         with open('data/dist/' + str(run) + 'run.txt') as f:
-            print(f.readlines())
             for line in f.readlines():
                 a, b, c, d = map(int, line.split())
                 time.append(len(time) + 1)
@@ -19,6 +18,16 @@ def visualize(runs=10):
                 data[3].append(d)
         
         print(time)
+        
+        plot1 = plt.plot(time, data[0])
+        plot2 = plt.plot(time, data[1])
+        plot3 = plt.plot(time, data[2])
+        plot4 = plt.plot(time, data[3])
+        
+        # plt.xlim(0, 100)
+        
+        plt.savefig('data/dist/' + str(run) + 'plot')
+        plt.close()
 
 if __name__ == '__main__':
     visualize()

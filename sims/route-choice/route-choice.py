@@ -49,7 +49,7 @@ class Driver:
     def __init__(self, _world):
         self.world = _world
 
-        self.ai = QLearn(temp=0.5, actions=[0, 1, 2, 3])
+        self.ai = QLearn(temp=1, actions=[0, 1, 2, 3])
         self.ai.agent = self
 
         self.last_action = None
