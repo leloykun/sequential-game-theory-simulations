@@ -87,7 +87,7 @@ def worker(params):
     res_ent = []
     num_states = []
 
-    env.show()
+    # env.show()
 
     for now in range(1, timesteps + 1):
         env.update(0, mouse.score)
@@ -109,7 +109,7 @@ def worker(params):
     with open(output_dir_dir + "res_ent.txt", 'w') as f:
         f.write('\n'.join(map(str, res_ent)))
 
-    with open(output_dir_dir + "num_states", 'w') as f:
+    with open(output_dir_dir + "num_states.txt", 'w') as f:
         f.write(' '.join(map(str, num_states)))
 
 def process(params):
@@ -117,10 +117,10 @@ def process(params):
 
 
 def run(params):
-    timesteps, runs, temp_powers = process(params)
+    runs, timesteps, temp_powers = process(params)
 
     print("cat-mouse-cheese starting...")
-    print("timesteps = %d,  runs = %d" % (timesteps, runs))
+    print("runs = %d,  timesteps = %d" % (runs, timesteps))
     sim_start = time.time()
 
     params = []

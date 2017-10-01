@@ -139,6 +139,10 @@ class Mouse(Agent):
                                             i)) for i, j in self.lookcells
         ])
 
+    def going_to_obstacle(self, action):
+        cell = self.world.getPointInDirection(self.cell.x, self.cell.y, action)
+        return self.world.get_cell(cell[0], cell[1]).wall
+
 
 class Cat(Agent):
     colour = 'red'
@@ -202,10 +206,10 @@ def process(params):
 
 
 def run(params):
-    timesteps, interval, runs = process(params)
+    runs, timesteps, interval = process(params)
 
     print("cat-mouse-cheese starting...")
-    print("timesteps = %d,  runs = %d" % (timesteps, runs))
+    print("runs = %d,  timesteps = %d" % (runs, timesteps))
     sim_start = time.time()
 
     for depth in range(1, max_visual_depth + 1):
