@@ -167,7 +167,7 @@ class QLearn:
 
         # Boltzmann
         elif type == 1:
-            eprobs = self.getEProbs(state, ignore_obstacles=True)
+            eprobs = self.getEProbs(state)
 
             ran = random.random()
             action = random.choice(self.actions)
@@ -222,7 +222,7 @@ class QLearn:
         if print_q_after:
             print(self.q)
 
-    def getEProbs(self, state, ignore_obstacles=False):
+    def getEProbs(self, state):
         ''' Probability of selecting each action on given state:
             eValue(state, action) = e ** (Q(state, action)/temp)
                                    eValue(state, action)
@@ -230,18 +230,12 @@ class QLearn:
                                    (sum of all eValues)
         '''
 
-        #  readd this as necessary
-        '''def going_to_obstacle(action):
-            cell = self.agent.world.getPointInDirection(
-                self.agent.cell.x, self.agent.cell.y, action)
-            return self.agent.world.get_cell(cell[0], cell[1]).wall'''
-
         eValues = []
         for action in self.actions:
-            '''if ignore_obstacles and going_to_obstacle(action):
+            if isinstance(getattr(self.agent, 'going_to_obstacle', None), collections.Callable):
                 eValues.append(0)
-            else:'''
-            eValues.append(math.exp(self.getQ(state, action) / self.temp))
+            else:
+                eValues.append(math.exp(self.getQ(state, action) / self.temp))
         total = sum(eValues)
         return [eValue / total for eValue in eValues]
 
