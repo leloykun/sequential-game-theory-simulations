@@ -1,5 +1,5 @@
 # cat-mouse [runs] [trials] [steps]
-cat-mouse 10 100 10
+# cat-mouse 10 100 10
 # 
 # cat-mouse-cheese [runs] [timesteps] [interval]
 # cat-mouse-cheese 10 10000 100
