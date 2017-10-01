@@ -1,5 +1,6 @@
-import random
 import math
+import random
+import collections
 
 
 class QLearn:
