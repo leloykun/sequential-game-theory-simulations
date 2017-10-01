@@ -117,10 +117,10 @@ def process(params):
 
 
 def run(params):
-    timesteps, runs, temp_powers = process(params)
+    runs, timesteps, temp_powers = process(params)
 
     print("cat-mouse-cheese starting...")
-    print("timesteps = %d,  runs = %d" % (timesteps, runs))
+    print("runs = %d,  timesteps = %d" % (runs, timesteps))
     sim_start = time.time()
 
     params = []
