@@ -81,6 +81,7 @@ TODO: explain what the parameters are about
 
 ## Details
 TODO
+TODO move this part to 'wiki'
 
 ### Reinforcement Learning
 TODO
