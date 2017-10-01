@@ -233,10 +233,12 @@ class QLearn:
 
         eValues = []
         for action in self.actions:
-            if isinstance(getattr(self.agent, 'going_to_obstacle', None), collections.Callable):
-                eValues.append(0)
-            else:
-                eValues.append(math.exp(self.getQ(state, action) / self.temp))
+            c = getattr(self.agent, 'going_to_obstacle', None)
+            if isinstance(c, collections.Callable):
+                if c(action):
+                    eValues.append(0)
+                    continue
+            eValues.append(math.exp(self.getQ(state, action) / self.temp))
         total = sum(eValues)
         return [eValue / total for eValue in eValues]
 
