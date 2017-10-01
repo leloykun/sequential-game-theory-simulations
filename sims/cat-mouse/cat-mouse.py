@@ -144,10 +144,10 @@ def process(params):
 
 
 def run(params):
-    trials, steps, runs = process(params)
+    runs, trials, steps = process(params)
 
     print("cat-mouse starting...")
-    print("trials = %d,  steps = %d,  runs = %d" % (trials, steps, runs))
+    print("runs = %d,  trials = %d,  steps = %d" % (runs, trials, steps))
     sim_start = time.time()
 
     for depth in range(1, max_visual_depth + 1):

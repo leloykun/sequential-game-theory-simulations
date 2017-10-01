@@ -202,10 +202,10 @@ def process(params):
 
 
 def run(params):
-    timesteps, interval, runs = process(params)
+    runs, timesteps, interval = process(params)
 
     print("cat-mouse-cheese starting...")
-    print("timesteps = %d,  runs = %d" % (timesteps, runs))
+    print("runs = %d,  timesteps = %d" % (runs, timesteps))
     sim_start = time.time()
 
     for depth in range(1, max_visual_depth + 1):
