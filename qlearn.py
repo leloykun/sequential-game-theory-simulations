@@ -99,8 +99,8 @@ class QLearn:
         '''
 
         eprobs = self.getEProbs(state)
-        new_sre = - sum([eprob * math.log10(eprob) for eprob in eprobs]) / \
-            math.log10(len(self.actions))
+        new_sre = - sum([eprob * math.log(eprob) for eprob in eprobs]) / \
+            math.log(len(self.actions))
 
         # recalc static SRE and ARE
         stat_sre_delta = new_sre - self.stat_SRE.get(state, 1)
