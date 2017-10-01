@@ -7,6 +7,7 @@ from qlearn import QLearn
 from world import World
 
 sim_name = 'route-choice'
+output_dir = 'sims/' + sim_name + '/data/'
 
 
 class DriverWorld(World):
@@ -28,15 +29,27 @@ class DriverWorld(World):
         for agent in self.agents:
             total_rewards += agent.learn()
 
-        print(str(total_rewards) + ' ' + ' '.join(map(str, self.road_cnt)))
+        # print(str(total_rewards) + ' ' + ' '.join(map(str, self.road_cnt)))
+
+    def get_are(self):
+        sum_stat_are = 0
+        sum_dyna_are = 0
+
+        for agent in self.agents:
+            sum_stat_are += agent.ai.stat_ARE
+            sum_dyna_are += agent.ai.dyna_ARE
+            # print(agent.ai.q)
+
+        return (sum_stat_are/len(self.agents), sum_dyna_are/len(self.agents))
+
 
 class Driver:
     cell = (0, 0)
-    
+
     def __init__(self, _world):
         self.world = _world
-    
-        self.ai = QLearn(actions=[0, 1, 2, 3])
+
+        self.ai = QLearn(temp=0.5, actions=[0, 1, 2, 3])
         self.ai.agent = self
 
         self.last_action = None
@@ -58,26 +71,56 @@ class Driver:
         return reward
 
     def calc_reward(self):
+        '''if self.world.road_cap[self.last_action] > self.world.road_cnt[self.last_action]:
+            return 1
+        else:
+            return (self.world.road_cap[self.last_action] - \
+                   self.world.road_cnt[self.last_action])'''
         return self.world.road_cap[self.last_action] - \
                self.world.road_cnt[self.last_action]
 
 
 def worker(params):
-    pass
+    run, timesteps, num_drivers, road_cap = params
+    print(run, timesteps, num_drivers, road_cap)
 
+    world = DriverWorld(road_cap)
+    for _ in range(num_drivers):
+        agent = Driver(world)
+        agent.ai.max_states = len(road_cap)
+        world.agents.append(agent)
+
+    choice_dist = []
+    res_ent = []
+
+    for _ in range(timesteps):
+        world.update()
+        choice_dist.append(' '.join(map(str, world.road_cnt)))
+        res_ent.append(' '.join(map(str, world.get_are())))
+
+    with open(output_dir + 'dist/' + str(run) + 'run.txt', 'w') as f:
+        f.write('\n'.join(choice_dist))
+
+    with open(output_dir + 'are/' + str(run) + 'run.txt', 'w') as f:
+        f.write('\n'.join(res_ent))
 
 def process(params):
     return map(int, params)
 
-
 def run(params):
-    timesteps, num_drivers, *road_cap = process(params)
-    # print(timesteps, num_drivers, "run nigger run")
-    
-    world = DriverWorld(road_cap)
-    for _ in range(num_drivers):
-        agent = Driver(world)
-        world.agents.append(agent)
-        
-    for _ in range(timesteps):
-        world.update()
+    runs, timesteps, num_drivers, *road_cap = process(params)
+
+    print("route-choice starting...")
+    print("timesteps = %d,  runs = %d" % (timesteps, runs))
+    sim_start = time.time()
+
+    params = []
+    for run in range(1, runs + 1):
+        params.append((run, timesteps, num_drivers, road_cap))
+
+    with multiprocessing.Pool(4) as pool:
+        pool.map(worker, params)
+
+    print("route-choice finished...")
+    print("overall runtime:", time.time() - sim_start, "secs")
+    print()
