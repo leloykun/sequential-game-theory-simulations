@@ -25,10 +25,8 @@ for temp_power in range(-temp_powers, temp_powers + 1):
             if num_states[xc] != num_states[xc - 1]:
                 pl.axvline(x=xc, color='pink', linestyle='-', linewidth=1)
 
-        with sns.color_palette("PuBuGn_d"):
-            for i in range(2):
-                pl.plot(time, data[i])
-                # plot2 = pl.plot(time, data[1], c='#0000FF')
+        plot1 = pl.plot(time, data[0], c='#6677AA')
+        plot2 = pl.plot(time, data[1], c='#0000FF')
 
         pl.title('Residual Entropy over Time')
 
