@@ -7,7 +7,7 @@ def visualize(runs=10):
         data = [[], [], [], []]
         time = []
 
-        with open('data/dist/' + str(run) + 'run.txt') as f:
+        with open('data/dis/' + str(run) + 'run.txt') as f:
             for line in f.readlines():
                 a, b, c, d = map(int, line.split())
                 time.append(len(time) + 1)
@@ -25,7 +25,7 @@ def visualize(runs=10):
         for i in range(4):
             sns.regplot(x=time[:1000], y=np.array(data[i][:1000]), ax=ax, ci=100, marker="+", n_boot=10000, scatter=False)
 
-        plt.savefig('data/dist/' + str(run) + 'plot1K')
+        plt.savefig('data/dis/' + str(run) + 'plot1K')
         plt.close()
         print("done with run %d" % run)
 
