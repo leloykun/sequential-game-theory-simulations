@@ -7,7 +7,6 @@ def visualize(runs=10):
         data = [[], [], [], []]
         time = []
         
-        print('data/dist/' + str(run) + 'run.txt')
         with open('data/dist/' + str(run) + 'run.txt') as f:
             for line in f.readlines():
                 a, b, c, d = map(int, line.split())
@@ -17,17 +16,23 @@ def visualize(runs=10):
                 data[2].append(c)
                 data[3].append(d)
         
-        print(time)
+        '''with sns.color_palette("PuBuGn_d"):
+            for i in range(4):
+                # sns.tsplot(data=data[i])
+                plt.plot(time, data[i])'''
+                
+        fig, ax = plt.subplots()
         
-        plot1 = plt.plot(time, data[0])
-        plot2 = plt.plot(time, data[1])
-        plot3 = plt.plot(time, data[2])
-        plot4 = plt.plot(time, data[3])
+        plt.xlim(1, 1000)
+        plt.ylim(1, 50)
         
-        # plt.xlim(0, 100)
+        time = np.array(time)
+        for i in range(4):
+            sns.regplot(x=time[:1000], y=np.array(data[i][:1000]), ax=ax, ci=100, marker="+", n_boot=10000, scatter=False)
         
-        plt.savefig('data/dist/' + str(run) + 'plot')
+        plt.savefig('data/dist/' + str(run) + 'plot1K')
         plt.close()
+        print("done with run %d" % run)
 
 if __name__ == '__main__':
     visualize()
