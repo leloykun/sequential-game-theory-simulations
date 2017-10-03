@@ -97,7 +97,7 @@ def worker(params):
         choice_dist.append(' '.join(map(str, world.road_cnt)))
         res_ent.append(' '.join(map(str, world.get_are())))
 
-    with open(output_dir + 'dist/' + str(run) + 'run.txt', 'w') as f:
+    with open(output_dir + 'dis/' + str(run) + 'run.txt', 'w') as f:
         f.write('\n'.join(choice_dist))
 
     with open(output_dir + 'are/' + str(run) + 'run.txt', 'w') as f:
