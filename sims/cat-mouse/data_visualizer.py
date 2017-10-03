@@ -26,7 +26,7 @@ def visualize(trials=100, steps=10, runs=10):
             for alpha in range(11):
                 for gamma in range(11):
                     temp[alpha][gamma] = max_perf - (data[alpha][gamma][layer] - (data[alpha][gamma][layer-1] if layer > 0 else 0)) / steps
-            
+
             plt.imshow(temp, extent=[-0.5, 10.5,-0.5,10.5], origin='lower', 
                        interpolation='nearest', vmin=0, vmax=max_perf, cmap=sns.light_palette("Navy", as_cmap=True)) #BrBG
 
