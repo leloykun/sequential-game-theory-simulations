@@ -1,0 +1,2982 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      html,body
+{
+  height:100%;
+  width:50em;
+  color:#000;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+body
+{
+  background-color:#FFF;
+  font:13.34px helvetica,arial,freesans,clean,sans-serif;
+  font-size:small;
+}
+body *
+{
+  line-height:1.4em;
+}
+pre,code
+{
+  font:12px 'Bitstream Vera Sans Mono',Courier,monospace;
+}
+html
+{
+  overflow-y:scroll;
+}
+
+#path {
+  font:40px helvetica,arial,freesans,clean,sans-serif;
+}
+
+#commit .group
+{
+  border-top:1px solid #bedce7;
+}
+
+#commit .separator
+{
+  padding-top:1em;
+}
+
+#commit .envelope
+{
+  border-bottom:1px solid #bedce7;
+  border-left:1px solid #bedce7;
+  border-right:1px solid #bedce7;
+  background:#eaf2f5
+
+repeat-x;
+  overflow:hidden;
+  padding:0 .7em .7em;
+}
+
+#commit .envelope.selected
+{
+  background:#fffeeb!important;
+}
+
+#commit .human
+{
+  padding-top:.7em;
+  float:left;
+}
+
+#commit .human .refs
+{
+  font-size:150%;
+}
+
+#commit .human .message pre
+{
+  white-space:pre-wrap;
+  word-wrap:break-word;
+  width:38em;
+  font-family:Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans 
+
+Mono",monospace;
+}
+
+#commit .human .actor
+{
+  clear:left;
+  margin-top:.75em;
+}
+
+#commit .merge
+{
+  padding-top:.7em;
+}
+
+#commit .merge .gravatar
+{
+  border:1px solid #d0d0d0;
+  background-color:#FFF;
+  float:left;
+  margin-right:.5em;
+  padding:2px;
+}
+
+#commit .merge .message
+{
+  margin-top:.2em;
+}
+
+#commit .machine
+{
+  float:right;
+  width:14em;
+  border-left:1px solid #bedce7;
+  color:gray;
+  font-family:Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+  font-size:.85em;
+  line-height:1.5em;
+  padding:.8em 0 .8em 1.2em;
+}
+
+#commit .commit_oneline
+{
+  background:#eaf2f5;
+}
+
+#commit .commit_oneline td
+{
+  border-bottom:1px solid #bedce7;
+}
+
+#commit .commit_oneline .date
+{
+  color:#888;
+  width:1%;
+  border-left:1px solid #bedce7;
+  padding:0 1em 0 .5em;
+}
+
+#commit .commit_oneline .author
+{
+  width:15%;
+}
+
+#commit .commit_oneline .gravatar img
+{
+  border:1px solid #d0d0d0;
+  background-color:#FFF;
+  float:left;
+  margin-right:.4em;
+  padding:1px;
+}
+
+#commit .commit_oneline .message
+{
+  font-size:75%;
+}
+
+#commit .commit_oneline .commit,#commit .commit_oneline .tree
+{
+  width:1%;
+  font-family:Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans 
+
+Mono",monospace;
+  font-size:90%;
+  color:gray;
+  border-left:1px solid #bedce7;
+  padding:.6em .5em;
+}
+
+#commit .commit_oneline .tree
+{
+  border-right:1px solid #bedce7;
+}
+h2,h3,p,#readme.announce,#posts .entry-content p
+{
+  margin:1em 0;
+}
+#commit h2
+{
+  margin:0;
+}
+#commit
+{
+  font-weight:700;
+  color:#000;
+}
+.ejector h4,.fieldgroup p.explain,.fieldgroup div.error p,#impact_legend 
+
+p,#impact_graph p,.help-callout h2:first-child,.infotip p,.octotip p,#facebox 
+
+.popup .cheatsheet .col:last-child,.page-commit-show #gitnotes h2,#dashboard 
+
+ul.repo_list,table.uploads .description dl.form,.global-notice p,#inbox 
+
+p,#message .actions p,.composer dl.form,#issues_next #show_issue form.edit_issue 
+
+input[type="text"],.hero .textographic p,.screenographic .caption p,.caption 
+
+p,.following ul.avatars,.vcard dl dd,ul.smallnav,.browser .listing p,.pull-
+
+form,.new-comments .bubble .comment,.bubble .comment-
+
+form,ul.repositories,.rule.no-margin,.metabox p,.standard_form h2,#commit 
+
+h2,.news .alert p,#posts .entry-content p img,.ie7 #gollum-editor form
+{
+  margin:0;
+}
+
+.ejector.ejecting p,.commit-preview p.name a,.pull-description a,#footer 
+
+ul.sosueme li.main,#commit .commit_oneline .author a
+{
+  font-weight:700;
+  color:#000;
+}
+#code_search_results .results_and_sidebar,.baconplayer .wrap,#forkqueue 
+
+.topper,#help,#message .envelope .reply .controls,#issues_next #issues_list 
+
+.main .footerbar,#issues_next #show_issue #discussion_bucket,#repos .repo 
+
+.title,#commit,#dashboard .dossier .profile .identity,#dashboard .dossier 
+
+.profile .vcard .field,#guides .guide,#posts,.commentstyle form .actions
+{
+  overflow:hidden;
+}
+*,.options-group dl,.tree-browser.downloads td p,#rss p,#commit_comments 
+
+.inner,#wiki-wrapper #template h1,#wiki-wrapper #template h2,#wiki-wrapper 
+
+#template h3,#wiki-wrapper #template h4,#wiki-wrapper #template h5,#wiki-wrapper 
+
+#template h6
+{
+  margin:0;
+  padding:0;
+}
+#forkqueue table.compare td.spacer,#commit .commit_oneline .gravatar
+{
+  width:1%;
+}
+.manpage h5,.options-group dt label,.standard_form pre,.login_form 
+
+pre,.forgot_password_form pre,.oauth_form pre,#commit .human .message
+{
+  font-size:13px;
+}
+#inbox .list .item .gravatar,#repos .repo .commit .actor .gravatar,#commit 
+
+.human .actor .gravatar,.news .alert .gravatar
+{
+  border:1px solid #d0d0d0;
+  background-color:#FFF;
+  float:left;
+  line-height:0;
+  margin-right:.7em;
+  padding:2px;
+}
+#issues_next #issues_list .main .pagination a,.pagehead.repohead h1 a,#repos 
+
+.repo .meta table td.url,#commit .human .message a.vis
+{
+  color:#4183c4;
+}
+#repos .repo .commit .actor .name,#commit .human .actor .name
+{
+  line-height:1.5em;
+}
+
+#repos .repo .commit .actor .name span,#commit .human .actor .name span
+{
+  color:#888;
+  font-size:90%;
+}
+
+#repos .repo .commit .actor .date,#commit .human .actor .date
+{
+  color:#888;
+  font-size:90%;
+  line-height:1em;
+}
+a,.profilecols ul.stats li a:hover strong,.profilecols ul.stats li a:hover span
+{
+  color:#4183c4;
+  text-decoration:none;
+}
+
+a:hover,#editbar .tab a:hover,#forkqueue table td.message a:hover,#inbox 
+
+.actions .compose p a span,#message .actions .compose p a span,td.linkable-
+
+line-number:hover,#files .file .view-modes ul.menu li:hover,.file-box .view-
+
+modes ul.menu li:hover
+{
+  text-decoration:underline;
+}
+*,.options-group dl,.tree-browser.downloads td p,#rss p,#commit_comments 
+
+.inner,#wiki-wrapper #template h1,#wiki-wrapper #template h2,#wiki-wrapper 
+
+#template h3,#wiki-wrapper #template h4,#wiki-wrapper #template h5,#wiki-wrapper 
+
+#template h6
+{
+  margin:0;
+  padding:0;
+}
+#commit .human .message a {
+color: black;
+}
+
+      </style>
+  </head>
+  <body>
+    <div id="path">
+      <b><a href="#">socialsims</a></b>
+    </div>
+    <div id="commit">
+      
+        
+          
+          <div class="separator">
+            <h2>05-10-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fine-tuned logistic regression</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:37:15 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">5</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">3594</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">3688</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added logistic regression</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:28:48 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">4</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">3715</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">9</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>04-10-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added steps in linear regression</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>05:46:55 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">15</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">10</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>03-10-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed naming issues p2</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:25:32 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed naming issues in data of route-choice</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:24:49 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">31</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">10001</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added linear regression stuff in cat-mouse</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:17:30 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">4</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">41</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">22</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>removed sns color pallete in simple-migration</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:22:06 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">4</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>rerunned route-choice</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:18:35 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">12</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">10014</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">10009</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>01-10-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>edited data visualizers</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>09:02:27 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">8</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">5</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>finished initial run of route-choice</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>05:32:32 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">13</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">10012</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">403</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added data_visualizer to route-choice</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>05:15:30 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">24</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed reward function in route-choice simulation</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>05:15:17 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">4</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">5</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added going_to_obstacle() to cat-mouse-cheese simulations</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>04:23:14 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">4</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed qlearn.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>04:17:22 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">28</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added going_to_obstacle to cat-mouse simulations</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>04:00:42 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">13</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">6</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added seaborn in imports of data_visualizer.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:53:41 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added whitespaces to list.txt</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:39:15 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">6</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">5</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>imported collections in qlearn.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:36:12 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed order of inputs in simulations and descriptions in list.txt</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:36:00 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">4</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">12</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">9</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>removed ignore_obstacles option in qlearn</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:28:09 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">7</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">13</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>plotted data in simple-migration</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:00:43 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">111</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">7</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">11</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added data_visualizer in simple-migration</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:41:30 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">46</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added remineder to move details part in readme to wiki</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:41:15 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>re-runned simple-migration</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:40:44 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">440</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1100209</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1100099</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>preparation for re-run of simple-migration</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:09:59 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">4</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">4</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>finishing touches for route-choice</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:46:57 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">6</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">460</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">17</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>used log instead of log10 in qlearn.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:46:27 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>30-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>made the number of roads a variable</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:29:03 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">19</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">17</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added option to print q in def learn in qlearn.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>08:02:03 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">3</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>changed default alpha and gamma values in qlearn</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:49:49 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added reminder to readd going-to-obstacle option in qlearn</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:47:49 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed qlearn</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:45:05 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">5</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">6</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>readded route-choice simulations</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:44:54 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">85</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added TODO in readme</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:22:48 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>29-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added params option to data_visualizer</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>06:06:32 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">4</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>removed visualization of data in cat-mouse</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>05:42:24 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">None</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">5</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added data visualization to portal.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>04:19:32 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">50</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">41</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge branch 'master' into dev</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>01:35:49 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>28-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge pull request #9 from leloykun/add-license-1</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:39:27 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Create LICENSE</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:39:16 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">21</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed todos in readme</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>06:32:59 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">6</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added concepts for cooperative migration</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:00:28 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>27-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge branch 'master' into dev</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:46:15 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added TODO sections in README.md</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:46:02 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">14</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added TODO sections in README.md</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:45:12 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">14</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Update README.md</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>06:31:31 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>improved graphs in experiment 6</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>06:31:01 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">21</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">6</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">6</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge branch 'master' of https://github.com/leloykun/socialsims</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>06:12:01 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Improved graphs in experiment 4</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>06:11:50 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">46</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Update README.md</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>04:00:21 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Update README.md</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:49:08 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Update README.md</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:40:43 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Update README.md</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:36:43 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">81</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>edited env_show</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:20:13 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added option to show simulations</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:17:36 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">4</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">5</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>removed route-choice sim</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:38:01 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">None</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">80</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>uncommented simulations in list.txt</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:37:07 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">4</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">82</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">18</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge pull request #8 from leloykun/dev</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:04:36 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>21-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added num_states to output of simple-migration</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:20:14 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">4</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added vertical lines to graphs</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:19:41 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">11</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">14</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">7</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>11-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge pull request #7 from leloykun/dev</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>08:52:59 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>redone cleaning code using yapf</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>08:37:12 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">6</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">51</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">29</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>cleaned up code using yapf</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>08:20:15 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">9</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">121</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">197</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>10-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>deleted simple-residual-entropy sims</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:53:58 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>conducted simple-migration simulations</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:53:26 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">343</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1100242</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">131</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added random agent type</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:29:29 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>09-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>aesthetic improvement to qlearn.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:53:52 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">7</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">13</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>aethetic changes to qlearn.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:42:57 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">3</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">3</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>refactored qlearn.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:25:49 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">82</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">44</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>renamed residual-entropy to simple-residual-entropy</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>09:26:18 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>conducted simple-migration simulation</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:45:03 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">13</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">255</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">5</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added more concept ideas</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:44:36 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>made cat-mouse sim more dynamic on param processing</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>01:55:49 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">6</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added explaination to difference in LRE</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>01:41:58 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>removed whitespaces</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>01:20:41 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">20</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">20</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>tests for cat-mouse-cheese simulations</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>01:11:25 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">24</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2617</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">14</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>07-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>refactored code for use in cat-mouse-cheese simulations</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:55:20 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">45</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">9</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added concept ideas again</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:14:44 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>06-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>plotted cat-mouse data</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>04:24:07 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">41</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">45</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>finished cat-mouse simulation</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:23:11 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">41</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">4840</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">484</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added infographics</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:22:38 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>started centralizing experiments</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:39:25 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">19</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">682</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">130</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>05-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added new experiment concept</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:28:25 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge pull request #6 from leloykun/dev</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>09:45:26 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added method to find out when agents start to fully learn policies</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:31:30 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>redone exp 6</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:31:11 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">53</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">996621</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2385831</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>04-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>repeated exp 6</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:19:59 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">30</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2455038</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2274876</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>moved data output to processes</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:14:58 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">31</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2260735</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">17153987</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>followed pep8 rules</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:02:48 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">88</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">80</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>finished experiment 6</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>09:40:50 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">37</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">17485913</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">186495</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed variable naming in qlearn.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>08:58:11 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">12</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">195853</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">37</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>03-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge branch 'master' into dev</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>08:10:33 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>aesthetic improvements to the plots</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:29:41 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">45</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>02-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge pull request #5 from leloykun/dev</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>08:26:41 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>replaced QLearning infographic with its png version</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>08:26:18 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>cosmetic changes</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:43:14 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">5</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">3</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>cosmetic update on experiment 5</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>04:58:59 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>conducted experiment 5: migration</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>04:51:43 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">13</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">56</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">83</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>animated graphs in experiment 4</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:37:33 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">4</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>preparation for experiment 5</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:30:47 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">22</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed plots in exp 4</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:11:54 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">41</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">5</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">4</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge pull request #4 from leloykun/dev</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:00:17 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added QLearning infographic</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:58:36 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>redone Experiment 4</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>01:53:29 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">62</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2429</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2427</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>conducted exp 4 (not final)</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:55:26 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">39</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2181</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2181</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>started Experiment 4</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:34:08 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">29</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2464</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed plots of exp 3</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:33:24 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">205</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">33</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">31</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge pull request #3 from leloykun/qlearn-fix</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:10:19 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>fixed qlearn</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:08:20 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">4</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">49</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">42</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>finished experiment 3</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:17:32 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">243</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">4883</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">520</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>start experiment 3</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>01:00:19 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">13</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">719</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">44</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>01-09-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>conducted experiment 2</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:44:51 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">8</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">428</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">406</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added test of multiprocessing</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>10:44:40 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">16</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>started experiment 2</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>08:41:40 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">4</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">392</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">22</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge pull request #2 from leloykun/dev</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:12:20 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added another plot to experiment 1</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:10:27 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>conducted experiment 1</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:05:04 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">5</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">391</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>made vision range a variable</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:04:36 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">3</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>moved infographic</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:03:34 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added concept for graphs</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:03:21 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added multithreading in experiment 1</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:03:06 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">63</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">25</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>updated paper</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:02:25 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>31-08-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>made alpha and gamma parameters modifiable</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:46:33 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">26</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">18</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added data for experiments</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>03:45:26 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added another experiment concept</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>02:19:37 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added concepts for experiments</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>01:19:11 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added qlearn ai to mouse</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>01:13:48 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">5</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">90</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">29</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>30-08-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added research paper to docs</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:25:19 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added qlearn back to codebase</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:02:28 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">214</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added cheese to simulation</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>09:37:40 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">11</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">5</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>made cat chase mouse</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>09:28:25 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">5</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">133</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">6</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added reinforcement learning infographic</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>09:07:37 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added experimental code</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>09:02:22 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">6</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">423</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>backupped again</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>09:02:04 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">4</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">48</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added more maps</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>12:02:33 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">19</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>29-08-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>moved older version to v2</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:28:22 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">5</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">0</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">0</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>changed ENVIRONMENT to MAP in settings</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:20:39 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">2</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added helper function to cell.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:20:16 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">4</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">1</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Merge pull request #1 from leloykun/widgets</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>06:00:06 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">-</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">-</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">-</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>moved widgets to separate folder</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>05:58:58 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">3</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">2</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>26-08-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>separated Cell class from cellular</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>07:21:54 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">4</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">49</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">51</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>added settings.py</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:26:43 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">6</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">115</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">181</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>created backup</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:25:42 AM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">8</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1158</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          
+            </div>
+          
+          <div class="separator">
+            <h2>25-08-2017</h2>
+          </div>
+          <div class="group">
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>imported stuff from original repo</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:43:57 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">16</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">1450</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+        
+          <div class="envelope commit">
+            <div class="human">
+              <div class="message">
+                <pre><a>Initial commit</a></pre>
+              </div>
+              <div class="actor">
+                  <div class="name"></span><a href="#Franz Louis T. Cesista">Franz Louis T. Cesista</a> - <span>11:28:08 PM</div>
+              </div>
+            </div>
+            <div class="machine">
+              Files Modified&nbsp;&nbsp;<a href="#" class="js-commit-link" data-key="c">1</a><br>
+              Lines Added&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="js-tree-link" data-key="t">2</a><br>
+              Lines Removed&nbsp;&nbsp;&nbsp;<a href="#" class="js-parent-link" data-key="p">None</a>
+            </div>
+        </div>
+      
+    </div>
+    </div>
+  </body>
+</html>
