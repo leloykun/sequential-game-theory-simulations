@@ -8,17 +8,29 @@ def analyze(trials=100, steps=10, runs=10):
     layers = int(trials / steps)
     X = []
     Y = []
+    
+    X_temp = {}
 
     for depth in range(1, 5):
-        for run in range(1, 1 + 1):
+        for run in range(1, runs + 1):
             with open("data/" + str(depth) + "/data" + str(run) + ".txt") as f:
                 for line in f.readlines():
                     line = list(map(int, line.split()))
                     for i in range(2, 12):
-                        X.append([(i - 1) * steps, depth, line[0]/10, line[1]/10])
-                        Y.append(line[i])
+                        temp = ((i - 1) * steps, depth, line[0]/10, line[1]/10)
+                        if temp in X_temp:
+                            X_temp[temp] += line[i]
+                        else:
+                            X_temp[temp] = line[i]
+    
+    for key in X_temp:
+        # print(list(key), X_temp[key]/10)
+        X.append(list(key))
+        Y.append(int(X_temp[key]/10))
 
-    '''lin_reg = linear_model.LinearRegression(n_jobs=-1)
+    # print(X)
+    # print(Y)
+    lin_reg = linear_model.LinearRegression(n_jobs=-1)
     lin_reg.fit(X, Y)
 
     print(str(round(lin_reg.intercept_, 2)) + " + " + \
@@ -28,10 +40,10 @@ def analyze(trials=100, steps=10, runs=10):
           str(round(lin_reg.coef_[3], 2)) + "*gamma")
 
     print("R-squared:", str(round(lin_reg.score(X, Y), 4)))
-    print()'''
+    print()
 
     print(len(X))
-    log_reg = linear_model.LogisticRegression(verbose=10, C=1e10, tol=1e-7, max_iter=1000)
+    log_reg = linear_model.LogisticRegression(C=1e7, tol=1e-5, max_iter=100, class_weight='balanced')
     log_reg.fit(X, Y)
     print()
 
@@ -46,7 +58,13 @@ def analyze(trials=100, steps=10, runs=10):
         f.write(str(log_reg.score(X, Y)))
 
     print("R-squared:", round(log_reg.score(X, Y), 4))
-    X_test = [[0, 1, 0.5, 0.5], [50, 1, 0.5, 0.5], [100, 1, 0.5, 0.5]]
+    X_test = [[0, 1, 0.5, 0.5],
+              [50, 1, 0.5, 0.5],
+              [100, 1, 0.5, 0.5],
+              [100, 1, 0.0, 0.0],
+              [100, 1, 1.0, 0.0],
+              [100, 1, 0.0, 1.0],
+              [100, 1, 1.0, 1.0]]
     print(log_reg.predict(X_test))
 
     print("time taken:", time.time() - start)
