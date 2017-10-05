@@ -1,0 +1,6 @@
+-994.88 intercept
+68.12 step
+1.95 depth
+1950.34 alpha
+1217.58 gamma
+0.8013 R-squared

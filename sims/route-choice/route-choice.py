@@ -49,7 +49,7 @@ class Driver:
     def __init__(self, _world):
         self.world = _world
 
-        self.ai = QLearn(temp=1, actions=[0, 1, 2, 3])
+        self.ai = QLearn(temp=0.01, actions=[0, 1, 2, 3])
         self.ai.agent = self
 
         self.last_action = None
@@ -97,7 +97,7 @@ def worker(params):
         choice_dist.append(' '.join(map(str, world.road_cnt)))
         res_ent.append(' '.join(map(str, world.get_are())))
 
-    with open(output_dir + 'dist/' + str(run) + 'run.txt', 'w') as f:
+    with open(output_dir + 'dis/' + str(run) + 'run.txt', 'w') as f:
         f.write('\n'.join(choice_dist))
 
     with open(output_dir + 'are/' + str(run) + 'run.txt', 'w') as f:
