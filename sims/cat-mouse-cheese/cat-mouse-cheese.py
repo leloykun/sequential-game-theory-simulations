@@ -72,7 +72,6 @@ class Mouse(Agent):
         for i in range(-self.visual_depth, self.visual_depth + 1):
             for j in range(-self.visual_depth, self.visual_depth + 1):
                 self.lookcells.append((i, j))
-        # print(self.lookcells)
 
     def update(self):
         state = self.calc_state()
@@ -82,7 +81,9 @@ class Mouse(Agent):
             self.eaten += 1
             reward = -100
             if self.last_state is not None:
-                self.ai.learn(self.last_state, self.last_action, reward,
+                self.ai.learn(self.last_state,
+                              self.last_action,
+                              reward,
                               state)
 
             self.last_state = None
@@ -95,29 +96,20 @@ class Mouse(Agent):
             self.world.cheese.cell = self.env.get_random_avail_cell()
 
         if self.last_state is not None:
-            self.ai.learn(self.last_state, self.last_action, reward,
+            self.ai.learn(self.last_state,
+                          self.last_action,
+                          reward,
                           state)
 
         state = self.calc_state()
         action = self.ai.chooseAction(state)
-        # print(state)
-        # print(action)
+
         self.last_state = state
         self.last_action = action
 
         self.goInDirection(action)
 
     def calc_state(self):
-        '''def get_dist_to(agent):
-            if abs(self.cell.x - agent.cell.x) <= self.visual_depth and \
-               abs(self.cell.y - agent.cell.y) <= self.visual_depth:
-                return ((self.cell.x - agent.cell.x),
-                        (self.cell.y - agent.cell.y))
-            else:
-                #default
-                return (100, 100)
-        return (get_dist_to(self.world.cheese),
-                get_dist_to(self.world.cat))'''
         cat = self.world.cat
         cheese = self.world.cheese
 
@@ -134,14 +126,15 @@ class Mouse(Agent):
                 return 0
 
         return tuple([
-            cell_value(
-                self.world.get_wrapped_cell(self.cell.x + j, self.cell.y +
-                                            i)) for i, j in self.lookcells
+            cell_value(self.world.get_wrapped_cell(self.cell.x + j, 
+                                                   self.cell.y +i))
+            for i, j in self.lookcells
         ])
 
     def going_to_obstacle(self, action):
-        cell = self.world.getPointInDirection(
-            self.cell.x, self.cell.y, action)
+        cell = self.world.getPointInDirection(self.cell.x,
+                                              self.cell.y,
+                                              action)
         return self.world.get_cell(cell[0], cell[1]).wall
 
 

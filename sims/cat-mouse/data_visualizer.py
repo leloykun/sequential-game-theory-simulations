@@ -14,7 +14,8 @@ def visualize(trials=100, steps=10, runs=10):
         start = time.time()
 
         data = [[[0 for layer in range(layers)]
-                 for _ in range(11)] for _ in range(11)]
+                    for _ in range(11)] 
+                    for _ in range(11)]
         for i in range(1, runs + 1):
             with open("data/" + str(depth) + "/data" + str(i) + ".txt") as f:
                 temp = f.readlines()
@@ -30,21 +31,27 @@ def visualize(trials=100, steps=10, runs=10):
                     temp[alpha][gamma] = max_perf - (data[alpha][gamma][layer] - (
                         data[alpha][gamma][layer - 1] if layer > 0 else 0)) / steps
 
-            plt.imshow(temp, extent=[-0.5, 10.5, -0.5, 10.5], origin='lower',
-                       interpolation='nearest', vmin=0, vmax=max_perf, cmap=sns.light_palette("Navy", as_cmap=True))  # BrBG
+            plt.imshow(temp,
+                       extent=[-0.5, 10.5, -0.5, 10.5],
+                       origin='lower',
+                       interpolation='nearest',
+                       vmin=0,
+                       vmax=max_perf,
+                       cmap=sns.light_palette("Navy", as_cmap=True))
 
             plt.title("QLearning Parameters vs. Agent Performance\nVisual Depth = " +
                       str(depth) + " || Training Period: " + str(layer + 1))
             plt.xlabel("Discount Rate")
             plt.ylabel("Learning Rate")
 
-            # TODO: make this uniform
-            plt.colorbar(boundaries=bounds, spacing='uniform',
-                         label='Agent Performance', ticks=[], extend='max')
+            plt.colorbar(boundaries=bounds,
+                         spacing='uniform',
+                         label='Agent Performance',
+                         ticks=[],
+                         extend='max')
             plt.tight_layout()
             plt.savefig("data/" + str(depth) + "/plot" + str(layer + 1))
             plt.close()
-            # plt.show()
 
         print("visual depth", depth, "run time:", time.time() - start)
 

@@ -29,8 +29,6 @@ class DriverWorld(World):
         for agent in self.agents:
             total_rewards += agent.learn()
 
-        # print(str(total_rewards) + ' ' + ' '.join(map(str, self.road_cnt)))
-
     def get_are(self):
         sum_stat_are = 0
         sum_dyna_are = 0
@@ -38,7 +36,6 @@ class DriverWorld(World):
         for agent in self.agents:
             sum_stat_are += agent.ai.stat_ARE
             sum_dyna_are += agent.ai.dyna_ARE
-            # print(agent.ai.q)
 
         return (sum_stat_are / len(self.agents),
                 sum_dyna_are / len(self.agents))
@@ -77,8 +74,6 @@ class Driver:
             return 1
         else:
             return -1
-        '''return self.world.road_cap[self.last_action] - \
-               self.world.road_cnt[self.last_action]'''
 
 
 def worker(params):
