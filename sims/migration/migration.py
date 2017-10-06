@@ -1,5 +1,6 @@
 import sys
 import time
+import math
 import random
 import multiprocessing
 
@@ -135,8 +136,8 @@ class Mouse(Agent):
 
     def going_to_obstacle(self, action):
         cell = self.world.get_point_in_direction(self.cell.x,
-                                              self.cell.y,
-                                              action)
+                                                 self.cell.y,
+                                                 action)
         cell = self.world.get_cell(cell[0], cell[1])
         return cell.wall or cell.num_agents() > 0
 
@@ -146,23 +147,39 @@ class Cat(Agent):
 
     def update(self):
         cell = self.cell
-        if cell != self.world.mouse.cell:
-            self.go_towards(self.world.mouse.cell)
+        mouse = self.get_nearest_mouse()
+        if cell != mouse.cell:
+            self.go_towards(mouse.cell)
             while cell == self.cell:
                 self.go_in_direction(random.randrange(self.world.num_dir))
 
+    def get_nearest_mouse(self):
+        mouse_so_far = None
+        for mouse in self.world.mice:
+            if mouse_so_far is None or self.is_nearer(mouse, mouse_so_far):
+                mouse_so_far = mouse
+        return mouse_so_far
+
+    def is_nearer(self, mouse1, mouse2):
+        dx1 = self.cell.x - mouse1.cell.x
+        dy1 = self.cell.y - mouse1.cell.y
+        dist1 = math.sqrt(dx1 * dx1 + dy1 * dy1)
+        dx2 = self.cell.x - mouse2.cell.x
+        dy2 = self.cell.y - mouse2.cell.y
+        dist2 = math.sqrt(dx2 * dx2 + dy2 * dy2)
+        return dist1 < dist2
+
 
 def worker(params):
-    alpha, gamma, timesteps, interval = params
+    timesteps, num_mice = params
 
     env = Environment(world=World(map='worlds/waco.txt', Cell=CasualCell))
 
-    mouse = Mouse()
-    env.add_agent(mouse)
-    mouse.ai.alpha = alpha / 10
-    mouse.ai.gamma = gamma / 10
-    mouse.ai.temp = 0.5
-    env.world.mouse = mouse
+    env.world.mice = []
+    for i in range(num_mice):
+        mouse = Mouse()
+        env.add_agent(mouse)
+        env.world.mice.append(mouse)
 
     cat = Cat()
     env.add_agent(cat)
@@ -173,21 +190,20 @@ def worker(params):
     cheese.move = False
     env.world.cheese = cheese
 
-    # env.show()
+    env.show()
 
     losses = []
     wins = []
     for now in range(1, timesteps + 1):
         env.update(mouse.eaten, mouse.fed)
 
-        if now % interval == 0:
-            losses.append(mouse.eaten)
-            wins.append(mouse.fed)
+        losses.append(mouse.eaten)
+        wins.append(mouse.fed)
 
     losses = " ".join(map(str, losses))
     wins = " ".join(map(str, wins))
 
-    return str(alpha) + " " + str(gamma) + " " + losses + " " + wins
+    return losses + " " + wins
 
 
 def ord(n):
@@ -203,31 +219,14 @@ def process(params):
 
 
 def run(params):
-    runs, timesteps, interval = process(params)
+    runs, timesteps, num_mice = process(params)
 
     print("migration starting...")
     print("runs = %d,  timesteps = %d" % (runs, timesteps))
     sim_start = time.time()
 
-    for depth in range(1, max_visual_depth + 1):
-        Mouse.visual_depth = depth
-        print("   visual depth:", Mouse.visual_depth)
-
-        for run in range(1, runs + 1):
-            run_start = time.time()
-
-            params = []
-            for alpha in range(11):
-                for gamma in range(11):
-                    params.append((alpha, gamma, timesteps, interval))
-
-            with multiprocessing.Pool(4) as pool:
-                results = pool.map(worker, params)
-
-            with open(output_dir + str(depth) + '/data' + str(run) + '.txt', 'w') as f:
-                f.write("\n".join(results))
-
-            print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
+    for run in range(runs):
+        print(worker((timesteps, num_mice)))
 
     print("migration finished...")
     print("overall runtime:", time.time() - sim_start, "secs")
