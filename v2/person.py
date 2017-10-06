@@ -209,7 +209,8 @@ class Person(cellular.Agent):
         tradePrio = []
         tradePeeps = []
         for agent in self.world.agents:
-            if agent.resources[i] - settings.AGENTS_CAN_REPRODUCE >= delta:
+            if agent.resources[i] - \
+                    settings.AGENTS_CAN_REPRODUCE >= delta:
                 if agent.resources[j] < settings.AGENTS_CAN_REPRODUCE:
                     tradePrio.append(agent)
                 else:

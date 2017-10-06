@@ -41,7 +41,7 @@ for depth in range(1, 5):
 
         # TODO: make this uniform
         plt.colorbar(boundaries=bounds, spacing='uniform',
-                     label='Agent Performance', ticks=[],  extend='max', cmap='Blues_r')
+                     label='Agent Performance', ticks=[], extend='max', cmap='Blues_r')
         plt.tight_layout()
         plt.savefig(str(depth) + "/plot" + str(layer + 1))
         plt.close()

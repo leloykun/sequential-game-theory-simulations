@@ -35,7 +35,7 @@ def get_indiv_wealths():
 
 
 def get_gini_inequality(wealths=None):
-    if wealths == None:
+    if wealths is None:
         wealths = sorted(get_indiv_wealths())
     numAgents = len(world.agents)
     G = sum(wealths[i] * (i + 1) for i in range(numAgents))
@@ -54,7 +54,8 @@ def get_ave_positions():
 
 
 def get_learning_entropy():
-    return sum(agent.ai.aveSRE for agent in world.agents) / len(world.agents)
+    return sum(agent.ai.aveSRE for agent in world.agents) / \
+        len(world.agents)
 
 
 if settings.TO_DISPLAY_WORLD:
