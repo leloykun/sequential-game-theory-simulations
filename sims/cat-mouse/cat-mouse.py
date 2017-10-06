@@ -78,7 +78,7 @@ class Cat(Agent):
 
         state = self.calc_state()
 
-        action = self.ai.chooseAction(state)
+        action = self.ai.choose_action(state)
         self.last_state = state
         self.last_action = action
 

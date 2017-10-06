@@ -34,8 +34,8 @@ class DriverWorld(World):
         sum_dyna_are = 0
 
         for agent in self.agents:
-            sum_stat_are += agent.ai.stat_ARE
-            sum_dyna_are += agent.ai.dyna_ARE
+            sum_stat_are += agent.ai.stat_are
+            sum_dyna_are += agent.ai.dyna_are
 
         return (sum_stat_are / len(self.agents),
                 sum_dyna_are / len(self.agents))
@@ -55,7 +55,7 @@ class Driver:
 
     def do_action(self):
         self.state = 0
-        action = self.ai.chooseAction(self.state)
+        action = self.ai.choose_action(self.state)
 
         self.last_state = self.state
         self.last_action = action
