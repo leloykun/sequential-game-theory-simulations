@@ -10,5 +10,5 @@
 # route-choice [runs] [timesteps] [num_drivers] [[road capacities]]
 # route-choice 10 1000 100 10 20 30 40
 # 
-# migration [runs] [timesteps] [interval]
-migration 10 10 1
+# migration [runs] [timesteps] [num_mice]
+migration 1 1000 3
