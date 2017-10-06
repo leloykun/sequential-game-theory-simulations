@@ -13,6 +13,7 @@ from environment import Environment
 sim_name = 'cat-mouse'
 max_visual_depth = 4
 
+
 class CasualCell(Cell):
     wall = False
 
@@ -94,9 +95,10 @@ class Cat(Agent):
             return (100, 100)
 
     def going_to_obstacle(self, action):
-        cell = self.world.getPointInDirection(self.cell.x, self.cell.y, action)
+        cell = self.world.getPointInDirection(
+            self.cell.x, self.cell.y, action)
         return self.world.get_cell(cell[0], cell[1]).wall
-            
+
     def get_data(self):
         pass
 

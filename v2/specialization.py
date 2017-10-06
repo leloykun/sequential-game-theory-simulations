@@ -109,14 +109,17 @@ while world.age < endAge:
 
     if settings.TO_SIMULATE_SEASONS:
         if world.age % 200 == 0:
-            change_growth_rate(1, 1, 20, 10, [0] * settings.RESOURCE_COUNT)
+            change_growth_rate(
+                1, 1, 20, 10, [0] * settings.RESOURCE_COUNT)
             change_growth_rate(1, 11, 20, 20, settings.DEF_GROWTH_RATE)
         elif world.age % 100 == 0:
             change_growth_rate(1, 1, 20, 10, settings.DEF_GROWTH_RATE)
-            change_growth_rate(1, 11, 20, 20, [0] * settings.RESOURCE_COUNT)
+            change_growth_rate(
+                1, 11, 20, 20, [0] * settings.RESOURCE_COUNT)
 
 save += str(world.numDeaths) + ' ' + str(world.cumulativePop) + '\n'
 
-savefile = open(settings.OUTPUT_LOCATION + settings.FILENAMES[settings.OUTPUT_TYPE] + ".txt", 'w')
+savefile = open(settings.OUTPUT_LOCATION +
+                settings.FILENAMES[settings.OUTPUT_TYPE] + ".txt", 'w')
 savefile.write(save)
 savefile.close()

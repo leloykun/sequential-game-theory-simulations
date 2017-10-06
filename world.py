@@ -63,7 +63,7 @@ class World:
         if not hasattr(self.Cell, 'load'):
             return
 
-        #self.reset()
+        # self.reset()
         for j in range(self.height):
             for i in range(min(self.width, len(self.data[j]))):
                 self.grid[j][i].load(self.data[j][i])

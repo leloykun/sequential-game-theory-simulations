@@ -2,17 +2,17 @@ NEARBY = [(0, -1), (1, 0), (0, 1), (-1, 0), (0, 0)]
 NEIGHBOUR_SYNONYMS = ('neighbours', 'neighbors', 'neighbour', 'neighbor')
 COLOR_CODE = ['#332532', '#644D52', '#F77A52', '#FF974F', '#A49A87']
 
-ID                   = 0
-RESOURCE_COUNT       = 5
-MAX_RES_AMOUNT       = 100
-DEF_GROWTH_RATE      = [0.02 for _ in range(RESOURCE_COUNT)]  # 0.05
-TO_UPDATE_CELLS      = True
-TO_COLOR_CELLS       = True
+ID = 0
+RESOURCE_COUNT = 5
+MAX_RES_AMOUNT = 100
+DEF_GROWTH_RATE = [0.02 for _ in range(RESOURCE_COUNT)]  # 0.05
+TO_UPDATE_CELLS = True
+TO_COLOR_CELLS = True
 
-AGENT_COUNT_INIT     = 5
-AGENT_COUNT_LIM      = 100
-AGENTS_CAN_TRADE     = True
-AGENTS_CAN_DIE       = True
+AGENT_COUNT_INIT = 5
+AGENT_COUNT_LIM = 100
+AGENTS_CAN_TRADE = True
+AGENTS_CAN_DIE = True
 AGENTS_CAN_REPRODUCE = True
 
 ENDOWMENT = 100
