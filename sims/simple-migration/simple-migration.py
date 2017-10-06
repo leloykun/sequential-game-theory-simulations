@@ -52,7 +52,9 @@ class Mouse(Agent):
         self.score += reward
 
         if self.last_state is not None:
-            self.ai.learn(self.last_state, self.last_action, reward,
+            self.ai.learn(self.last_state,
+                          self.last_action,
+                          reward,
                           state)
 
         action = self.ai.chooseAction(state)
@@ -72,8 +74,8 @@ class Mouse(Agent):
 def worker(params):
     alpha, gamma, temp_power, timesteps, run = params
 
-    env = Environment(world=World(
-        map='worlds/box20x10.txt', Cell=CasualCell))
+    env = Environment(world=World(map='worlds/box20x10.txt',
+                                  Cell=CasualCell))
 
     mouse = Mouse()
     env.add_agent(mouse)

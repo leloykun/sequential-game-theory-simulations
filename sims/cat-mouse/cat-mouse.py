@@ -48,12 +48,11 @@ class Cat(Agent):
     visual_depth = 2
 
     def __init__(self):
-        self.ai = QLearn(
-            actions=list(range(8)),  # world.num_dir = 8
-            temp=5,
-            alpha=0.9,
-            gamma=0.9,
-            epsilon=0.1)
+        self.ai = QLearn(actions=list(range(8)),
+                         temp=5,
+                         alpha=0.9,
+                         gamma=0.9,
+                         epsilon=0.1)
         self.ai.agent = self
 
         self.eaten = 0
@@ -72,7 +71,9 @@ class Cat(Agent):
             self.world.mouse.cell = self.env.get_random_avail_cell()
 
         if self.last_state is not None:
-            self.ai.learn(self.last_state, self.last_action, reward,
+            self.ai.learn(self.last_state,
+                          self.last_action,
+                          reward,
                           state)
 
         state = self.calc_state()
@@ -95,8 +96,9 @@ class Cat(Agent):
             return (100, 100)
 
     def going_to_obstacle(self, action):
-        cell = self.world.getPointInDirection(
-            self.cell.x, self.cell.y, action)
+        cell = self.world.getPointInDirection(self.cell.x,
+                                              self.cell.y,
+                                              action)
         return self.world.get_cell(cell[0], cell[1]).wall
 
     def get_data(self):
@@ -106,8 +108,8 @@ class Cat(Agent):
 def worker(params):
     alpha, gamma, trials, steps = params
 
-    env = Environment(world=World(
-        map='worlds/box10x10.txt', Cell=CasualCell))
+    env = Environment(world=World(map='worlds/box10x10.txt',
+                                  Cell=CasualCell))
 
     cat = Cat()
     env.add_agent(cat)
@@ -181,8 +183,7 @@ def run(params):
             savefile.close()
             # print(worker((5, 5, depth, run)))
 
-            print("     ",
-                  ord(run), "runtime:", time.time() - run_start, "secs")
+            print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
 
     print("cat-mouse finished...")
     print("overall runtime:", time.time() - sim_start, "secs")

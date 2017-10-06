@@ -24,8 +24,13 @@ def visualize(runs=10):
 
         time = np.array(time)
         for i in range(4):
-            sns.regplot(x=time[:1000], y=np.array(
-                data[i][:1000]), ax=ax, ci=100, marker="+", n_boot=10000, scatter=False)
+            sns.regplot(x=time[:1000],
+                        y=np.array(data[i][:1000]),
+                        ax=ax,
+                        ci=100,
+                        marker="+",
+                        n_boot=10000,
+                        scatter=False)
 
         plt.savefig('data/dis/' + str(run) + 'plot1K')
         plt.close()
