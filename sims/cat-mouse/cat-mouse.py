@@ -40,7 +40,7 @@ class Mouse(Agent):
         if self.move:
             cell = self.cell
             while cell == self.cell:
-                self.goInDirection(random.randrange(self.world.num_dir))
+                self.go_in_direction(random.randrange(self.world.num_dir))
 
 
 class Cat(Agent):
@@ -82,7 +82,7 @@ class Cat(Agent):
         self.last_state = state
         self.last_action = action
 
-        self.goInDirection(action)
+        self.go_in_direction(action)
 
     # TODO: consider wrapping here
     def calc_state(self):

@@ -41,7 +41,7 @@ class Cheese(Agent):
         if self.move:
             cell = self.cell
             while cell == self.cell:
-                self.goInDirection(random.randrange(8))
+                self.go_in_direction(random.randrange(8))
 
 
 class Mouse(Agent):
@@ -109,7 +109,7 @@ class Mouse(Agent):
         self.last_state = state
         self.last_action = action
 
-        self.goInDirection(action)
+        self.go_in_direction(action)
 
     def calc_state(self):
         cat = self.world.cat
@@ -147,9 +147,9 @@ class Cat(Agent):
     def update(self):
         cell = self.cell
         if cell != self.world.mouse.cell:
-            self.goTowards(self.world.mouse.cell)
+            self.go_towards(self.world.mouse.cell)
             while cell == self.cell:
-                self.goInDirection(random.randrange(self.world.num_dir))
+                self.go_in_direction(random.randrange(self.world.num_dir))
 
 
 def worker(params):

@@ -61,7 +61,7 @@ class Mouse(Agent):
         self.last_state = state
         self.last_action = action
 
-        self.goInDirection(action)
+        self.go_in_direction(action)
 
     def calc_state(self):
         day = self.world.age % 100
