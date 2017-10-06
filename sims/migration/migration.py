@@ -138,7 +138,7 @@ class Mouse(Agent):
                                               self.cell.y,
                                               action)
         cell = self.world.get_cell(cell[0], cell[1])
-        return cell.wall or cell.num_agents > 0
+        return cell.wall or cell.num_agents() > 0
 
 
 class Cat(Agent):
