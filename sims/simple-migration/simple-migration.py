@@ -57,7 +57,7 @@ class Mouse(Agent):
                           reward,
                           state)
 
-        action = self.ai.chooseAction(state)
+        action = self.ai.choose_action(state)
         self.last_state = state
         self.last_action = action
 
@@ -97,7 +97,7 @@ def worker(params):
         scores.append(mouse.score)
         positions.append(mouse.cell.y)
         res_ent.append(
-            str(mouse.ai.stat_ARE) + " " + str(mouse.ai.dyna_ARE))
+            str(mouse.ai.stat_are) + " " + str(mouse.ai.dyna_are))
         num_states.append(len(mouse.ai.states))
 
     output_dir_dir = output_dir + str(temp_power) + "/" + str(run)
