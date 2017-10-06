@@ -112,6 +112,7 @@ def worker(params):
     with open(output_dir_dir + "num_states.txt", 'w') as f:
         f.write(' '.join(map(str, num_states)))
 
+
 def process(params):
     return map(int, params)
 

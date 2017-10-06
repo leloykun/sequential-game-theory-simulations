@@ -12,13 +12,13 @@ for i in range(1, num_data_files + 1):
             data[alpha][gamma] += (fed / eaten) / num_data_files
 
 print(data)
-        
+
 nrows, ncols = 100, 100
 z = 100 * np.random.random(nrows * ncols).reshape((nrows, ncols))
 
-plt.imshow(data, extent=[-0.5, 10.5,-0.5,10.5], origin='lower', 
+plt.imshow(data, extent=[-0.5, 10.5, -0.5, 10.5], origin='lower',
            interpolation='nearest', cmap='Blues')
-           
+
 plt.title("QLearning Parameters vs. Fed/Eaten Ratio")
 plt.xlabel("Discount Rate")
 plt.ylabel("Learning Rate")

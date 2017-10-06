@@ -8,13 +8,14 @@ runs = 10
 temp_powers = 5
 
 for temp_power in range(-temp_powers, temp_powers + 1):
-    for r in range(1, runs+1):
+    for r in range(1, runs + 1):
         time = [0]
         data = [[1.0], [1.0]]
         with open('data/' + str(temp_power) + '/' + str(r) + "res_ent.txt") as f:
-            temp = [list(map(float, line.split())) for line in f.readlines()]
+            temp = [list(map(float, line.split()))
+                    for line in f.readlines()]
             for i in range(1000):
-                time.append(i+1)
+                time.append(i + 1)
                 data[0].append(temp[i][0])
                 data[1].append(temp[i][1])
 
@@ -33,7 +34,7 @@ for temp_power in range(-temp_powers, temp_powers + 1):
         pl.xlabel('Time')
         pl.ylabel('Residual Entropy')
 
-        pl.xticks(np.arange(0, 1001+1, 100.0))
+        pl.xticks(np.arange(0, 1001 + 1, 100.0))
 
         pl.xlim(0, 1001)
         pl.ylim(0.0, 1.0)

@@ -5,6 +5,7 @@ import cellular
 import qlearn
 import settings
 
+
 def pick_random_location(world):
     while True:
         x = random.randrange(world.width)
@@ -18,26 +19,29 @@ class Person(cellular.Agent):
     def __init__(self, _id=0):
         self.ai = None
         self.ai = qlearn.QLearn(
-            actions = list(range(settings.RESOURCE_COUNT)),
-            temp    = settings.DEF_TEMP,
-            alpha   = 0.25,
-            gamma   = 0.9,
-            epsilon = 0.1)
-            
-        self.lastState  = None
+            actions=list(range(settings.RESOURCE_COUNT)),
+            temp=settings.DEF_TEMP,
+            alpha=0.25,
+            gamma=0.9,
+            epsilon=0.1)
+
+        self.lastState = None
         self.lastAction = None
 
         self.colour = 'gray'
-        self.age    = 0
+        self.age = 0
 
-        self.ID     = _id
+        self.ID = _id
 
-        self.skillSet = [settings.DEF_SKILLS for _ in range(settings.RESOURCE_COUNT)]
+        self.skillSet = [settings.DEF_SKILLS for _ in range(
+            settings.RESOURCE_COUNT)]
         if settings.TO_RANDOMIZE_SKILLS:
-            self.skillSet = [random.random() for _ in range(settings.RESOURCE_COUNT)]
+            self.skillSet = [random.random()
+                             for _ in range(settings.RESOURCE_COUNT)]
             #self.skillSet = [0.90 + random.random()/10 for _ in range(settings.RESOURCE_COUNT)]
 
-        self.resources = [settings.ENDOWMENT for _ in range(settings.RESOURCE_COUNT)]
+        self.resources = [settings.ENDOWMENT for _ in range(
+            settings.RESOURCE_COUNT)]
 
         self.wealth = settings.ENDOWMENT * settings.RESOURCE_COUNT
         self.last_wealth = settings.ENDOWMENT * settings.RESOURCE_COUNT
@@ -52,7 +56,8 @@ class Person(cellular.Agent):
             reward = self.calc_reward()
 
             if self.lastState is not None:
-                self.ai.learn(self.lastState, self.lastAction, reward, state)
+                self.ai.learn(self.lastState,
+                              self.lastAction, reward, state)
 
             #state = self.calc_state()
             #state = self.calc_state(), self.world.age // 100
@@ -79,7 +84,8 @@ class Person(cellular.Agent):
                 i, j = random.choice(settings.NEARBY)
                 workCell = self.world.getWrappedCell(self.cell.x + i,
                                                      self.cell.y + j)
-                action = random.choice(list(range(settings.RESOURCE_COUNT)))
+                action = random.choice(
+                    list(range(settings.RESOURCE_COUNT)))
                 if not workCell.wall and len(workCell.agents) == 0:
                     break
 
@@ -143,7 +149,8 @@ class Person(cellular.Agent):
         self.improve_skills(action)
 
     def improve_skills(self, action):
-        self.skillSet[action] = min(self.skillSet[action] * settings.IMPROVE_RATE, 1.0)
+        self.skillSet[action] = min(
+            self.skillSet[action] * settings.IMPROVE_RATE, 1.0)
 
     def consume_resources(self, amount=settings.DEF_RES_INTAKE):
         self.resources = [x - amount for x in self.resources]
@@ -152,7 +159,8 @@ class Person(cellular.Agent):
     def find_best_work_cell(self, action, returnAll=False):
         bestCells = [self.cell]
         for i, j in settings.NEARBY:
-            cell = self.world.getWrappedCell(self.cell.x + i, self.cell.y + j)
+            cell = self.world.getWrappedCell(
+                self.cell.x + i, self.cell.y + j)
             if cell.wall or len(cell.agents) > 0:
                 continue
             elif cell.resources[action] > bestCells[0].resources[action]:
@@ -173,7 +181,8 @@ class Person(cellular.Agent):
                 j = self.resources.index(max(self.resources))
 
                 if self.resources[j] > settings.AGENTS_CAN_REPRODUCE:
-                    delta = min(self.resources[j] - settings.AGENTS_CAN_REPRODUCE, deltaI)
+                    delta = min(
+                        self.resources[j] - settings.AGENTS_CAN_REPRODUCE, deltaI)
                 else:
                     break
 
@@ -191,7 +200,8 @@ class Person(cellular.Agent):
                     if settings.OUTPUT_TYPE == 6:
                         global save
                         save += str(world.age) + " " + str(self.ID) + " " \
-                              + str(tradePartner.settings.ID) + " " + str(delta) + '\n'
+                            + str(tradePartner.settings.ID) + \
+                            " " + str(delta) + '\n'
                 else:
                     break
 

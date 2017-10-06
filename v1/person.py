@@ -63,7 +63,7 @@ class Person(cellular.Agent):
             alpha=0.25,
             gamma=0.9,
             epsilon=0.1)
-            
+
         self.lastState = None
         self.lastAction = None
 
@@ -74,7 +74,8 @@ class Person(cellular.Agent):
 
         self.skillSet = [DEF_SKILLS for _ in range(RESOURCE_COUNT)]
         if TO_RANDOMIZE_SKILLS:
-            self.skillSet = [random.random() for _ in range(RESOURCE_COUNT)]
+            self.skillSet = [random.random()
+                             for _ in range(RESOURCE_COUNT)]
             #self.skillSet = [0.90 + random.random()/10 for _ in range(RESOURCE_COUNT)]
 
         self.resources = [ENDOWMENT for _ in range(RESOURCE_COUNT)]
@@ -92,7 +93,8 @@ class Person(cellular.Agent):
             reward = self.calc_reward()
 
             if self.lastState is not None:
-                self.ai.learn(self.lastState, self.lastAction, reward, state)
+                self.ai.learn(self.lastState,
+                              self.lastAction, reward, state)
 
             #state = self.calc_state()
             #state = self.calc_state(), self.world.age // 100
@@ -183,7 +185,8 @@ class Person(cellular.Agent):
         self.improve_skills(action)
 
     def improve_skills(self, action):
-        self.skillSet[action] = min(self.skillSet[action] * IMPROVE_RATE, 1.0)
+        self.skillSet[action] = min(
+            self.skillSet[action] * IMPROVE_RATE, 1.0)
 
     def consume_resources(self, amount=DEF_RES_INTAKE):
         self.resources = [x - amount for x in self.resources]
@@ -192,7 +195,8 @@ class Person(cellular.Agent):
     def find_best_work_cell(self, action, returnAll=False):
         bestCells = [self.cell]
         for i, j in NEARBY:
-            cell = self.world.getWrappedCell(self.cell.x + i, self.cell.y + j)
+            cell = self.world.getWrappedCell(
+                self.cell.x + i, self.cell.y + j)
             if cell.wall or len(cell.agents) > 0:
                 continue
             elif cell.resources[action] > bestCells[0].resources[action]:
@@ -213,7 +217,8 @@ class Person(cellular.Agent):
                 j = self.resources.index(max(self.resources))
 
                 if self.resources[j] > TRADING_THRESHOLD:
-                    delta = min(self.resources[j] - TRADING_THRESHOLD, deltaI)
+                    delta = min(
+                        self.resources[j] - TRADING_THRESHOLD, deltaI)
                 else:
                     break
 
@@ -231,7 +236,8 @@ class Person(cellular.Agent):
                     if OUTPUT_TYPE == 6:
                         global save
                         save += str(world.age) + " " + str(self.id) + " " \
-                              + str(tradePartner.id) + " " + str(delta) + '\n'
+                            + str(tradePartner.id) + \
+                            " " + str(delta) + '\n'
                 else:
                     break
 

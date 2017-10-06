@@ -140,7 +140,8 @@ class Mouse(Agent):
         ])
 
     def going_to_obstacle(self, action):
-        cell = self.world.getPointInDirection(self.cell.x, self.cell.y, action)
+        cell = self.world.getPointInDirection(
+            self.cell.x, self.cell.y, action)
         return self.world.get_cell(cell[0], cell[1]).wall
 
 

@@ -40,7 +40,7 @@ class DriverWorld(World):
             sum_dyna_are += agent.ai.dyna_ARE
             # print(agent.ai.q)
 
-        return (sum_stat_are/len(self.agents), sum_dyna_are/len(self.agents))
+        return (sum_stat_are / len(self.agents), sum_dyna_are / len(self.agents))
 
 
 class Driver:
@@ -67,7 +67,8 @@ class Driver:
 
     def learn(self):
         reward = self.calc_reward()
-        self.ai.learn(self.last_state, self.last_action, reward, self.state)
+        self.ai.learn(self.last_state, self.last_action,
+                      reward, self.state)
         return reward
 
     def calc_reward(self):
@@ -103,8 +104,10 @@ def worker(params):
     with open(output_dir + 'are/' + str(run) + 'run.txt', 'w') as f:
         f.write('\n'.join(res_ent))
 
+
 def process(params):
     return map(int, params)
+
 
 def run(params):
     runs, timesteps, num_drivers, *road_cap = process(params)

@@ -29,14 +29,14 @@ class Cell:
         else:
             return 'white'
 
-    #def load(self):
+    # def load(self):
     #    pass
 
-    #def update(self):
+    # def update(self):
     #    pass
 
-    #def randomize(self):
+    # def randomize(self):
     #    pass
 
-    #def get_data(self):
+    # def get_data(self):
     #    pass
