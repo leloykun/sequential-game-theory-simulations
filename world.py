@@ -16,9 +16,6 @@ class World:
     agents = []
     age = 0
 
-    total_deaths = 0
-    total_borns = 0
-
     def __init__(self, map='worlds/box5v5', Cell=None, num_dir=8):
         self.map = map
         self.Cell = Cell
@@ -55,9 +52,6 @@ class World:
 
         self.agents = []
         self.age = 0
-
-        self.total_deaths = 0
-        self.total_borns = 0
 
     def load(self):
         if not hasattr(self.Cell, 'load'):
