@@ -98,7 +98,7 @@ class World:
         self.display.update()
         self.age += 1
 
-    def getPointInDirection(self, x, y, dir):
+    def get_point_in_direction(self, x, y, dir):
         if self.num_dir == 8:
             dx, dy = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1),
                       (-1, 0), (-1, -1)][dir]

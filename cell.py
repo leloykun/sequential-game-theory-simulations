@@ -8,7 +8,7 @@ class Cell:
     def __getattr__(self, key):
         if key in neighbor_synonyms:
             pts = [
-                self.world.getPointInDirection(self.x, self.y, dir)
+                self.world.get_point_in_direction(self.x, self.y, dir)
                 for dir in range(self.world.num_dir)
             ]
             ns = tuple([self.world.grid[y][x] for (x, y) in pts])
