@@ -40,7 +40,7 @@ def visualize(trials=100, steps=10, runs=10):
 
             # TODO: make this uniform
             plt.colorbar(boundaries=bounds, spacing='uniform',
-                         label='Agent Performance', ticks=[],  extend='max')
+                         label='Agent Performance', ticks=[], extend='max')
             plt.tight_layout()
             plt.savefig("data/" + str(depth) + "/plot" + str(layer + 1))
             plt.close()

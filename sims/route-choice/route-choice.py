@@ -40,7 +40,8 @@ class DriverWorld(World):
             sum_dyna_are += agent.ai.dyna_ARE
             # print(agent.ai.q)
 
-        return (sum_stat_are / len(self.agents), sum_dyna_are / len(self.agents))
+        return (sum_stat_are / len(self.agents),
+                sum_dyna_are / len(self.agents))
 
 
 class Driver:

@@ -111,12 +111,12 @@ class Mouse(Agent):
         '''def get_dist_to(agent):
             if abs(self.cell.x - agent.cell.x) <= self.visual_depth and \
                abs(self.cell.y - agent.cell.y) <= self.visual_depth:
-                return ((self.cell.x - agent.cell.x), 
+                return ((self.cell.x - agent.cell.x),
                         (self.cell.y - agent.cell.y))
             else:
                 #default
                 return (100, 100)
-        return (get_dist_to(self.world.cheese), 
+        return (get_dist_to(self.world.cheese),
                 get_dist_to(self.world.cat))'''
         cat = self.world.cat
         cheese = self.world.cheese
