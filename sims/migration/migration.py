@@ -47,16 +47,11 @@ class Cheese(Agent):
 
 class Mouse(Agent):
     colour = 'gray'
-    visual_depth = 2
+    visual_depth = 3
     lookcells = []
 
     def __init__(self):
-        self.ai = QLearn(
-            actions=list(range(8)),
-            temp=5,
-            alpha=0.5,
-            gamma=0.5,
-            epsilon=0.1)
+        self.ai = QLearn(actions=list(range(8)))
         self.ai.agent = self
 
         self.eaten = 0
@@ -113,9 +108,6 @@ class Mouse(Agent):
         self.go_in_direction(action)
 
     def calc_state(self):
-        cat = self.world.cat
-        cheese = self.world.cheese
-
         def cell_value(cell):
             if cat.cell is not None and (cell.x == cat.cell.x and
                                          cell.y == cat.cell.y):
@@ -128,6 +120,9 @@ class Mouse(Agent):
             else:
                 return 0
 
+        cat = self.world.cat
+        cheese = self.world.cheese
+
         return tuple([
             cell_value(self.world.get_wrapped_cell(self.cell.x + j, 
                                                    self.cell.y +i))
@@ -139,7 +134,7 @@ class Mouse(Agent):
                                                  self.cell.y,
                                                  action)
         cell = self.world.get_cell(cell[0], cell[1])
-        return cell.wall or cell.num_agents() > 0
+        return cell.wall or (cell.num_agents() > 0 and self.world.cheese not in cell.agents)
 
 
 class Cat(Agent):
@@ -196,7 +191,8 @@ def worker(params):
     losses = []
     wins = []
     for now in range(1, timesteps + 1):
-        env.update(mouse.eaten, mouse.fed)
+        env.update(sum(mouse.eaten for mouse in env.world.mice), 
+                   sum(mouse.fed for mouse in env.world.mice))
 
         losses.append(mouse.eaten)
         wins.append(mouse.fed)
