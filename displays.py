@@ -8,7 +8,7 @@ class PygameDisplay:
     activated = False
     paused = False
     title = ''
-    updateEvery = 1
+    update_every = 1
     delay = 0
     screen = None
 
@@ -28,14 +28,14 @@ class PygameDisplay:
             PygameDisplay.screen = pygame.display.set_mode(
                 (w, h), pygame.RESIZABLE, 32)
         self.activated = True
-        self.defaultColour = self.getColour(
+        self.default_colour = self.get_colour(
             self.world.grid[0][0].__class__())
         self.redraw()
 
     def redraw(self):
         if not self.activated:
             return
-        self.screen.fill(self.defaultColour)
+        self.screen.fill(self.default_colour)
         hexgrid = self.world.num_dir == 6
         self.offsety = (
             self.screen.get_height() - self.world.height * self.size) // 2
@@ -49,10 +49,10 @@ class PygameDisplay:
                 sx += self.size // 2
             for cell in row:
                 if len(cell.agents) > 0:
-                    c = self.getColour(cell.agents[0])
+                    c = self.get_colour(cell.agents[0])
                 else:
-                    c = self.getColour(cell)
-                if c != self.defaultColour:
+                    c = self.get_colour(cell)
+                if c != self.default_colour:
                     try:
                         self.screen.fill(c,
                                          (sx, sy, self.size, self.size))
@@ -62,7 +62,7 @@ class PygameDisplay:
             odd = not odd
             sy += self.size
 
-    def redrawCell(self, x, y):
+    def redraw_cell(self, x, y):
         if not self.activated:
             return
         sx = x * self.size + self.offsetx
@@ -72,33 +72,33 @@ class PygameDisplay:
 
         cell = self.world.grid[y][x]
         if len(cell.agents) > 0:
-            c = self.getColour(cell.agents[0])
+            c = self.get_colour(cell.agents[0])
         else:
-            c = self.getColour(cell)
+            c = self.get_colour(cell)
 
         self.screen.fill(c, (sx, sy, self.size, self.size))
 
     def update(self):
         if not self.activated:
             return
-        if self.world.age % self.updateEvery != 0 and not self.paused:
+        if self.world.age % self.update_every != 0 and not self.paused:
             return
-        self.setTitle(self.title)
+        self.set_title(self.title)
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 sys.exit()
             elif event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.VIDEORESIZE:
-                self.onResize(event)
+                self.on_resize(event)
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_PAGEUP:
                 if self.delay > 0:
                     self.delay -= 1
                 else:
-                    self.updateEvery *= 2
+                    self.update_every *= 2
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_PAGEDOWN:
-                if self.updateEvery > 1:
-                    self.updateEvery //= 2
+                if self.update_every > 1:
+                    self.update_every //= 2
                 else:
                     self.delay += 1
                 if self.delay > 10:
@@ -115,7 +115,7 @@ class PygameDisplay:
         if self.delay > 0:
             time.sleep(self.delay * 0.1)
 
-    def setTitle(self, title):
+    def set_title(self, title):
         if not self.activated:
             return
         self.title = title
@@ -128,7 +128,7 @@ class PygameDisplay:
         while self.paused:
             self.update()
 
-    def onResize(self, event):
+    def on_resize(self, event):
         if not self.activated:
             return
         pygame.display.set_mode(event.size, pygame.RESIZABLE, 32)
@@ -140,7 +140,7 @@ class PygameDisplay:
             self.size = 1
         self.redraw()
 
-    def getColour(self, obj):
+    def get_colour(self, obj):
         c = getattr(obj, 'colour', None)
         if c is None:
             c = getattr(obj, 'color', 'white')
@@ -152,7 +152,7 @@ class PygameDisplay:
             return c
         return pygame.color.Color(c)
 
-    def saveImage(self, filename=None):
+    def save_image(self, filename=None):
         if filename is None:
             filename = 'animations/test/' + '%03d.png' % (self.world.age +
                                                           1)
@@ -167,8 +167,8 @@ class PygameDisplay:
             extra.append('fed=%d' % self.world.fed)
         if self.paused:
             extra.append('paused')
-        if self.updateEvery != 1:
-            extra.append('skip=%d' % self.updateEvery)
+        if self.update_every != 1:
+            extra.append('skip=%d' % self.update_every)
         if self.delay > 0:
             extra.append('delay=%d' % self.delay)
 
