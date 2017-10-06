@@ -89,8 +89,8 @@ class World:
                 old_cell = agent.cell
                 agent.update()
                 if old_cell != agent.cell:
-                    self.display.redrawCell(old_cell.x, old_cell.y)
-                self.display.redrawCell(agent.cell.x, agent.cell.y)
+                    self.display.redraw_cell(old_cell.x, old_cell.y)
+                self.display.redraw_cell(agent.cell.x, agent.cell.y)
 
         self.eaten = eaten
         self.fed = fed
