@@ -122,8 +122,8 @@ def process(params):
 def run(params):
     runs, timesteps, temp_powers = process(params)
 
-    print("cat-mouse-cheese starting...")
-    print("runs = %d,  timesteps = %d" % (runs, timesteps))
+    print("simple-migration starting...")
+    print("runs = %d,  timesteps = %d,  temp_powers = %d" % (runs, timesteps, temp_powers))
     sim_start = time.time()
 
     params = []
@@ -134,6 +134,6 @@ def run(params):
     with multiprocessing.Pool(4) as pool:
         pool.map(func=worker, iterable=params)
 
-    print("cat-mouse-cheese finished...")
+    print("simple-migration finished...")
     print("overall runtime:", time.time() - sim_start, "secs")
     print()
