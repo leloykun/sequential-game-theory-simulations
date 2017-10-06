@@ -44,8 +44,10 @@ def analyze(trials=100, steps=10, runs=10):
     print()
 
     print(len(X))
-    log_reg = linear_model.LogisticRegression(
-        C=1e7, tol=1e-5, max_iter=100, class_weight='balanced')
+    log_reg = linear_model.LogisticRegression(C=1e7,
+                                              tol=1e-5,
+                                              max_iter=100,
+                                              class_weight='balanced')
     log_reg.fit(X, Y)
     print()
 
