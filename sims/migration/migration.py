@@ -163,17 +163,18 @@ class Cat(Agent):
     def is_nearer(self, mouse1, mouse2):
         dx1 = self.cell.x - mouse1.cell.x
         dy1 = self.cell.y - mouse1.cell.y
-        dist1 = math.sqrt(dx1 * dx1 + dy1 * dy1)
+        dist1 = math.sqrt(dx1**2 + dy1**2)
         dx2 = self.cell.x - mouse2.cell.x
         dy2 = self.cell.y - mouse2.cell.y
-        dist2 = math.sqrt(dx2 * dx2 + dy2 * dy2)
+        dist2 = math.sqrt(dx2**2 + dy2**2)
         return dist1 < dist2
 
 
 def worker(params):
     timesteps, num_mice = params
 
-    env = Environment(world=World(map='worlds/waco.txt', Cell=CasualCell))
+    env = Environment(world=World(map='worlds/empty15x15.txt',
+                                  Cell=CasualCell))
 
     env.world.mice = []
     for i in range(num_mice):
@@ -200,10 +201,7 @@ def worker(params):
         losses.append(mouse.eaten)
         wins.append(mouse.fed)
 
-    losses = " ".join(map(str, losses))
-    wins = " ".join(map(str, wins))
-
-    return losses + " " + wins
+    return ' '.join(map(str, losses + wins))
 
 
 def ord(n):
