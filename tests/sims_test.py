@@ -1,4 +1,4 @@
-from ..sims.cat-mouse import cat-mouse
+from ..sims.migration import migration
 
-def test_cat_mouse():
-    assert cat-mouse.Mouse.colour == 'grey'
+def test_migration():
+    assert migration.Mouse.colour == 'gray'
