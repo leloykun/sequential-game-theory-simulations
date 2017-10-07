@@ -70,7 +70,7 @@ class Driver:
         return reward
 
     def calc_reward(self):
-        if self.world.road_cap[self.last_action] > self.world.road_cnt[self.last_action]:
+        if self.world.road_cap[self.last_action] >= self.world.road_cnt[self.last_action]:
             return 1
         else:
             return -1
