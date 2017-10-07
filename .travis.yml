@@ -6,6 +6,6 @@ install:
 script:
   - pytest tests/
 cache:
-  - pip
+  - pip 
 notifications:
   - email: false
