@@ -4,7 +4,7 @@ import math
 import random
 import multiprocessing
 
-from ...cell.Cell import CasualCell
+from ...cell import CasualCell
 from ...agent import Agent
 from ...world import World
 from ...qlearn import QLearn
