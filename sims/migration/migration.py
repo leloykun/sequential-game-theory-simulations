@@ -4,7 +4,7 @@ import math
 import random
 import multiprocessing
 
-from ...cell import Cell
+from ...cell.Cell import CasualCell
 from ...agent import Agent
 from ...world import World
 from ...qlearn import QLearn
@@ -14,25 +14,6 @@ sim_name = 'migration'
 output_dir = 'sims/' + sim_name + '/data/'
 
 max_visual_depth = 4
-
-
-class CasualCell(Cell):
-    wall = False
-
-    def colour(self):
-        if self.wall:
-            return 'black'
-        else:
-            return 'white'
-
-    def load(self, data):
-        if data == 'X':
-            self.wall = True
-        else:
-            self.wall = False
-
-    def num_agents(self):
-        return len(self.agents)
 
 
 class Cheese(Agent):
@@ -184,7 +165,7 @@ def worker(params):
     cheese.move = False
     env.world.cheese = cheese
 
-    env.show()
+    # env.show()
 
     losses = []
     wins = []
