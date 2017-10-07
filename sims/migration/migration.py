@@ -60,9 +60,6 @@ class Mouse(Agent):
         self.last_action = None
         self.last_state = None
 
-        self.last_action = None
-        self.last_state = None
-
         self.calc_lookcells()
 
     def calc_lookcells(self):
@@ -134,7 +131,8 @@ class Mouse(Agent):
                                                  self.cell.y,
                                                  action)
         cell = self.world.get_cell(cell[0], cell[1])
-        return cell.wall or (cell.num_agents() > 0 and self.world.cheese not in cell.agents)
+        return cell.wall or (cell.num_agents() > 0 and
+                             self.world.cheese not in cell.agents)
 
 
 class Cat(Agent):

@@ -62,9 +62,6 @@ class Mouse(Agent):
         self.last_action = None
         self.last_state = None
 
-        self.last_action = None
-        self.last_state = None
-
         self.calc_lookcells()
 
     def calc_lookcells(self):
