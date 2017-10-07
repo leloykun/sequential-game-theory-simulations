@@ -9,7 +9,7 @@ NOTE: This project is not finished yet. See the older version [here](https://git
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
-[Python 3.x](https://www.python.org/downloads/) (preferably [python 3.6](https://www.python.org/downloads/release/python-360/)) are needed to run the tests.
+[Python 3.x](https://www.python.org/downloads/) (preferably [python 3.5](https://www.python.org/downloads/release/python-350/)) are needed to run the tests.
 
 The following python libraries must also be installed:
 - [matplotlib](https://matplotlib.org/)
@@ -52,6 +52,10 @@ TODO: add better examples
 The visuals are hidden by default. This is to speed up the run times of the simulations.
 
 If you want to turn turn them on, simply uncomment the line with `env.show()` in the source code of each simulation:
+```python
+# env.show()
+env.show()
+```
 ![](https://github.com/leloykun/socialsims/blob/master/docs/env_show.png)
 
 This is NOT recommended.
@@ -98,8 +102,6 @@ TODO
 
 ## Results and Discussion
 TODO
-
-TODO make data denser in cat-mouse and run logistic regression again
 
 TODO use seaborn facet grid to graph data
 
