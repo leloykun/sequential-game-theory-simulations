@@ -1,6 +1,6 @@
 import random
 
-from qlearn import QLearn
+from .qlearn import QLearn
 
 
 class Agent:

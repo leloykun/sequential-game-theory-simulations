@@ -3,8 +3,8 @@ import time
 import random
 import multiprocessing
 
-from qlearn import QLearn
-from world import World
+from ...qlearn import QLearn
+from ...world import World
 
 sim_name = 'route-choice'
 output_dir = 'sims/' + sim_name + '/data/'
