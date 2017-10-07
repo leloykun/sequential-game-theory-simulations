@@ -3,9 +3,6 @@ import sys
 import inspect
 import importlib
 
-import cell
-import agent
-
 # add current directory to pythonpath
 cmd_folder = os.path.realpath(
     os.path.abspath(
