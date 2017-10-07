@@ -166,7 +166,7 @@ class Cat(Agent):
 def worker(params):
     timesteps, num_mice = params
 
-    env = Environment(world=World(map='worlds/empty15x15.txt',
+    env = Environment(world=World(map='worlds/box15x15.txt',
                                   Cell=CasualCell))
 
     env.world.mice = []
