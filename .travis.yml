@@ -4,6 +4,6 @@ python:
 install:
   - pip install -r requirements.txt
 script:
-  - py.test
+  - pytest tests/basic.py
 notifications:
   - email: false
