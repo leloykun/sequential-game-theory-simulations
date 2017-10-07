@@ -4,11 +4,11 @@ import math
 import random
 import multiprocessing
 
-from cell import Cell
-from agent import Agent
-from world import World
-from qlearn import QLearn
-from environment import Environment
+from ...cell import Cell
+from ...agent import Agent
+from ...world import World
+from ...qlearn import QLearn
+from ...environment import Environment
 
 sim_name = 'migration'
 output_dir = 'sims/' + sim_name + '/data/'
