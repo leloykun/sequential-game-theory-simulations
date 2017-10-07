@@ -15,10 +15,10 @@ class QLearn:
 
         #  SRE => State Residual Entropy
         #  ARE => Agent Residual Entropy
-        self.stat_SRE = {}
-        self.stat_ARE = 1.0
-        self.dyna_SRE = {}
-        self.dyna_ARE = 1.0
+        self.stat_sre = {}
+        self.stat_are = 1.0
+        self.dyna_sre = {}
+        self.dyna_are = 1.0
 
         self.temp = temp
 
@@ -41,9 +41,9 @@ class QLearn:
         else:
             self.q[(state, action)] = oldv + self.alpha * (value - oldv)
 
-        self.recalc_ARE(state, reward)
+        self.recalc_are(state, reward)
 
-    def recalc_ARE(self, state, reward):
+    def recalc_are(self, state, reward):
         '''  Learning Residual Entropy
             TODO: update this to take into account diff ways of
                   measuring SRE
@@ -99,27 +99,27 @@ class QLearn:
                     Ito, A. & Kanabuchi, M.
         '''
 
-        eprobs = self.getEProbs(state)
+        eprobs = self.get_eprobs(state)
         new_sre = - sum([eprob * math.log(eprob) for eprob in eprobs]) / \
             math.log(len(self.actions))
 
         # recalc static SRE and ARE
-        stat_sre_delta = new_sre - self.stat_SRE.get(state, 1)
-        self.stat_SRE[state] = new_sre
-        self.stat_ARE += stat_sre_delta / self.max_states
+        stat_sre_delta = new_sre - self.stat_sre.get(state, 1)
+        self.stat_sre[state] = new_sre
+        self.stat_are += stat_sre_delta / self.max_states
 
         # recalc dynamic SRE and ARE
         if state in self.states:
-            dyna_sre_delta = new_sre - self.dyna_SRE.get(state, 1)
-            self.dyna_SRE[state] = new_sre
-            self.dyna_ARE += dyna_sre_delta / len(self.states)
+            dyna_sre_delta = new_sre - self.dyna_sre.get(state, 1)
+            self.dyna_sre[state] = new_sre
+            self.dyna_are += dyna_sre_delta / len(self.states)
         else:
             self.states.add(state)
-            self.dyna_SRE[state] = new_sre
-            self.dyna_ARE = (self.dyna_ARE * (len(self.states) - 1) +
-                             self.dyna_SRE[state]) / len(self.states)
+            self.dyna_sre[state] = new_sre
+            self.dyna_are = (self.dyna_are * (len(self.states) - 1) +
+                             self.dyna_sre[state]) / len(self.states)
 
-    def chooseAction(self, state, type=1):
+    def choose_action(self, state, type=1):
         # Greedy Epsilon
         if type == 0:
             action = 0
@@ -144,7 +144,7 @@ class QLearn:
 
         # Boltzmann
         elif type == 1:
-            eprobs = self.getEProbs(state)
+            eprobs = self.get_eprobs(state)
 
             ran = random.random()
             action = random.choice(self.actions)
@@ -194,12 +194,14 @@ class QLearn:
 
     def learn(self, state1, action1, reward, state2, print_q_after=False):
         maxqnew = max([self.getQ(state2, a) for a in self.actions])
-        self.learnQ(state1, action1, reward,
+        self.learnQ(state1,
+                    action1,
+                    reward,
                     reward + self.gamma * maxqnew)
         if print_q_after:
             print(self.q)
 
-    def getEProbs(self, state):
+    def get_eprobs(self, state):
         ''' Probability of selecting each action on given state:
             eValue(state, action) = e ** (Q(state, action)/temp)
                                    eValue(state, action)

@@ -16,9 +16,6 @@ class World:
     agents = []
     age = 0
 
-    total_deaths = 0
-    total_borns = 0
-
     def __init__(self, map='worlds/box5v5', Cell=None, num_dir=8):
         self.map = map
         self.Cell = Cell
@@ -56,14 +53,11 @@ class World:
         self.agents = []
         self.age = 0
 
-        self.total_deaths = 0
-        self.total_borns = 0
-
     def load(self):
         if not hasattr(self.Cell, 'load'):
             return
 
-        #self.reset()
+        # self.reset()
         for j in range(self.height):
             for i in range(min(self.width, len(self.data[j]))):
                 self.grid[j][i].load(self.data[j][i])
@@ -89,8 +83,8 @@ class World:
                 old_cell = agent.cell
                 agent.update()
                 if old_cell != agent.cell:
-                    self.display.redrawCell(old_cell.x, old_cell.y)
-                self.display.redrawCell(agent.cell.x, agent.cell.y)
+                    self.display.redraw_cell(old_cell.x, old_cell.y)
+                self.display.redraw_cell(agent.cell.x, agent.cell.y)
 
         self.eaten = eaten
         self.fed = fed
@@ -98,7 +92,7 @@ class World:
         self.display.update()
         self.age += 1
 
-    def getPointInDirection(self, x, y, dir):
+    def get_point_in_direction(self, x, y, dir):
         if self.num_dir == 8:
             dx, dy = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1),
                       (-1, 0), (-1, -1)][dir]

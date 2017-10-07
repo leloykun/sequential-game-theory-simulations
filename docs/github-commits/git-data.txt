@@ -1,0 +1,408 @@
+[START commit][author=Franz Louis T. Cesista][time=1507178235][message=fine-tuned logistic regression][hash=d1ad5ee11587d2265b9ee5657a4e8d68609a5c3f]
+ 5 files changed, 3594 insertions(+), 3688 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1507170528][message=added logistic regression][hash=166d31c2dc0215278a3c4895645674d1cf1d82c4]
+ 4 files changed, 3715 insertions(+), 9 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1507067215][message=added steps in linear regression][hash=c6fdec7fc526cd4492da268a8c9eec7afe8afe1e]
+ 2 files changed, 15 insertions(+), 10 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1507040732][message=fixed naming issues p2][hash=601421f777f0585b001b1f779d4068b4007daff8]
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1507040689][message=fixed naming issues in data of route-choice][hash=a2bfbc3c34b3dfef7dffb6cd4aff26db2fa8be6b]
+ 31 files changed, 10001 insertions(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1507040250][message=added linear regression stuff in cat-mouse][hash=104e471b45d850276524f27f9cee3d9eb4191a22]
+ 4 files changed, 41 insertions(+), 22 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1507011726][message=removed sns color pallete in simple-migration][hash=7e080bd668d642883cba75d88974cc0a263980ba]
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1507011515][message=rerunned route-choice][hash=2738559bdc89c8e3fff21901efba8de74014a394]
+ 12 files changed, 10014 insertions(+), 10009 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506862947][message=edited data visualizers][hash=d1f4fd75ee8f950a4cfc5c6bd7c647756a8c24fe]
+ 2 files changed, 8 insertions(+), 5 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506850352][message=finished initial run of route-choice][hash=daa32ff8dc87d3e5b24844493a040d341a0e1039]
+ 13 files changed, 10012 insertions(+), 403 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506849330][message=added data_visualizer to route-choice][hash=d73bc0504285b11f01fabacbd2a4a5e96ccb8c6c]
+ 1 file changed, 24 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506849317][message=fixed reward function in route-choice simulation][hash=abd7dab6ce9c2c7ec5725121c9a5ced68f458834]
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506846194][message=added going_to_obstacle() to cat-mouse-cheese simulations][hash=369a6654ddc14f823b8056dabf10f82c45ee8535]
+ 1 file changed, 4 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506845842][message=fixed qlearn.py][hash=0e16d3655dbc47566feb1fce863b1eddd971990a]
+ 3 files changed, 2 insertions(+), 28 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506844842][message=added going_to_obstacle to cat-mouse simulations][hash=0a6e881c2aca52a7bf5319e4b78d0e13b1296db9]
+ 3 files changed, 13 insertions(+), 6 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506844421][message=added seaborn in imports of data_visualizer.py][hash=a24e788e367c442fd9656d414515a1cf8c2bee37]
+ 1 file changed, 1 insertion(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506843555][message=added whitespaces to list.txt][hash=6bcef35cb2f96c7b9a1b0396b947d56164d09153]
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506843372][message=imported collections in qlearn.py][hash=c7b1427d0e86b43e96d3943635b39b2a7906cedf]
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506843360][message=fixed order of inputs in simulations and descriptions in list.txt][hash=fa8ebbbf47f17bc59238f022a475ebf2f854f021]
+ 4 files changed, 12 insertions(+), 9 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506842889][message=removed ignore_obstacles option in qlearn][hash=7a0479c77b5cb471305ae631fed8e382582fa934]
+ 2 files changed, 7 insertions(+), 13 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506830443][message=plotted data in simple-migration][hash=eb7f901b07a61f2622eae3f2295f40866d3299a8]
+ 111 files changed, 7 insertions(+), 11 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506829290][message=added data_visualizer in simple-migration][hash=14ed0c2ffd361cba89d5b55240733428bc9e1645]
+ 1 file changed, 46 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506829275][message=added remineder to move details part in readme to wiki][hash=c2f89943b15384826b786ecb19b53c159b0b252b]
+ 1 file changed, 1 insertion(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506829244][message=re-runned simple-migration][hash=51841c1a8184264514a0ca89c8c4a5e214d8d786]
+ 440 files changed, 1100209 insertions(+), 1100099 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506827399][message=preparation for re-run of simple-migration][hash=f7294fd70c359eb24563706c6fcb725089e3fa24]
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506826017][message=finishing touches for route-choice][hash=4f57daaa1f80abc1e07932b9f31d92e7788d7371]
+ 6 files changed, 460 insertions(+), 17 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506825987][message=used log instead of log10 in qlearn.py][hash=dfe8f53c663a75a3c63d27f065233b274442c2af]
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506785343][message=made the number of roads a variable][hash=adee2c7c3f908816ebc86cf16b04254a614bd96f]
+ 2 files changed, 19 insertions(+), 17 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506772923][message=added option to print q in def learn in qlearn.py][hash=7a7ce090c5761526095d202f14a045067a1a7164]
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506772189][message=changed default alpha and gamma values in qlearn][hash=414595c461f0a5b3142c12534683a1855d2fb02a]
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506772069][message=added reminder to readd going-to-obstacle option in qlearn][hash=b38a4f312475c4a89c77a6bdd7fb49bfb0650514]
+ 2 files changed, 2 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506771905][message=fixed qlearn][hash=e8984f1448f3c07ca2bbd61daab1446d53bf5879]
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506771894][message=readded route-choice simulations][hash=c7bd9bc593585d3f7b0b341a536606a5ab504adf]
+ 3 files changed, 85 insertions(+), 2 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506770568][message=added TODO in readme][hash=49fec34f68559e24b343d31f32743734243b3a6d]
+ 1 file changed, 1 insertion(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506636392][message=added params option to data_visualizer][hash=009d1981eb32e663d90d41ab0b735f1d558b1037]
+ 2 files changed, 4 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506634944][message=removed visualization of data in cat-mouse][hash=7fa60f68ba9073396064d82c39698afa0986edc5]
+ 1 file changed, 5 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506629972][message=added data visualization to portal.py][hash=d708419dc985d576c29514acf5cae950d71de041]
+ 3 files changed, 50 insertions(+), 41 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506620149][message=Merge branch 'master' into dev][hash=295864d32af59ee7b67a29874843ac4906f89c9f]
+[START commit][author=Franz Louis T. Cesista][time=1506580767][message=Merge pull request #9 from leloykun/add-license-1][hash=f7dc06bf8af3068c8674b1312836924a344e021a]
+[START commit][author=Franz Louis T. Cesista][time=1506580756][message=Create LICENSE][hash=bddfe9ee18704c5f5f995ed5eb3d53f61b3ddccc]
+ 1 file changed, 21 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506551579][message=fixed todos in readme][hash=7a4ee8ea813dd1228558369df8a88731f2ef72b1]
+ 1 file changed, 6 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506538828][message=added concepts for cooperative migration][hash=60dd6e44f0e1045bee1931f76572ff10b62adee3]
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506523575][message=Merge branch 'master' into dev][hash=5ada5b18b956ea95057124fd2a527188f597ce4e]
+[START commit][author=Franz Louis T. Cesista][time=1506523562][message=added TODO sections in README.md][hash=c144fffd1b0c68243c9f318115845bab48f6f7c3]
+ 1 file changed, 14 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506523512][message=added TODO sections in README.md][hash=5d68b336bf9469cea14582525d57f4d1093d31fe]
+ 1 file changed, 14 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506508291][message=Update README.md][hash=31751c67d466cc6cbffae3cbb7622ce525d666f8]
+ 1 file changed, 2 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506508261][message=improved graphs in experiment 6][hash=7a661d3b450d3a0efa74e5c2428671f735c91a9c]
+ 21 files changed, 6 insertions(+), 6 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506507121][message=Merge branch 'master' of https://github.com/leloykun/socialsims][hash=15d27ca46495d87194523bc2e0c46fec302dada6]
+[START commit][author=Franz Louis T. Cesista][time=1506507110][message=Improved graphs in experiment 4][hash=4e5f1c8c9930104d6afb60bf5edf40719c8c2554]
+ 46 files changed, 1 insertion(+), 2 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506499221][message=Update README.md][hash=080a9155a4985caa78a8b265507b5682d6980cd3]
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506498548][message=Update README.md][hash=7503678926b7c734df0ad7b30c0ebfcf72f86464]
+ 1 file changed, 2 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1506498043][message=Update README.md][hash=d64f6007f7d6918fd5fc6de52d2849c12acdd246]
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506497803][message=Update README.md][hash=93b189b316f1637543c162456837ee5f49a59cbb]
+ 1 file changed, 81 insertions(+), 2 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506496813][message=edited env_show][hash=9c09d0445b5cc8911984aac44262eb545261296a]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506496656][message=added option to show simulations][hash=f7d1e871648b544f81c46b038e123009218162f0]
+ 4 files changed, 5 insertions(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506494281][message=removed route-choice sim][hash=6bbba81b5a83514dec0e5538574f7964ab1887ff]
+ 2 files changed, 80 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506494227][message=uncommented simulations in list.txt][hash=a399d4c4c9a4d8c89fd507a37d468a49cbc1ea5c]
+ 4 files changed, 82 insertions(+), 18 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1506492276][message=Merge pull request #8 from leloykun/dev][hash=f392f161f9e394d5b0f6a2ae2675b1d34168be70]
+[START commit][author=Franz Louis T. Cesista][time=1505974814][message=added num_states to output of simple-migration][hash=eab54c9442a1798eea241d9caf3c8fd0958c0d87]
+ 1 file changed, 4 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1505974781][message=added vertical lines to graphs][hash=fd04f66f55e5198e8991c333cf2b3103b3ab93a2]
+ 11 files changed, 14 insertions(+), 7 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1505134379][message=Merge pull request #7 from leloykun/dev][hash=9024a66d1d7f7f1eab001645e49cb98d47ed33b3]
+[START commit][author=Franz Louis T. Cesista][time=1505133432][message=redone cleaning code using yapf][hash=1b34ad82b78a7b8fbb95dd9fdd1678bbf1e27b6c]
+ 6 files changed, 51 insertions(+), 29 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1505132415][message=cleaned up code using yapf][hash=44aed34239765caf78ec118b34c5c301306504a8]
+ 9 files changed, 121 insertions(+), 197 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1505055238][message=deleted simple-residual-entropy sims][hash=6f0b771a9a2beb88e30c0d5701c0a88c195be2fc]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1505055206][message=conducted simple-migration simulations][hash=4109c2062c8757af541d186dc866e2ca1ec09461]
+ 343 files changed, 1100242 insertions(+), 131 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1505053769][message=added random agent type][hash=1546b5fee398af8cd36cc14fdfa3bb5837de97e2]
+ 1 file changed, 2 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1504968832][message=aesthetic improvement to qlearn.py][hash=6846aec6e72c0049f59948c280b9b38ff5f6579d]
+ 1 file changed, 7 insertions(+), 13 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504968177][message=aethetic changes to qlearn.py][hash=0b09cfbef04bb91eadf28f5074380769bec20b53]
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504967149][message=refactored qlearn.py][hash=2d72c0231116ad5933c89e04c2a52b025771cf42]
+ 1 file changed, 82 insertions(+), 44 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504963578][message=renamed residual-entropy to simple-residual-entropy][hash=97de939b90588f065a49ff7c50de732b9d5b3361]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504957503][message=conducted simple-migration simulation][hash=f9e1d16e2d192808bd06d55d682c8f992b6a011c]
+ 13 files changed, 255 insertions(+), 5 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504957476][message=added more concept ideas][hash=fc984409e3b77aab31ebbc65f416d18e3012732b]
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504936549][message=made cat-mouse sim more dynamic on param processing][hash=a9414afbd50d0111b429e5b844ce3d20e7cdcb3a]
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504935718][message=added explaination to difference in LRE][hash=f3d9775000bc12a17b740382d4b43b01fcd142f0]
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504934441][message=removed whitespaces][hash=ec651ceb8f7de1546aaa62fad04c5ec996c30d31]
+ 2 files changed, 20 insertions(+), 20 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504933885][message=tests for cat-mouse-cheese simulations][hash=4123af93e3feef1469cf7d38a2b8f0d2e8f73848]
+ 24 files changed, 2617 insertions(+), 14 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504760120][message=refactored code for use in cat-mouse-cheese simulations][hash=83748d1067947e8a4db800e6c78708e4f5b142db]
+ 3 files changed, 45 insertions(+), 9 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504757684][message=added concept ideas again][hash=3eded04a24a5612b36d1fbf5b729372714cb3dd0]
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504686247][message=plotted cat-mouse data][hash=66366b41d3b0f4ef75e1ea9ffe485c1505707232]
+ 41 files changed, 45 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1504682591][message=finished cat-mouse simulation][hash=b1f6e94cc0ae34093fb11c77b59774c1bdfa918b]
+ 41 files changed, 4840 insertions(+), 484 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504682558][message=added infographics][hash=4dbf8343c555d494359798041abcdb226694cba9]
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504629565][message=started centralizing experiments][hash=33cbbbf680b0cb48d08061b1f0643315d586a014]
+ 19 files changed, 682 insertions(+), 130 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504621705][message=added new experiment concept][hash=b71701f1b894fb7e3a77a5892d1225cf898f1dfc]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504619126][message=Merge pull request #6 from leloykun/dev][hash=8f5d48f5d6ed7b360a7a73ac1f964adb146e1318]
+[START commit][author=Franz Louis T. Cesista][time=1504542690][message=added method to find out when agents start to fully learn policies][hash=ac6c70a0b2e9f999be1b5e9fe81cdf386a81f594]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504542671][message=redone exp 6][hash=7fb4e3a44425d24959fbbb95ca66fa741aee06c3]
+ 53 files changed, 996621 insertions(+), 2385831 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504534799][message=repeated exp 6][hash=8d357e3a5cea3ed1dbcda91ebc1b5f675095bb16]
+ 30 files changed, 2455038 insertions(+), 2274876 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504534498][message=moved data output to processes][hash=a78a4af26c41fce5aa398f1eb32e0b4f61bdbc41]
+ 31 files changed, 2260735 insertions(+), 17153987 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504533768][message=followed pep8 rules][hash=ba699c798bec3623c827ec2f5d1eedb0292a21d8]
+ 3 files changed, 88 insertions(+), 80 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504532450][message=finished experiment 6][hash=d950d8a56604efc675f2b227e08a7d1d4b787538]
+ 37 files changed, 17485913 insertions(+), 186495 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504529891][message=fixed variable naming in qlearn.py][hash=62af4590b552d333769f8d20932fa78c2c821915]
+ 12 files changed, 195853 insertions(+), 37 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504440633][message=Merge branch 'master' into dev][hash=a83e6ed59e3b1476e00c5db69a72d245ba5d2196]
+[START commit][author=Franz Louis T. Cesista][time=1504438181][message=aesthetic improvements to the plots][hash=a26bc869b30917dbbfaeccdc9809197df16f9d07]
+ 45 files changed, 1 insertion(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504355201][message=Merge pull request #5 from leloykun/dev][hash=de7d8796b3fb644f9c73da06a1416bf11c5bf9d9]
+[START commit][author=Franz Louis T. Cesista][time=1504355178][message=replaced QLearning infographic with its png version][hash=87734b6384c2c15be3d339aa945b47088ffa3d93]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504352594][message=cosmetic changes][hash=de1a81a94331e466ebd05d82ee5063d12be55ab8]
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504342739][message=cosmetic update on experiment 5][hash=351f8e120b4006cbc418c8bc9066e34406058c27]
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504342303][message=conducted experiment 5: migration][hash=816f61d20b968dd9493cb59ca162695d3a34df0d]
+ 13 files changed, 56 insertions(+), 83 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504337853][message=animated graphs in experiment 4][hash=0b558e1b1f5d93e998552ca76599ebaef7ece575]
+ 4 files changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504337447][message=preparation for experiment 5][hash=44ea6a78f670f7e2ed3ba7a0ca91139b91f570cb]
+ 2 files changed, 22 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1504336314][message=fixed plots in exp 4][hash=ea5ed8fd3b74c7931e30d7f38b7c6c1a263cb32f]
+ 41 files changed, 5 insertions(+), 4 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504335617][message=Merge pull request #4 from leloykun/dev][hash=401d6441f5308bd14948af007d444785bb161807]
+[START commit][author=Franz Louis T. Cesista][time=1504335516][message=added QLearning infographic][hash=d004deb62edba442bfc3db7023a60f7e725c4a90]
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504331609][message=redone Experiment 4][hash=3d1fc6b6ec0b70ffded049dee9b6944ada6e0e85]
+ 62 files changed, 2429 insertions(+), 2427 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504328126][message=conducted exp 4 (not final)][hash=cd166618941be6d106d09a1b1a7f8b33a5384ed6]
+ 39 files changed, 2181 insertions(+), 2181 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504326848][message=started Experiment 4][hash=c85bdddbdd0db4352497fa388a58980da65e9bc9]
+ 29 files changed, 2464 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1504326804][message=fixed plots of exp 3][hash=c43aa412d07d0ed2148897424c22e7d92c886ed8]
+ 205 files changed, 33 insertions(+), 31 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504325419][message=Merge pull request #3 from leloykun/qlearn-fix][hash=e952b226a0f6729a5788971c1226be2d7b34eaab]
+[START commit][author=Franz Louis T. Cesista][time=1504325300][message=fixed qlearn][hash=33c2cd4581d2f8c53c3ee7860441c3cafc2707f2]
+ 4 files changed, 49 insertions(+), 42 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504322252][message=finished experiment 3][hash=e91676e88aa955407963596a14b1231146bd7782]
+ 243 files changed, 4883 insertions(+), 520 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504285219][message=start experiment 3][hash=4c529e322c1025b2b6cbb623bb1f3158451481a7]
+ 13 files changed, 719 insertions(+), 44 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504277091][message=conducted experiment 2][hash=7cc76d5ab52dee03fc103f2ac33743005d6b07f9]
+ 8 files changed, 428 insertions(+), 406 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504277080][message=added test of multiprocessing][hash=f453fb241037b0456afb7b1e96e0981e1e09b7de]
+ 1 file changed, 16 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1504269700][message=started experiment 2][hash=da223cf9bcb512c503824051f826daafe256fbdf]
+ 4 files changed, 392 insertions(+), 22 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504264340][message=Merge pull request #2 from leloykun/dev][hash=ed42ea97cf8098995b7706f082081a4058ad50d5]
+[START commit][author=Franz Louis T. Cesista][time=1504264227][message=added another plot to experiment 1][hash=3171ad9d4f19bf8fb11c2aa94946a47421831ee4]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504263904][message=conducted experiment 1][hash=2dd96127eeddcd741298596c662c7bd07de4c5a1]
+ 5 files changed, 391 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1504263876][message=made vision range a variable][hash=0ae4a447a34ea38bdfb6eca9dc8d4ff7e992d146]
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504263814][message=moved infographic][hash=f2cba842986317725e1328b7e99f209f91f83ab9]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504263801][message=added concept for graphs][hash=f9a7a08c405fbce9d47ad6375de1a786ca1fa1fa]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504263786][message=added multithreading in experiment 1][hash=0e02852c8a9e4f42fad5ca10fb73c959edaf24fe]
+ 1 file changed, 63 insertions(+), 25 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504263745][message=updated paper][hash=ad2de09a236f9be02960c44714da5da0e00f1499]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504122393][message=made alpha and gamma parameters modifiable][hash=7e7ac064a6b713c5b84f43d39d3d7ef0bf7e81a7]
+ 3 files changed, 26 insertions(+), 18 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504122326][message=added data for experiments][hash=451bc96e152da98d1bf71a23b80bce26c7738f80]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504117177][message=added another experiment concept][hash=5653668b7df234240912be1956f6951194ce05db]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504113551][message=added concepts for experiments][hash=7ea86e6e1c503e3f6f3fb92a7a1ebcf7f3a2d733]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504113228][message=added qlearn ai to mouse][hash=e3cde5a75eb19562f15aa325ca9406d58ca28922]
+ 5 files changed, 90 insertions(+), 29 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504106719][message=added research paper to docs][hash=655788ac4f443161d5700a2f0fec0f030509785a]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504105348][message=added qlearn back to codebase][hash=753377c3298070e960f297dad4666a8a2b5f5eca]
+ 1 file changed, 214 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1504100260][message=added cheese to simulation][hash=8e28d5eb72a3170401fee8a5c64cb02e301125b0]
+ 3 files changed, 11 insertions(+), 5 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504099705][message=made cat chase mouse][hash=fc1a790a2d5804c90a036824505a707d343cefc3]
+ 5 files changed, 133 insertions(+), 6 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504098457][message=added reinforcement learning infographic][hash=719b11c13579dcb4f01480bfa6bb7ea167c2900f]
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504098142][message=added experimental code][hash=dab63ba4418977b60d9e348a698e156978c3217b]
+ 6 files changed, 423 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1504098124][message=backupped again][hash=4bae160f6e282f28b31d55b0ba11e9e91666d83d]
+ 4 files changed, 48 insertions(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504022553][message=added more maps][hash=129f2157608ffbb9694266aed6047a095369cae0]
+ 2 files changed, 19 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1504020502][message=moved older version to v2][hash=74e454cecaf3241c1ac9ce649c6238426efee8e1]
+ 5 files changed, 0 insertions(+), 0 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504020039][message=changed ENVIRONMENT to MAP in settings][hash=3da6f94e0573e34a537940dbad36654586ba3328]
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504020016][message=added helper function to cell.py][hash=3e2b42e3b8c62c273d88a0410d48f46005ecf195]
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1504000806][message=Merge pull request #1 from leloykun/widgets][hash=3e2f8885351a3a16a728c59c2cda1f6b7500b2b9]
+[START commit][author=Franz Louis T. Cesista][time=1504000738][message=moved widgets to separate folder][hash=22af742cdbc7d3237bd5c6f0fbe5f6773af1de62]
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1503746514][message=separated Cell class from cellular][hash=836dc2b4a47cd3f69197783e6e719fca5f612cf6]
+ 4 files changed, 49 insertions(+), 51 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1503718003][message=added settings.py][hash=ed0342ddcc70ddbff5b624d7a106a17de4b16135]
+ 6 files changed, 115 insertions(+), 181 deletions(-)
+
+[START commit][author=Franz Louis T. Cesista][time=1503717942][message=created backup][hash=1c0f095d31333632c3e0204bbc596ab0b4772c4b]
+ 8 files changed, 1158 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1503675837][message=imported stuff from original repo][hash=c26eb06aa6b7108a1ce5efb88e0eda3ea56c599e]
+ 16 files changed, 1450 insertions(+)
+
+[START commit][author=Franz Louis T. Cesista][time=1503674888][message=Initial commit][hash=ad24d8f006978fa65e35538d4e81ca287d088799]
+ 1 file changed, 2 insertions(+)

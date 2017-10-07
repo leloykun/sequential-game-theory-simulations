@@ -35,7 +35,7 @@ def get_indiv_wealths():
 
 
 def get_gini_inequality(wealths=None):
-    if wealths == None:
+    if wealths is None:
         wealths = sorted(get_indiv_wealths())
     numAgents = len(world.agents)
     G = sum(wealths[i] * (i + 1) for i in range(numAgents))
@@ -54,7 +54,8 @@ def get_ave_positions():
 
 
 def get_learning_entropy():
-    return sum(agent.ai.aveSRE for agent in world.agents) / len(world.agents)
+    return sum(agent.ai.aveSRE for agent in world.agents) / \
+        len(world.agents)
 
 
 if settings.TO_DISPLAY_WORLD:
@@ -109,14 +110,17 @@ while world.age < endAge:
 
     if settings.TO_SIMULATE_SEASONS:
         if world.age % 200 == 0:
-            change_growth_rate(1, 1, 20, 10, [0] * settings.RESOURCE_COUNT)
+            change_growth_rate(
+                1, 1, 20, 10, [0] * settings.RESOURCE_COUNT)
             change_growth_rate(1, 11, 20, 20, settings.DEF_GROWTH_RATE)
         elif world.age % 100 == 0:
             change_growth_rate(1, 1, 20, 10, settings.DEF_GROWTH_RATE)
-            change_growth_rate(1, 11, 20, 20, [0] * settings.RESOURCE_COUNT)
+            change_growth_rate(
+                1, 11, 20, 20, [0] * settings.RESOURCE_COUNT)
 
 save += str(world.numDeaths) + ' ' + str(world.cumulativePop) + '\n'
 
-savefile = open(settings.OUTPUT_LOCATION + settings.FILENAMES[settings.OUTPUT_TYPE] + ".txt", 'w')
+savefile = open(settings.OUTPUT_LOCATION +
+                settings.FILENAMES[settings.OUTPUT_TYPE] + ".txt", 'w')
 savefile.write(save)
 savefile.close()

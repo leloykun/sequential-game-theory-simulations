@@ -19,7 +19,8 @@ class Cell(cellular.Cell):
         if self.wall:
             return 'black'
         elif TO_COLOR_CELLS:
-            ratio = sum(self.resources) / (MAX_RES_AMOUNT * RESOURCE_COUNT)
+            ratio = sum(self.resources) / \
+                (MAX_RES_AMOUNT * RESOURCE_COUNT)
             gradient = hex(int(ratio * 64) + 191)[2:]
             if len(gradient) < 2:
                 gradient = '0' + gradient
@@ -34,7 +35,8 @@ class Cell(cellular.Cell):
             self.growthRate = [1 for _ in range(RESOURCE_COUNT)]
         else:
             self.wall = False
-            self.resources = [MAX_RES_AMOUNT for _ in range(RESOURCE_COUNT)]
+            self.resources = [
+                MAX_RES_AMOUNT for _ in range(RESOURCE_COUNT)]
             self.growthRate = DEF_GROWTH_RATE
 
     def update(self):
@@ -45,7 +47,8 @@ class Cell(cellular.Cell):
                 self.resources[i] = min(self.resources[i], MAX_RES_AMOUNT)
 
 
-world = cellular.World(Cell, directions=8, filename='../worlds/smallbox3.txt')
+world = cellular.World(
+    Cell, directions=8, filename='../worlds/smallbox3.txt')
 world.age = 0
 
 
@@ -70,7 +73,7 @@ def get_indiv_wealths():
 
 
 def get_gini_inequality(wealths=None):
-    if wealths == None:
+    if wealths is None:
         wealths = sorted(get_indiv_wealths())
     numAgents = len(world.agents)
     G = sum(wealths[i] * (i + 1) for i in range(numAgents))
@@ -89,7 +92,8 @@ def get_ave_positions():
 
 
 def get_learning_entropy():
-    return sum(agent.ai.aveSRE for agent in world.agents) / len(world.agents)
+    return sum(agent.ai.aveSRE for agent in world.agents) / \
+        len(world.agents)
 
 
 if TO_DISPLAY_WORLD:

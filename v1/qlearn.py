@@ -4,7 +4,7 @@ import random
 class QLearn:
     def __init__(self, actions, temp=5,
                  epsilon=0.1, alpha=0.2, gamma=0.9):
-        
+
         self.q = {}
 
         self.states = set()
@@ -87,7 +87,7 @@ class QLearn:
             newSRE = -sum(
                 [eprob * math.log10(eprob) for eprob in eprobs]) \
                 / math.log10(len(self.actions)
-            )
+                             )
             delta = newSRE - self.statesRE[state]
 
             self.statesRE[state] = newSRE
@@ -101,10 +101,10 @@ class QLearn:
             e1 = 1 / eSum  # eprob when Q(S,a) == 0
 
             self.statesRE[state] = \
-                - ((len(self.actions) - 1) * (e1 * math.log10(e1)) \
-                + (eX * math.log10(eX))) / math.log10(len(self.actions))
-            self.aveSRE = (self.aveSRE * (len(self.states) - 1) \
-                        + self.statesRE[state]) / len(self.states)
+                - ((len(self.actions) - 1) * (e1 * math.log10(e1))
+                   + (eX * math.log10(eX))) / math.log10(len(self.actions))
+            self.aveSRE = (self.aveSRE * (len(self.states) - 1)
+                           + self.statesRE[state]) / len(self.states)
 
     def chooseAction(self, state, type=1):
         # Greedy Epsilon
@@ -121,7 +121,7 @@ class QLearn:
                 maxCount = q.count(maxQ)
                 if maxCount > 1:
                     best = [
-                        i for i in range(len(self.actions)) 
+                        i for i in range(len(self.actions))
                         if q[i] == maxQ
                     ]
                     i = random.choice(best)
@@ -166,8 +166,8 @@ class QLearn:
             # we select a random one among them
             count = q.count(maxQ)
             if count > 1:
-                best = [ 
-                    i for i in range(len(self.actions)) 
+                best = [
+                    i for i in range(len(self.actions))
                     if q[i] == maxQ
                 ]
                 i = random.choice(best)
@@ -179,7 +179,7 @@ class QLearn:
 
     def learn(self, state1, action1, reward, state2):
         maxqnew = max([self.getQ(state2, a) for a in self.actions])
-        self.learnQ(state1, action1, reward, \
+        self.learnQ(state1, action1, reward,
                     reward + self.gamma * maxqnew)
 
     '''
@@ -196,7 +196,7 @@ class QLearn:
     def getEProbs(self, state):
         import math
         eValues = [
-            math.exp(self.getQ(state, a) / self.temp) 
+            math.exp(self.getQ(state, a) / self.temp)
             for a in self.actions
         ]
         total = sum(eValues)

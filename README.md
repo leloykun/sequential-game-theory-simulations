@@ -99,7 +99,7 @@ TODO
 ## Results and Discussion
 TODO
 
-TODO use sklearn to analyze agent performance vs. qlearning parameters (with logistic regression)
+TODO make data denser in cat-mouse and run logistic regression again
 
 TODO use seaborn facet grid to graph data
 
