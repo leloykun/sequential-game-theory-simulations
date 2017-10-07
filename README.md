@@ -91,6 +91,11 @@ cat-mouse 10 100 10
 # migration 1 100000 3
 ```
 
+### Running the tests
+```bash
+pytest tests/
+```
+
 ## Details
 TODO
 
