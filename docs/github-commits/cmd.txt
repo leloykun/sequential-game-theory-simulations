@@ -1,0 +1,2 @@
+git log --pretty=format:"[START commit][author=%an][time=%ct][message=%s][hash=%H]" --shortstat > git-data.txt
+python main.py -n socialsims

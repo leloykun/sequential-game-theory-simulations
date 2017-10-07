@@ -262,9 +262,11 @@ class PygameDisplay:
         if PygameDisplay.screen is None \
                 or PygameDisplay.screen.get_width() != w \
                 or PygameDisplay.screen.get_height() != h:
-            PygameDisplay.screen = pygame.display.set_mode((w, h), pygame.RESIZABLE, 32)
+            PygameDisplay.screen = pygame.display.set_mode(
+                (w, h), pygame.RESIZABLE, 32)
         self.activated = True
-        self.defaultColour = self.getColour(self.world.grid[0][0].__class__())
+        self.defaultColour = self.getColour(
+            self.world.grid[0][0].__class__())
         self.redraw()
 
     def redraw(self):
@@ -289,7 +291,8 @@ class PygameDisplay:
                     c = self.getColour(cell)
                 if c != self.defaultColour:
                     try:
-                        self.screen.fill(c, (sx, sy, self.size, self.size))
+                        self.screen.fill(
+                            c, (sx, sy, self.size, self.size))
                     except TypeError:
                         print(('Error: invalid colour:', c))
                 sx += self.size
@@ -388,7 +391,8 @@ class PygameDisplay:
 
     def saveImage(self, filename=None):
         if filename is None:
-            filename = 'animations/test/' + '%03d.png' % (self.world.age + 1)
+            filename = 'animations/test/' + \
+                '%03d.png' % (self.world.age + 1)
         pygame.image.save(self.screen, filename)
 
 

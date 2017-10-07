@@ -52,14 +52,16 @@ class Mouse(Agent):
         self.score += reward
 
         if self.last_state is not None:
-            self.ai.learn(self.last_state, self.last_action, reward,
+            self.ai.learn(self.last_state,
+                          self.last_action,
+                          reward,
                           state)
 
-        action = self.ai.chooseAction(state)
+        action = self.ai.choose_action(state)
         self.last_state = state
         self.last_action = action
 
-        self.goInDirection(action)
+        self.go_in_direction(action)
 
     def calc_state(self):
         day = self.world.age % 100
@@ -72,8 +74,8 @@ class Mouse(Agent):
 def worker(params):
     alpha, gamma, temp_power, timesteps, run = params
 
-    env = Environment(world=World(
-        map='worlds/box20x10.txt', Cell=CasualCell))
+    env = Environment(world=World(map='worlds/box20x10.txt',
+                                  Cell=CasualCell))
 
     mouse = Mouse()
     env.add_agent(mouse)
@@ -95,7 +97,7 @@ def worker(params):
         scores.append(mouse.score)
         positions.append(mouse.cell.y)
         res_ent.append(
-            str(mouse.ai.stat_ARE) + " " + str(mouse.ai.dyna_ARE))
+            str(mouse.ai.stat_are) + " " + str(mouse.ai.dyna_are))
         num_states.append(len(mouse.ai.states))
 
     output_dir_dir = output_dir + str(temp_power) + "/" + str(run)
@@ -112,6 +114,7 @@ def worker(params):
     with open(output_dir_dir + "num_states.txt", 'w') as f:
         f.write(' '.join(map(str, num_states)))
 
+
 def process(params):
     return map(int, params)
 
@@ -119,8 +122,8 @@ def process(params):
 def run(params):
     runs, timesteps, temp_powers = process(params)
 
-    print("cat-mouse-cheese starting...")
-    print("runs = %d,  timesteps = %d" % (runs, timesteps))
+    print("simple-migration starting...")
+    print("runs = %d,  timesteps = %d,  temp_powers = %d" % (runs, timesteps, temp_powers))
     sim_start = time.time()
 
     params = []
@@ -131,6 +134,6 @@ def run(params):
     with multiprocessing.Pool(4) as pool:
         pool.map(func=worker, iterable=params)
 
-    print("cat-mouse-cheese finished...")
+    print("simple-migration finished...")
     print("overall runtime:", time.time() - sim_start, "secs")
     print()

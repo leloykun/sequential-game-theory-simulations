@@ -17,27 +17,27 @@ class Agent:
 
     '''def __getattr__(self, key):
         if key == 'leftCell':
-            return self.getCellOnLeft()
+            return self.get_cell_on_left()
         elif key == 'rightCell':
-            return self.getCellOnRight()
+            return self.get_cell_on_right()
         elif key == 'aheadCell':
-            return self.getCellAhead()
+            return self.get_cell_ahead()
         raise AttributeError(key)'''
 
     def turn(self, amount):
         self.dir = (self.dir + amount) % self.world.num_dir
 
-    def turnLeft(self):
+    def turn_left(self):
         self.turn(-1)
 
-    def turnRight(self):
+    def turn_right(self):
         self.turn(1)
 
-    def turnAround(self):
+    def turn_around(self):
         self.turn(self.world.num_dir / 2)
 
     # return True if successfully moved in that direction
-    def goInDirection(self, dir):
+    def go_in_direction(self, dir):
         target = self.cell.neighbour[dir]
         if getattr(target, 'wall', False):
             # print "hit a wall"
@@ -45,24 +45,24 @@ class Agent:
         self.cell = target
         return True
 
-    def goForward(self):
-        self.goInDirection(self.dir)
+    def go_forward(self):
+        self.go_in_direction(self.dir)
 
-    def goBackward(self):
-        self.turnAround()
-        self.goForward()
-        self.turnAround()
+    def go_backward(self):
+        self.turn_around()
+        self.go_forward()
+        self.turn_around()
 
-    def getCellAhead(self):
+    def get_cell_ahead(self):
         return self.cell.neighbour[self.dir]
 
-    def getCellOnLeft(self):
+    def get_cell_on_left(self):
         return self.cell.neighbour[(self.dir - 1) % self.world.num_dir]
 
-    def getCellOnRight(self):
+    def get_cell_on_right(self):
         return self.cell.neighbour[(self.dir + 1) % self.world.num_dir]
 
-    def goTowards(self, target):
+    def go_towards(self, target):
         if self.cell == target:
             return
         best = None
