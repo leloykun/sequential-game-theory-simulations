@@ -9,7 +9,7 @@ NOTE: This project is not finished yet. See the older version [here](https://git
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
-[Python 3.x](https://www.python.org/downloads/) (preferably [python 3.5](https://www.python.org/downloads/release/python-350/)) are needed to run the tests.
+[Python 3.x](https://www.python.org/downloads/) (preferably [python 3.5](https://www.python.org/downloads/release/python-350/)) is needed to run the tests.
 
 The following python libraries must also be installed:
 - [matplotlib](https://matplotlib.org/)
@@ -56,9 +56,8 @@ If you want to turn turn them on, simply uncomment the line with `env.show()` in
 # env.show()
 env.show()
 ```
-![](https://github.com/leloykun/socialsims/blob/master/docs/env_show.png)
 
-This is NOT recommended.
+This is *NOT* recommended.
 
 TODO: centralize this option
 
@@ -74,14 +73,23 @@ Additionally, `data_visualizer.py` can easily be modified when needed.
 TODO: centralize data visualization
 
 ### Running the simulations individually
-You can comment out the simulations in `list.txt` to exclude them from being run by `portal.py`. For example, with the following, only simulation `cat-mouse` would be run with parameters `100 10 10` (more on this later).
+You can comment out the simulations in `list.txt` to exclude them from being run by `portal.py`. For example, with the following, only simulation `cat-mouse` would be run with parameters `100 10 10` as `[runs] [trials] [steps]`.
 ```txt
-cat-mouse 100 10 10
-# cat-mouse-cheese 10000 100 10
-# simple-migration 10000 10 5
-```
+# cat-mouse [runs] [trials] [steps]
+cat-mouse 10 100 10
 
-TODO: explain what the parameters are about
+# cat-mouse-cheese [runs] [timesteps] [interval]
+# cat-mouse-cheese 10 10000 100
+
+# simple-migration [runs] [timesteps] [temp_powers]
+# simple-migration 10 10000 5
+
+# route-choice [runs] [timesteps] [num_drivers] [[road capacities]]
+# route-choice 10 1000 100 10 20 30 40
+
+# migration [runs] [timesteps] [num_mice]
+# migration 1 100000 3
+```
 
 ## Details
 TODO
