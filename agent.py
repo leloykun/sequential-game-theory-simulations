@@ -78,3 +78,13 @@ class Agent:
             if getattr(best, 'wall', False):
                 return
             self.cell = best
+
+
+class Prey(Agent):
+    colour = 'grey'
+
+    def update(self):
+        if self.move:
+            cell = self.cell
+            while cell == self.cell:
+                self.go_in_direction(random.randrange(self.world.num_dir))
