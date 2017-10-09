@@ -130,10 +130,12 @@ class Cat(Agent):
     def is_nearer(self, mouse1, mouse2):
         dx1 = self.cell.x - mouse1.cell.x
         dy1 = self.cell.y - mouse1.cell.y
-        dist1 = math.sqrt(dx1**2 + dy1**2)
+        dist1 = dx1**2 + dy1**2
+        # dist1 = math.sqrt(dist1)
         dx2 = self.cell.x - mouse2.cell.x
         dy2 = self.cell.y - mouse2.cell.y
-        dist2 = math.sqrt(dx2**2 + dy2**2)
+        dist2 = dx2**2 + dy2**2
+        # dist2 = math.sqrt(dist2)
         return dist1 < dist2
 
 
