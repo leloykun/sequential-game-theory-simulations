@@ -8,7 +8,7 @@ from ..utils import ord, process
 from ...qlearn import QLearn
 from ...world import World
 
-sim_name = 'route-choice'
+sim_name = 'route_choice'
 output_dir = 'sims/' + sim_name + '/data/'
 
 
