@@ -6,16 +6,17 @@ import multiprocessing
 
 from ..utils import ord, process
 
-from ...cell import CasualCell
 from ...agent import Agent
-from ...agent import Prey as Mouse
 from ...world import World
 from ...qlearn import QLearn
+from ...cell import CasualCell
+from ...agent import Prey as Mouse
 from ...environment import Environment
 
 sim_name = 'cat_mouse'
 output_dir = 'sims/' + sim_name + '/data/'
 
+test = False
 max_visual_depth = 4
 
 
@@ -111,8 +112,10 @@ def worker(params):
     return result
 
 
-def run(params, test=False):
+def run(params, test_=False):
     runs, trials, steps = process(params)
+    global test
+    test = test_
 
     for depth in range(1, max_visual_depth + 1):
         Cat.visual_depth = depth
@@ -125,6 +128,9 @@ def run(params, test=False):
             for alpha in range(11):
                 for gamma in range(11):
                     params.append((alpha, gamma, trials, steps))
+
+            if test:
+                params = [(5, 5, trials, steps)]
 
             pool = multiprocessing.Pool(4)
             results = pool.map(func=worker, iterable=params)

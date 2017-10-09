@@ -5,16 +5,17 @@ import multiprocessing
 
 from ..utils import ord, process
 
-from ...cell import CasualCell
 from ...agent import Agent
-from ...agent import Prey as Cheese
 from ...world import World
 from ...qlearn import QLearn
+from ...cell import CasualCell
+from ...agent import Prey as Cheese
 from ...environment import Environment
 
 sim_name = 'cat_mouse_cheese'
 output_dir = 'sims/' + sim_name + '/data/'
 
+test = False
 max_visual_depth = 4
 
 
@@ -155,8 +156,10 @@ def worker(params):
     return str(alpha) + " " + str(gamma) + " " + losses + " " + wins
 
 
-def run(params):
+def run(params, test_=False):
     runs, timesteps, interval = process(params)
+    global test
+    test = test_
 
     for depth in range(1, max_visual_depth + 1):
         Mouse.visual_depth = depth
@@ -170,11 +173,15 @@ def run(params):
                 for gamma in range(11):
                     params.append((alpha, gamma, timesteps, interval))
 
+            if test:
+                params = [(5, 5, timesteps, interval)]
+
             with multiprocessing.Pool(4) as pool:
                 results = pool.map(worker, params)
 
-            with open(output_dir + str(depth) + "/data" + str(run) +
-                      ".txt", 'w') as f:
-                f.write("\n".join(results))
+            if not test:
+                with open(output_dir + str(depth) + "/data" + str(run) +
+                          ".txt", 'w') as f:
+                    f.write("\n".join(results))
 
             print("     ", ord(run), "runtime:", time.time() - run_start, "secs")

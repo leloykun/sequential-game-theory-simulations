@@ -5,11 +5,13 @@ import multiprocessing
 
 from ..utils import ord, process
 
-from ...qlearn import QLearn
 from ...world import World
+from ...qlearn import QLearn
 
 sim_name = 'route_choice'
 output_dir = 'sims/' + sim_name + '/data/'
+
+test = False
 
 
 class DriverWorld(World):
@@ -80,7 +82,7 @@ class Driver:
 
 def worker(params):
     run, timesteps, num_drivers, road_cap = params
-    print(run, timesteps, num_drivers, road_cap)
+    global test
 
     world = DriverWorld(road_cap)
     for _ in range(num_drivers):
@@ -96,15 +98,18 @@ def worker(params):
         choice_dist.append(' '.join(map(str, world.road_cnt)))
         res_ent.append(' '.join(map(str, world.get_are())))
 
-    with open(output_dir + 'dis/' + str(run) + 'run.txt', 'w') as f:
-        f.write('\n'.join(choice_dist))
+    if not test:
+        with open(output_dir + 'dis/' + str(run) + 'run.txt', 'w') as f:
+            f.write('\n'.join(choice_dist))
 
-    with open(output_dir + 'are/' + str(run) + 'run.txt', 'w') as f:
-        f.write('\n'.join(res_ent))
+        with open(output_dir + 'are/' + str(run) + 'run.txt', 'w') as f:
+            f.write('\n'.join(res_ent))
 
 
-def run(params):
+def run(params, test_=False):
     runs, timesteps, num_drivers, *road_cap = process(params)
+    global test
+    test = test_
 
     params = []
     for run in range(1, runs + 1):

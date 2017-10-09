@@ -5,14 +5,16 @@ import multiprocessing
 
 from ..utils import ord, process
 
-from ...cell import CasualCell
 from ...agent import Agent
 from ...world import World
 from ...qlearn import QLearn
+from ...cell import CasualCell
 from ...environment import Environment
 
-sim_name = 'simple-migration'
+sim_name = 'simple_migration'
 output_dir = 'sims/' + sim_name + '/data/'
+
+test = False
 
 
 class Mouse(Agent):
@@ -56,6 +58,7 @@ class Mouse(Agent):
 
 def worker(params):
     alpha, gamma, temp_power, timesteps, run = params
+    global test
 
     env = Environment(world=World(map='worlds/box20x10.txt',
                                   Cell=CasualCell))
@@ -85,21 +88,24 @@ def worker(params):
 
     output_dir_dir = output_dir + str(temp_power) + "/" + str(run)
 
-    with open(output_dir_dir + "scores.txt", 'w') as f:
-        f.write(' '.join(map(str, scores)))
+    if not test:
+        with open(output_dir_dir + "scores.txt", 'w') as f:
+            f.write(' '.join(map(str, scores)))
 
-    with open(output_dir_dir + "pos.txt", 'w') as f:
-        f.write(' '.join(map(str, positions)))
+        with open(output_dir_dir + "pos.txt", 'w') as f:
+            f.write(' '.join(map(str, positions)))
 
-    with open(output_dir_dir + "res_ent.txt", 'w') as f:
-        f.write('\n'.join(map(str, res_ent)))
+        with open(output_dir_dir + "res_ent.txt", 'w') as f:
+            f.write('\n'.join(map(str, res_ent)))
 
-    with open(output_dir_dir + "num_states.txt", 'w') as f:
-        f.write(' '.join(map(str, num_states)))
+        with open(output_dir_dir + "num_states.txt", 'w') as f:
+            f.write(' '.join(map(str, num_states)))
 
 
-def run(params):
+def run(params, test_=False):
     runs, timesteps, temp_powers = process(params)
+    global test
+    test = test_
 
     params = []
     for run in range(1, runs + 1):
