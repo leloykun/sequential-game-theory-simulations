@@ -3,6 +3,8 @@ import time
 import random
 import multiprocessing
 
+from ..utils import ord, process
+
 from ...qlearn import QLearn
 from ...world import World
 
@@ -99,10 +101,6 @@ def worker(params):
 
     with open(output_dir + 'are/' + str(run) + 'run.txt', 'w') as f:
         f.write('\n'.join(res_ent))
-
-
-def process(params):
-    return map(int, params)
 
 
 def run(params):
