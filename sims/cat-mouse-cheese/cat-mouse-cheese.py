@@ -3,7 +3,7 @@ import time
 import random
 import multiprocessing
 
-from ...cell import Cell
+from ...cell import CasualCell
 from ...agent import Agent
 from ...world import World
 from ...qlearn import QLearn
@@ -11,25 +11,6 @@ from ...environment import Environment
 
 sim_name = 'cat-mouse-cheese'
 max_visual_depth = 4
-
-
-class CasualCell(Cell):
-    wall = False
-
-    def colour(self):
-        if self.wall:
-            return 'black'
-        else:
-            return 'white'
-
-    def load(self, data):
-        if data == 'X':
-            self.wall = True
-        else:
-            self.wall = False
-
-    def num_agents(self):
-        return len(self.agents)
 
 
 class Cheese(Agent):
