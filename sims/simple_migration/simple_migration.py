@@ -101,10 +101,6 @@ def worker(params):
 def run(params):
     runs, timesteps, temp_powers = process(params)
 
-    print("simple-migration starting...")
-    print("runs = %d,  timesteps = %d,  temp_powers = %d" % (runs, timesteps, temp_powers))
-    sim_start = time.time()
-
     params = []
     for run in range(1, runs + 1):
         for power in range(-temp_powers, temp_powers + 1):
@@ -112,7 +108,3 @@ def run(params):
 
     with multiprocessing.Pool(4) as pool:
         pool.map(func=worker, iterable=params)
-
-    print("simple-migration finished...")
-    print("overall runtime:", time.time() - sim_start, "secs")
-    print()

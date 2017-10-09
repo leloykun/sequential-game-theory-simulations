@@ -106,17 +106,9 @@ def worker(params):
 def run(params):
     runs, timesteps, num_drivers, *road_cap = process(params)
 
-    print("route-choice starting...")
-    print("timesteps = %d,  runs = %d" % (timesteps, runs))
-    sim_start = time.time()
-
     params = []
     for run in range(1, runs + 1):
         params.append((run, timesteps, num_drivers, road_cap))
 
     with multiprocessing.Pool(4) as pool:
         pool.map(worker, params)
-
-    print("route-choice finished...")
-    print("overall runtime:", time.time() - sim_start, "secs")
-    print()

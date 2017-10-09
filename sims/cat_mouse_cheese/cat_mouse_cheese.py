@@ -156,10 +156,6 @@ def worker(params):
 def run(params):
     runs, timesteps, interval = process(params)
 
-    print("cat_mouse_cheese starting...")
-    print("runs = %d,  timesteps = %d" % (runs, timesteps))
-    sim_start = time.time()
-
     for depth in range(1, max_visual_depth + 1):
         Mouse.visual_depth = depth
         print("   visual depth:", Mouse.visual_depth)
@@ -179,9 +175,4 @@ def run(params):
                       + str(run) + ".txt", 'w') as f:
                 f.write("\n".join(results))
 
-            print("     ",
-                  ord(run), "runtime:", time.time() - run_start, "secs")
-
-    print("cat_mouse_cheese finished...")
-    print("overall runtime:", time.time() - sim_start, "secs")
-    print()
+            print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
