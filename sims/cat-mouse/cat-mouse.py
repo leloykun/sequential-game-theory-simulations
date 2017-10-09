@@ -20,11 +20,7 @@ class Cat(Agent):
     visual_depth = 2
 
     def __init__(self):
-        self.ai = QLearn(actions=list(range(8)),
-                         temp=5,
-                         alpha=0.9,
-                         gamma=0.9,
-                         epsilon=0.1)
+        self.ai = QLearn(actions=list(range(8)))
         self.ai.agent = self
 
         self.eaten = 0

@@ -20,12 +20,7 @@ class Mouse(Agent):
     lookcells = []
 
     def __init__(self):
-        self.ai = QLearn(
-            actions=list(range(8)),
-            temp=5,
-            alpha=0.5,
-            gamma=0.5,
-            epsilon=0.1)
+        self.ai = QLearn(actions=list(range(8)))
         self.ai.agent = self
 
         self.eaten = 0
