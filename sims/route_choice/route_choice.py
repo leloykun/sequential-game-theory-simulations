@@ -11,8 +11,6 @@ from ...qlearn import QLearn
 sim_name = 'route_choice'
 output_dir = 'sims/' + sim_name + '/data/'
 
-test = False
-
 
 class DriverWorld(World):
     agents = []
@@ -81,7 +79,7 @@ class Driver:
 
 
 def worker(params):
-    run, timesteps, num_drivers, road_cap = params
+    run, timesteps, num_drivers, road_cap, test = params
 
     world = DriverWorld(road_cap)
     for _ in range(num_drivers):
@@ -97,7 +95,6 @@ def worker(params):
         choice_dist.append(' '.join(map(str, world.road_cnt)))
         res_ent.append(' '.join(map(str, world.get_are())))
 
-    global test
     if not test:
         with open(output_dir + 'dis/' + str(run) + 'run.txt', 'w') as f:
             f.write('\n'.join(choice_dist))
@@ -106,14 +103,12 @@ def worker(params):
             f.write('\n'.join(res_ent))
 
 
-def run(params, test_=False):
+def run(params, test=False):
     runs, timesteps, num_drivers, *road_cap = process(params)
-    global test
-    test = test_
 
     params = []
     for run in range(1, runs + 1):
-        params.append((run, timesteps, num_drivers, road_cap))
+        params.append((run, timesteps, num_drivers, road_cap, test))
 
     with multiprocessing.Pool(4) as pool:
         pool.map(worker, params)
