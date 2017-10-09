@@ -6,22 +6,13 @@ import multiprocessing
 
 from ...cell import CasualCell
 from ...agent import Agent
+from ...agent import Prey as Mouse
 from ...world import World
 from ...qlearn import QLearn
 from ...environment import Environment
 
 sim_name = 'cat-mouse'
 max_visual_depth = 4
-
-
-class Mouse(Agent):
-    colour = 'grey'
-
-    def update(self):
-        if self.move:
-            cell = self.cell
-            while cell == self.cell:
-                self.go_in_direction(random.randrange(self.world.num_dir))
 
 
 class Cat(Agent):
