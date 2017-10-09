@@ -60,14 +60,13 @@ def analyze(trials=100, steps=10, runs=10):
         f.write(str(log_reg.score(X, Y)))
 
     print("R-squared:", round(log_reg.score(X, Y), 4))
-    X_test = [[0, 1, 0.5, 0.5],
-              [50, 1, 0.5, 0.5],
-              [100, 1, 0.5, 0.5],
-              [100, 1, 0.0, 0.0],
-              [100, 1, 1.0, 0.0],
-              [100, 1, 0.0, 1.0],
-              [100, 1, 1.0, 1.0]]
-    print(log_reg.predict(X_test))
+    X_test = [[1, 0, 0, 0],
+              [0, 1, 0, 0],
+              [0, 0, 1, 0],
+              [0, 0, 0, 1],
+              [100, 1, 0.5, 0.5]]
+    Y_test = log_reg.predict(X_test)
+    print(Y_test)
 
     print("time taken:", time.time() - start)
 
