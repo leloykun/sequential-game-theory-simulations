@@ -4,6 +4,8 @@ import random
 import importlib
 import multiprocessing
 
+from ..utils import ord, process
+
 from ...cell import CasualCell
 from ...agent import Agent
 from ...agent import Prey as Mouse
@@ -105,18 +107,6 @@ def worker(params):
         prev_fed = env.world.fed
 
     return result
-
-
-def ord(n):
-    return str(n) + ("th" if 4 <= n % 100 <= 20 else {
-        1: "st",
-        2: "nd",
-        3: "rd"
-    }.get(n % 10, "th"))
-
-
-def process(params):
-    return map(int, params)
 
 
 def run(params):
