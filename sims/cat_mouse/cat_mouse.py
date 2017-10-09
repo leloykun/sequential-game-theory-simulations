@@ -14,6 +14,8 @@ from ...qlearn import QLearn
 from ...environment import Environment
 
 sim_name = 'cat_mouse'
+output_dir = 'sims/' + sim_name + '/data/'
+
 max_visual_depth = 4
 
 
@@ -109,7 +111,7 @@ def worker(params):
     return result
 
 
-def run(params):
+def run(params, test=False):
     runs, trials, steps = process(params)
 
     for depth in range(1, max_visual_depth + 1):
@@ -128,13 +130,13 @@ def run(params):
             results = pool.map(func=worker, iterable=params)
             pool.close()
 
-            to_save = ""
-            for result in results:
-                to_save += ' '.join(map(str, result)) + '\n'
-            savefile = open("sims/" + sim_name + "/data/" + str(depth) +
-                            "/data" + str(run) + ".txt", 'w')
-            savefile.write(to_save)
-            savefile.close()
-            # print(worker((5, 5, depth, run)))
+            if not test:
+                to_save = ""
+                for result in results:
+                    to_save += ' '.join(map(str, result)) + '\n'
+                savefile = open(output_dir + str(depth) + "/data" + str(run) +
+                                ".txt", 'w')
+                savefile.write(to_save)
+                savefile.close()
 
             print("     ", ord(run), "runtime:", time.time() - run_start, "secs")

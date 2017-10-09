@@ -13,6 +13,8 @@ from ...qlearn import QLearn
 from ...environment import Environment
 
 sim_name = 'cat_mouse_cheese'
+output_dir = 'sims/' + sim_name + '/data/'
+
 max_visual_depth = 4
 
 
@@ -171,8 +173,8 @@ def run(params):
             with multiprocessing.Pool(4) as pool:
                 results = pool.map(worker, params)
 
-            with open("sims/" + sim_name + "/data/" + str(depth) + "/data"
-                      + str(run) + ".txt", 'w') as f:
+            with open(output_dir + str(depth) + "/data" + str(run) +
+                      ".txt", 'w') as f:
                 f.write("\n".join(results))
 
             print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
