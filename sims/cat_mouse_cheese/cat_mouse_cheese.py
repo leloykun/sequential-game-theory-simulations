@@ -12,7 +12,7 @@ from ...world import World
 from ...qlearn import QLearn
 from ...environment import Environment
 
-sim_name = 'cat-mouse-cheese'
+sim_name = 'cat_mouse_cheese'
 max_visual_depth = 4
 
 
@@ -156,7 +156,7 @@ def worker(params):
 def run(params):
     runs, timesteps, interval = process(params)
 
-    print("cat-mouse-cheese starting...")
+    print("cat_mouse_cheese starting...")
     print("runs = %d,  timesteps = %d" % (runs, timesteps))
     sim_start = time.time()
 
@@ -182,6 +182,6 @@ def run(params):
             print("     ",
                   ord(run), "runtime:", time.time() - run_start, "secs")
 
-    print("cat-mouse-cheese finished...")
+    print("cat_mouse_cheese finished...")
     print("overall runtime:", time.time() - sim_start, "secs")
     print()
