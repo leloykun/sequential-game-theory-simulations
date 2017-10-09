@@ -58,7 +58,6 @@ class Mouse(Agent):
 
 def worker(params):
     alpha, gamma, temp_power, timesteps, run = params
-    global test
 
     env = Environment(world=World(map='worlds/box20x10.txt',
                                   Cell=CasualCell))
@@ -88,6 +87,7 @@ def worker(params):
 
     output_dir_dir = output_dir + str(temp_power) + "/" + str(run)
 
+    global test
     if not test:
         with open(output_dir_dir + "scores.txt", 'w') as f:
             f.write(' '.join(map(str, scores)))
