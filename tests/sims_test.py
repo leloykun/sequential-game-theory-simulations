@@ -14,11 +14,11 @@ def test_cat_mouse_cheese():
 
 
 def test_route_choice():
-    route_choice.run(["1", "100", "10", "1", "2", "3", "4"], test_=True)
+    route_choice.run(["1", "100", "10", "1", "2", "3", "4"], test=True)
 
 
 def test_simple_migration():
-    simple_migration.run([1, 100, 1], test_=True)
+    simple_migration.run([1, 100, 1], test=True)
 
 
 def test_migration():

@@ -14,8 +14,6 @@ from ...environment import Environment
 sim_name = 'simple_migration'
 output_dir = 'sims/' + sim_name + '/data/'
 
-test = False
-
 
 class Mouse(Agent):
     colour = 'grey'
@@ -57,7 +55,7 @@ class Mouse(Agent):
 
 
 def worker(params):
-    alpha, gamma, temp_power, timesteps, run = params
+    alpha, gamma, temp_power, timesteps, run, test = params
 
     env = Environment(world=World(map='worlds/box20x10.txt',
                                   Cell=CasualCell))
@@ -87,7 +85,6 @@ def worker(params):
 
     output_dir_dir = output_dir + str(temp_power) + "/" + str(run)
 
-    global test
     if not test:
         with open(output_dir_dir + "scores.txt", 'w') as f:
             f.write(' '.join(map(str, scores)))
@@ -102,15 +99,13 @@ def worker(params):
             f.write(' '.join(map(str, num_states)))
 
 
-def run(params, test_=False):
+def run(params, test=False):
     runs, timesteps, temp_powers = process(params)
-    global test
-    test = test_
 
     params = []
     for run in range(1, runs + 1):
         for power in range(-temp_powers, temp_powers + 1):
-            params.append((0.5, 0.5, power, timesteps, run))
+            params.append((0.5, 0.5, power, timesteps, run, test))
 
     with multiprocessing.Pool(4) as pool:
         pool.map(func=worker, iterable=params)
