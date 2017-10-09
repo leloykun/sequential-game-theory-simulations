@@ -82,7 +82,6 @@ class Driver:
 
 def worker(params):
     run, timesteps, num_drivers, road_cap = params
-    global test
 
     world = DriverWorld(road_cap)
     for _ in range(num_drivers):
@@ -98,6 +97,7 @@ def worker(params):
         choice_dist.append(' '.join(map(str, world.road_cnt)))
         res_ent.append(' '.join(map(str, world.get_are())))
 
+    global test
     if not test:
         with open(output_dir + 'dis/' + str(run) + 'run.txt', 'w') as f:
             f.write('\n'.join(choice_dist))
