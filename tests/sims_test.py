@@ -1,5 +1,8 @@
-from ..sims.migration import migration
+from ..sims.cat_mouse import cat_mouse
+from ..sims.cat_mouse_cheese import cat_mouse_cheese
 from ..sims.route_choice import route_choice
+from ..sims.simple_migration import simple_migration
+from ..sims.migration import migration
 
 
 def test_migration():
