@@ -175,13 +175,5 @@ def worker(params):
 def run(params):
     runs, timesteps, num_mice = process(params)
 
-    print("migration starting...")
-    print("runs = %d,  timesteps = %d" % (runs, timesteps))
-    sim_start = time.time()
-
     for run in range(runs):
         print(worker((timesteps, num_mice)))
-
-    print("migration finished...")
-    print("overall runtime:", time.time() - sim_start, "secs")
-    print()

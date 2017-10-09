@@ -112,10 +112,6 @@ def worker(params):
 def run(params):
     runs, trials, steps = process(params)
 
-    print("cat_mouse starting...")
-    print("runs = %d,  trials = %d,  steps = %d" % (runs, trials, steps))
-    sim_start = time.time()
-
     for depth in range(1, max_visual_depth + 1):
         Cat.visual_depth = depth
         print("   visual depth:", Cat.visual_depth)
@@ -142,7 +138,3 @@ def run(params):
             # print(worker((5, 5, depth, run)))
 
             print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
-
-    print("cat_mouse finished...")
-    print("overall runtime:", time.time() - sim_start, "secs")
-    print()
