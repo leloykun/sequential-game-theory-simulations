@@ -111,6 +111,9 @@ def worker(params):
 def run(params, test=False):
     runs, trials, steps = process(params)
 
+    if test:
+        worker((0.5, 0.5, trials, steps, test))
+
     for depth in range(1, max_visual_depth + 1):
         Cat.visual_depth = depth
         print("   visual depth:", Cat.visual_depth)
@@ -134,8 +137,8 @@ def run(params, test=False):
                 to_save = ""
                 for result in results:
                     to_save += ' '.join(map(str, result)) + '\n'
-                savefile = open(output_dir + str(depth) + "/data" + str(run) +
-                                ".txt", 'w')
+                savefile = open(output_dir + str(depth) + "/data" +
+                                str(run) + ".txt", 'w')
                 savefile.write(to_save)
                 savefile.close()
 

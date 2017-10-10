@@ -18,7 +18,7 @@ def test_route_choice():
 
 
 def test_simple_migration():
-    simple_migration.run([1, 100, 1], test=True)
+    simple_migration.run([1, 100, 2], test=True)
 
 
 def test_migration():

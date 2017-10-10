@@ -103,6 +103,9 @@ def worker(params):
 def run(params, test=False):
     runs, timesteps, num_drivers, *road_cap = process(params)
 
+    if test:
+        worker((1, timesteps, num_drivers, road_cap, test))
+
     params = []
     for run in range(1, runs + 1):
         params.append((run, timesteps, num_drivers, road_cap, test))
