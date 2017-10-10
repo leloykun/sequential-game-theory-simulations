@@ -1,4 +1,3 @@
-import gc
 import time
 from sklearn import linear_model
 
@@ -6,7 +5,6 @@ from sklearn import linear_model
 def analyze(trials=100, steps=10, runs=10):
     start = time.time()
 
-    layers = int(trials / steps)
     X = []
     Y = []
 

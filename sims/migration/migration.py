@@ -4,7 +4,7 @@ import math
 import random
 import multiprocessing as mp
 
-from ..utils import ord, process
+from ..utils import to_ordinal, process
 
 from ...agent import Agent
 from ...world import World

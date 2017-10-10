@@ -3,8 +3,6 @@ import time
 import random
 import multiprocessing as mp
 
-from ..utils import ord, process
-
 from ...agent import Agent
 from ...world import World
 from ...qlearn import QLearn
@@ -74,7 +72,7 @@ def worker(params):
 
     # env.show()
 
-    for now in range(1, timesteps + 1):
+    for _ in range(1, timesteps + 1):
         env.update(0, mouse.score)
 
         scores.append(mouse.score)

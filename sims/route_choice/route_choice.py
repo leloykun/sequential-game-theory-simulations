@@ -3,7 +3,7 @@ import time
 import random
 import multiprocessing as mp
 
-from ..utils import ord, process
+from ..utils import to_ordinal, process
 
 from ...world import World
 from ...qlearn import QLearn

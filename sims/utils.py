@@ -1,4 +1,4 @@
-def ord(n):
+def to_ordinal(n):
     return str(n) + ("th" if 4 <= n % 100 <= 20 else {
         1: "st",
         2: "nd",
