@@ -13,7 +13,6 @@ from ...environment import Environment
 sim_name = 'cat_mouse'
 output_dir = 'sims/' + sim_name + '/data/'
 
-test = False
 max_visual_depth = 4
 
 
@@ -76,7 +75,7 @@ class Cat(Agent):
 
 
 def worker(params):
-    alpha, gamma, trials, steps = params
+    alpha, gamma, trials, steps, test = params
 
     env = Environment(world=World(outline='worlds/box10x10.txt',
                                   Cell=CasualCell))
@@ -93,7 +92,9 @@ def worker(params):
     mouse.move = True
     env.world.mouse = mouse
 
-    # env.show()
+    # test = True
+    if test:
+        env.show()
 
     env.world.fed = 0
     prev_fed = 0
@@ -109,10 +110,8 @@ def worker(params):
     return result
 
 
-def run(params, test_=False):
+def run(params, test=False):
     runs, trials, steps = process(params)
-    global test
-    test = test_
 
     for depth in range(1, max_visual_depth + 1):
         Cat.visual_depth = depth
@@ -124,10 +123,10 @@ def run(params, test_=False):
             params = []
             for alpha in range(11):
                 for gamma in range(11):
-                    params.append((alpha, gamma, trials, steps))
+                    params.append((alpha, gamma, trials, steps, test))
 
             if test:
-                params = [(5, 5, trials, steps)]
+                params = [(5, 5, trials, steps, test)]
 
             pool = mp.Pool(mp.cpu_count())
             results = pool.map(func=worker, iterable=params)
