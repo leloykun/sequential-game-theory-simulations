@@ -5,6 +5,9 @@ from ..utils import process
 from ...world import World
 from ...qlearn import QLearn
 
+import coverage
+coverage.process_startup()
+
 sim_name = 'route_choice'
 output_dir = 'sims/' + sim_name + '/data/'
 

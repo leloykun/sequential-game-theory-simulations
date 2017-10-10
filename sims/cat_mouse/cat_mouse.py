@@ -10,6 +10,9 @@ from ...cell import CasualCell
 from ...agent import DumbPrey as Mouse
 from ...environment import Environment
 
+import coverage
+coverage.process_startup()
+
 sim_name = 'cat_mouse'
 output_dir = 'sims/' + sim_name + '/data/'
 
