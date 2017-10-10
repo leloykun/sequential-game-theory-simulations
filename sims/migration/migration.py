@@ -2,7 +2,7 @@ import sys
 import time
 import math
 import random
-import multiprocessing
+import multiprocessing as mp
 
 from ..utils import ord, process
 

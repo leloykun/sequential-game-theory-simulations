@@ -1,7 +1,7 @@
 import sys
 import time
 import random
-import multiprocessing
+import multiprocessing as mp
 
 from ..utils import ord, process
 
@@ -176,7 +176,7 @@ def run(params, test_=False):
             if test:
                 params = [(5, 5, timesteps, interval)]
 
-            with multiprocessing.Pool(4) as pool:
+            with mp.Pool(mp.cpu_count()) as pool:
                 results = pool.map(worker, params)
 
             if not test:
