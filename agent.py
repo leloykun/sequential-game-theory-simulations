@@ -13,7 +13,8 @@ class Agent:
                 val.agents.append(self)
         self.__dict__[key] = val
 
-    '''def __getattr__(self, key):
+    """ unnecessary codes
+    def __getattr__(self, key):
         if key == 'leftCell':
             return self.get_cell_on_left()
         elif key == 'rightCell':
@@ -21,7 +22,6 @@ class Agent:
         elif key == 'aheadCell':
             return self.get_cell_ahead()
         raise AttributeError(key)
-    '''
 
     def turn(self, amount):
         self.dir = (self.dir + amount) % self.world.num_dir
@@ -34,15 +34,6 @@ class Agent:
 
     def turn_around(self):
         self.turn(self.world.num_dir / 2)
-
-    # return True if successfully moved in that direction
-    def go_in_direction(self, dir):
-        target = self.cell.neighbour[dir]
-        if getattr(target, 'wall', False):
-            # print "hit a wall"
-            return False
-        self.cell = target
-        return True
 
     def go_forward(self):
         self.go_in_direction(self.dir)
@@ -59,7 +50,16 @@ class Agent:
         return self.cell.neighbour[(self.dir - 1) % self.world.num_dir]
 
     def get_cell_on_right(self):
-        return self.cell.neighbour[(self.dir + 1) % self.world.num_dir]
+        return self.cell.neighbour[(self.dir + 1) % self.world.num_dir]"""
+
+    # return True if successfully moved in that direction
+    def go_in_direction(self, dir):
+        target = self.cell.neighbour[dir]
+        if getattr(target, 'wall', False):
+            # print "hit a wall"
+            return False
+        self.cell = target
+        return True
 
     def go_towards(self, target):
         if self.cell == target:
