@@ -4,7 +4,7 @@ import random
 import importlib
 import multiprocessing as mp
 
-from ..utils import ord, process
+from ..utils import to_ordinal, process
 
 from ...agent import Agent
 from ...world import World
@@ -147,7 +147,7 @@ def run(params, test_=False):
 
             print(
                 "     ",
-                ord(run),
+                to_ordinal(run),
                 "runtime:",
                 time.time() -
                 run_start,
