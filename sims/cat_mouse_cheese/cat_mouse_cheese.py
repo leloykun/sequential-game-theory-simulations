@@ -139,8 +139,7 @@ def worker(params):
     cheese.move = False
     env.world.cheese = cheese
 
-    if test:
-        env.show()
+    # env.show()
 
     losses = []
     wins = []

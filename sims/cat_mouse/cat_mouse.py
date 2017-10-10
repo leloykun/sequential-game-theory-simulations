@@ -92,9 +92,7 @@ def worker(params):
     mouse.move = True
     env.world.mouse = mouse
 
-    # test = True
-    if test:
-        env.show()
+    # env.show()
 
     env.world.fed = 0
     prev_fed = 0
