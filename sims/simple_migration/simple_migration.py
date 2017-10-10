@@ -1,7 +1,7 @@
 import sys
 import time
 import random
-import multiprocessing
+import multiprocessing as mp
 
 from ..utils import ord, process
 
@@ -107,5 +107,5 @@ def run(params, test=False):
         for power in range(-temp_powers, temp_powers + 1):
             params.append((0.5, 0.5, power, timesteps, run, test))
 
-    with multiprocessing.Pool(4) as pool:
+    with mp.Pool(mp.cpu_count()) as pool:
         pool.map(func=worker, iterable=params)
