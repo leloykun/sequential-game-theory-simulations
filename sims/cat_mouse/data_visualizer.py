@@ -14,8 +14,8 @@ def visualize(trials=100, steps=10, runs=10):
         start = time.time()
 
         data = [[[0 for layer in range(layers)]
-                    for _ in range(11)] 
-                    for _ in range(11)]
+                 for _ in range(11)]
+                for _ in range(11)]
         for i in range(1, runs + 1):
             with open("data/" + str(depth) + "/data" + str(i) + ".txt") as f:
                 temp = f.readlines()

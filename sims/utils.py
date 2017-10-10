@@ -7,7 +7,7 @@ def ord(n):
 
 
 def process(params):
-    if type(params) is str:
+    if isinstance(params, str):
         params = params.split()
     assert type(params) in [list, tuple]
     return list(map(int, params))

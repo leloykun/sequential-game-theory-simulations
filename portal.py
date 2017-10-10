@@ -29,4 +29,9 @@ if __name__ == '__main__':
                 sim = importlib.import_module('sims.' + sim + '.' + sim)
                 sim.run(params)
 
-                print(sim, "finished with runtime:", time.time() - sim_start, "secs\n")
+                print(
+                    sim,
+                    "finished with runtime:",
+                    time.time() -
+                    sim_start,
+                    "secs\n")

@@ -96,8 +96,8 @@ class Mouse(Agent):
         cheese = self.world.cheese
 
         return tuple([
-            cell_value(self.world.get_wrapped_cell(self.cell.x + j, 
-                                                   self.cell.y +i))
+            cell_value(self.world.get_wrapped_cell(self.cell.x + j,
+                                                   self.cell.y + i))
             for i, j in self.lookcells
         ])
 
@@ -124,7 +124,8 @@ class Cat(Agent):
     def get_nearest_mouse(self):
         mouse_so_far = None
         for mouse in self.world.mice:
-            if mouse_so_far is None or self.is_nearer(mouse, mouse_so_far):
+            if mouse_so_far is None or self.is_nearer(
+                    mouse, mouse_so_far):
                 mouse_so_far = mouse
         return mouse_so_far
 
@@ -166,7 +167,7 @@ def worker(params):
     losses = []
     wins = []
     for now in range(1, timesteps + 1):
-        env.update(sum(mouse.eaten for mouse in env.world.mice), 
+        env.update(sum(mouse.eaten for mouse in env.world.mice),
                    sum(mouse.fed for mouse in env.world.mice))
 
         losses.append(mouse.eaten)
