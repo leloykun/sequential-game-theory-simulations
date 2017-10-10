@@ -7,7 +7,7 @@ from ...agent import Agent
 from ...world import World
 from ...qlearn import QLearn
 from ...cell import CasualCell
-from ...agent import Prey as Mouse
+from ...agent import DumbPrey as Mouse
 from ...environment import Environment
 
 sim_name = 'cat_mouse'
