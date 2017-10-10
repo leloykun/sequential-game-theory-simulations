@@ -1,4 +1,4 @@
-from displays import PygameDisplay
+from .displays import PygameDisplay
 
 
 class World:

@@ -2,47 +2,22 @@ import sys
 import time
 import math
 import random
-import multiprocessing
+import multiprocessing as mp
 
-from cell import Cell
-from agent import Agent
-from world import World
-from qlearn import QLearn
-from environment import Environment
+from ..utils import ord, process
+
+from ...agent import Agent
+from ...world import World
+from ...qlearn import QLearn
+from ...cell import CasualCell
+from ...agent import Prey as Cheese
+from ...environment import Environment
 
 sim_name = 'migration'
 output_dir = 'sims/' + sim_name + '/data/'
 
+test = False
 max_visual_depth = 4
-
-
-class CasualCell(Cell):
-    wall = False
-
-    def colour(self):
-        if self.wall:
-            return 'black'
-        else:
-            return 'white'
-
-    def load(self, data):
-        if data == 'X':
-            self.wall = True
-        else:
-            self.wall = False
-
-    def num_agents(self):
-        return len(self.agents)
-
-
-class Cheese(Agent):
-    colour = 'yellow'
-
-    def update(self):
-        if self.move:
-            cell = self.cell
-            while cell == self.cell:
-                self.go_in_direction(random.randrange(8))
 
 
 class Mouse(Agent):
@@ -156,10 +131,12 @@ class Cat(Agent):
     def is_nearer(self, mouse1, mouse2):
         dx1 = self.cell.x - mouse1.cell.x
         dy1 = self.cell.y - mouse1.cell.y
-        dist1 = math.sqrt(dx1**2 + dy1**2)
+        dist1 = dx1**2 + dy1**2
+        # dist1 = math.sqrt(dist1)
         dx2 = self.cell.x - mouse2.cell.x
         dy2 = self.cell.y - mouse2.cell.y
-        dist2 = math.sqrt(dx2**2 + dy2**2)
+        dist2 = dx2**2 + dy2**2
+        # dist2 = math.sqrt(dist2)
         return dist1 < dist2
 
 
@@ -184,7 +161,7 @@ def worker(params):
     cheese.move = False
     env.world.cheese = cheese
 
-    env.show()
+    # env.show()
 
     losses = []
     wins = []
@@ -198,28 +175,10 @@ def worker(params):
     return ' '.join(map(str, losses + wins))
 
 
-def ord(n):
-    return str(n) + ("th" if 4 <= n % 100 <= 20 else {
-        1: "st",
-        2: "nd",
-        3: "rd"
-    }.get(n % 10, "th"))
-
-
-def process(params):
-    return map(int, params)
-
-
-def run(params):
+def run(params, test_=True):
     runs, timesteps, num_mice = process(params)
-
-    print("migration starting...")
-    print("runs = %d,  timesteps = %d" % (runs, timesteps))
-    sim_start = time.time()
+    global test
+    test = test_
 
     for run in range(runs):
         print(worker((timesteps, num_mice)))
-
-    print("migration finished...")
-    print("overall runtime:", time.time() - sim_start, "secs")
-    print()

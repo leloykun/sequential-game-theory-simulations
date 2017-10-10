@@ -1,45 +1,22 @@
 import sys
 import time
 import random
-import multiprocessing
+import multiprocessing as mp
 
-from cell import Cell
-from agent import Agent
-from world import World
-from qlearn import QLearn
-from environment import Environment
+from ..utils import ord, process
 
-sim_name = 'cat-mouse-cheese'
+from ...agent import Agent
+from ...world import World
+from ...qlearn import QLearn
+from ...cell import CasualCell
+from ...agent import Prey as Cheese
+from ...environment import Environment
+
+sim_name = 'cat_mouse_cheese'
+output_dir = 'sims/' + sim_name + '/data/'
+
+test = False
 max_visual_depth = 4
-
-
-class CasualCell(Cell):
-    wall = False
-
-    def colour(self):
-        if self.wall:
-            return 'black'
-        else:
-            return 'white'
-
-    def load(self, data):
-        if data == 'X':
-            self.wall = True
-        else:
-            self.wall = False
-
-    def num_agents(self):
-        return len(self.agents)
-
-
-class Cheese(Agent):
-    colour = 'yellow'
-
-    def update(self):
-        if self.move:
-            cell = self.cell
-            while cell == self.cell:
-                self.go_in_direction(random.randrange(8))
 
 
 class Mouse(Agent):
@@ -48,12 +25,7 @@ class Mouse(Agent):
     lookcells = []
 
     def __init__(self):
-        self.ai = QLearn(
-            actions=list(range(8)),
-            temp=5,
-            alpha=0.5,
-            gamma=0.5,
-            epsilon=0.1)
+        self.ai = QLearn(actions=list(range(8)))
         self.ai.agent = self
 
         self.eaten = 0
@@ -184,24 +156,10 @@ def worker(params):
     return str(alpha) + " " + str(gamma) + " " + losses + " " + wins
 
 
-def ord(n):
-    return str(n) + ("th" if 4 <= n % 100 <= 20 else {
-        1: "st",
-        2: "nd",
-        3: "rd"
-    }.get(n % 10, "th"))
-
-
-def process(params):
-    return map(int, params)
-
-
-def run(params):
+def run(params, test_=False):
     runs, timesteps, interval = process(params)
-
-    print("cat-mouse-cheese starting...")
-    print("runs = %d,  timesteps = %d" % (runs, timesteps))
-    sim_start = time.time()
+    global test
+    test = test_
 
     for depth in range(1, max_visual_depth + 1):
         Mouse.visual_depth = depth
@@ -215,16 +173,15 @@ def run(params):
                 for gamma in range(11):
                     params.append((alpha, gamma, timesteps, interval))
 
-            with multiprocessing.Pool(4) as pool:
+            if test:
+                params = [(5, 5, timesteps, interval)]
+
+            with mp.Pool(mp.cpu_count()) as pool:
                 results = pool.map(worker, params)
 
-            with open("sims/" + sim_name + "/data/" + str(depth) + "/data"
-                      + str(run) + ".txt", 'w') as f:
-                f.write("\n".join(results))
+            if not test:
+                with open(output_dir + str(depth) + "/data" + str(run) +
+                          ".txt", 'w') as f:
+                    f.write("\n".join(results))
 
-            print("     ",
-                  ord(run), "runtime:", time.time() - run_start, "secs")
-
-    print("cat-mouse-cheese finished...")
-    print("overall runtime:", time.time() - sim_start, "secs")
-    print()
+            print("     ", ord(run), "runtime:", time.time() - run_start, "secs")

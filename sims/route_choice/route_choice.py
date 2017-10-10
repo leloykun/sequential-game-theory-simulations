@@ -1,12 +1,14 @@
 import sys
 import time
 import random
-import multiprocessing
+import multiprocessing as mp
 
-from qlearn import QLearn
-from world import World
+from ..utils import ord, process
 
-sim_name = 'route-choice'
+from ...world import World
+from ...qlearn import QLearn
+
+sim_name = 'route_choice'
 output_dir = 'sims/' + sim_name + '/data/'
 
 
@@ -70,15 +72,14 @@ class Driver:
         return reward
 
     def calc_reward(self):
-        if self.world.road_cap[self.last_action] > self.world.road_cnt[self.last_action]:
+        if self.world.road_cap[self.last_action] >= self.world.road_cnt[self.last_action]:
             return 1
         else:
             return -1
 
 
 def worker(params):
-    run, timesteps, num_drivers, road_cap = params
-    print(run, timesteps, num_drivers, road_cap)
+    run, timesteps, num_drivers, road_cap, test = params
 
     world = DriverWorld(road_cap)
     for _ in range(num_drivers):
@@ -94,31 +95,20 @@ def worker(params):
         choice_dist.append(' '.join(map(str, world.road_cnt)))
         res_ent.append(' '.join(map(str, world.get_are())))
 
-    with open(output_dir + 'dis/' + str(run) + 'run.txt', 'w') as f:
-        f.write('\n'.join(choice_dist))
+    if not test:
+        with open(output_dir + 'dis/' + str(run) + 'run.txt', 'w') as f:
+            f.write('\n'.join(choice_dist))
 
-    with open(output_dir + 'are/' + str(run) + 'run.txt', 'w') as f:
-        f.write('\n'.join(res_ent))
-
-
-def process(params):
-    return map(int, params)
+        with open(output_dir + 'are/' + str(run) + 'run.txt', 'w') as f:
+            f.write('\n'.join(res_ent))
 
 
-def run(params):
+def run(params, test=False):
     runs, timesteps, num_drivers, *road_cap = process(params)
-
-    print("route-choice starting...")
-    print("timesteps = %d,  runs = %d" % (timesteps, runs))
-    sim_start = time.time()
 
     params = []
     for run in range(1, runs + 1):
-        params.append((run, timesteps, num_drivers, road_cap))
+        params.append((run, timesteps, num_drivers, road_cap, test))
 
-    with multiprocessing.Pool(4) as pool:
+    with mp.Pool(mp.cpu_count()) as pool:
         pool.map(worker, params)
-
-    print("route-choice finished...")
-    print("overall runtime:", time.time() - sim_start, "secs")
-    print()

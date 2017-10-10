@@ -1,35 +1,18 @@
 import sys
 import time
 import random
-import multiprocessing
+import multiprocessing as mp
 
-from cell import Cell
-from agent import Agent
-from world import World
-from qlearn import QLearn
-from environment import Environment
+from ..utils import ord, process
 
-sim_name = 'simple-migration'
+from ...agent import Agent
+from ...world import World
+from ...qlearn import QLearn
+from ...cell import CasualCell
+from ...environment import Environment
+
+sim_name = 'simple_migration'
 output_dir = 'sims/' + sim_name + '/data/'
-
-
-class CasualCell(Cell):
-    wall = False
-
-    def colour(self):
-        if self.wall:
-            return 'black'
-        else:
-            return 'white'
-
-    def load(self, data):
-        if data == 'X':
-            self.wall = True
-        else:
-            self.wall = False
-
-    def num_agents(self):
-        return len(self.agents)
 
 
 class Mouse(Agent):
@@ -72,7 +55,7 @@ class Mouse(Agent):
 
 
 def worker(params):
-    alpha, gamma, temp_power, timesteps, run = params
+    alpha, gamma, temp_power, timesteps, run, test = params
 
     env = Environment(world=World(map='worlds/box20x10.txt',
                                   Cell=CasualCell))
@@ -102,38 +85,27 @@ def worker(params):
 
     output_dir_dir = output_dir + str(temp_power) + "/" + str(run)
 
-    with open(output_dir_dir + "scores.txt", 'w') as f:
-        f.write(' '.join(map(str, scores)))
+    if not test:
+        with open(output_dir_dir + "scores.txt", 'w') as f:
+            f.write(' '.join(map(str, scores)))
 
-    with open(output_dir_dir + "pos.txt", 'w') as f:
-        f.write(' '.join(map(str, positions)))
+        with open(output_dir_dir + "pos.txt", 'w') as f:
+            f.write(' '.join(map(str, positions)))
 
-    with open(output_dir_dir + "res_ent.txt", 'w') as f:
-        f.write('\n'.join(map(str, res_ent)))
+        with open(output_dir_dir + "res_ent.txt", 'w') as f:
+            f.write('\n'.join(map(str, res_ent)))
 
-    with open(output_dir_dir + "num_states.txt", 'w') as f:
-        f.write(' '.join(map(str, num_states)))
-
-
-def process(params):
-    return map(int, params)
+        with open(output_dir_dir + "num_states.txt", 'w') as f:
+            f.write(' '.join(map(str, num_states)))
 
 
-def run(params):
+def run(params, test=False):
     runs, timesteps, temp_powers = process(params)
-
-    print("simple-migration starting...")
-    print("runs = %d,  timesteps = %d,  temp_powers = %d" % (runs, timesteps, temp_powers))
-    sim_start = time.time()
 
     params = []
     for run in range(1, runs + 1):
         for power in range(-temp_powers, temp_powers + 1):
-            params.append((0.5, 0.5, power, timesteps, run))
+            params.append((0.5, 0.5, power, timesteps, run, test))
 
-    with multiprocessing.Pool(4) as pool:
+    with mp.Pool(mp.cpu_count()) as pool:
         pool.map(func=worker, iterable=params)
-
-    print("simple-migration finished...")
-    print("overall runtime:", time.time() - sim_start, "secs")
-    print()

@@ -1,10 +1,8 @@
 import os
 import sys
+import time
 import inspect
 import importlib
-
-import cell
-import agent
 
 # add current directory to pythonpath
 cmd_folder = os.path.realpath(
@@ -20,9 +18,15 @@ if __name__ == '__main__':
     # run each simulation
     with open(sims_list) as f:
         sims_list = f.readlines()
+
         for sim in sims_list:
             sim, *params = sim.split()
-            #print(sim, params)
+
             if sim != "#":
+                print(sim, "starting with params:", params)
+                sim_start = time.time()
+
                 sim = importlib.import_module('sims.' + sim + '.' + sim)
                 sim.run(params)
+
+                print(sim, "finished with runtime:", time.time() - sim_start, "secs\n")

@@ -40,3 +40,22 @@ class Cell:
 
     # def get_data(self):
     #    pass
+
+
+class CasualCell(Cell):
+    wall = False
+
+    def colour(self):
+        if self.wall:
+            return 'black'
+        else:
+            return 'white'
+
+    def load(self, data):
+        if data == 'X':
+            self.wall = True
+        else:
+            self.wall = False
+
+    def num_agents(self):
+        return len(self.agents)
