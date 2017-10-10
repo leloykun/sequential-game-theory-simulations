@@ -1,7 +1,7 @@
 matplotlib
 pygame
 numpy
-coverage
+coverage >=4.0, <4.4
 codeclimate-test-reporter
 pytest-cov
 pytest
