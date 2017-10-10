@@ -132,7 +132,6 @@ class PygameDisplay:
         if not self.activated:
             return
         pygame.display.set_mode(event.size, pygame.RESIZABLE, 32)
-        oldSize = self.size
         scalew = event.size[0] // self.world.width
         scaleh = event.size[1] // self.world.height
         self.size = min(scalew, scaleh)
@@ -140,7 +139,8 @@ class PygameDisplay:
             self.size = 1
         self.redraw()
 
-    def get_colour(self, obj):
+    @staticmethod
+    def get_colour(obj):
         c = getattr(obj, 'colour', None)
         if c is None:
             c = getattr(obj, 'color', 'white')

@@ -119,9 +119,9 @@ class QLearn:
             self.dyna_are = (self.dyna_are * (len(self.states) - 1) +
                              self.dyna_sre[state]) / len(self.states)
 
-    def choose_action(self, state, type=1):
+    def choose_action(self, state, method=1):
         # Greedy Epsilon
-        if type == 0:
+        if method in [0, 'epsilon']:
             action = 0
             if random.random() < self.epsilon:
                 action = random.choice(self.actions)
@@ -143,7 +143,7 @@ class QLearn:
             return action
 
         # Boltzmann
-        elif type == 1:
+        elif method in [1, 'boltzmann']:
             eprobs = self.get_eprobs(state)
 
             ran = random.random()
@@ -161,7 +161,7 @@ class QLearn:
             return action
 
         # Mod Random
-        elif type == 2:
+        elif method in [2, 'mod_random']:
             q = [self.getQ(state, a) for a in self.actions]
             maxQ = max(q)
 
@@ -189,7 +189,9 @@ class QLearn:
 
             action = self.actions[i]
             return action
-        elif type == 3:
+
+        # random
+        elif method in [3, 'random']:
             return random.choice(self.actions)
 
     def learn(self, state1, action1, reward, state2, print_q_after=False):

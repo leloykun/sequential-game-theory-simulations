@@ -1,7 +1,5 @@
 import random
 
-from .qlearn import QLearn
-
 
 class Agent:
     def __setattr__(self, key, val):
@@ -22,7 +20,8 @@ class Agent:
             return self.get_cell_on_right()
         elif key == 'aheadCell':
             return self.get_cell_ahead()
-        raise AttributeError(key)'''
+        raise AttributeError(key)
+    '''
 
     def turn(self, amount):
         self.dir = (self.dir + amount) % self.world.num_dir

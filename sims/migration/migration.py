@@ -1,10 +1,9 @@
-import sys
 import time
 import math
 import random
 import multiprocessing as mp
 
-from ..utils import ord, process
+from ..utils import to_ordinal, process
 
 from ...agent import Agent
 from ...world import World
@@ -96,8 +95,8 @@ class Mouse(Agent):
         cheese = self.world.cheese
 
         return tuple([
-            cell_value(self.world.get_wrapped_cell(self.cell.x + j, 
-                                                   self.cell.y +i))
+            cell_value(self.world.get_wrapped_cell(self.cell.x + j,
+                                                   self.cell.y + i))
             for i, j in self.lookcells
         ])
 
@@ -124,7 +123,8 @@ class Cat(Agent):
     def get_nearest_mouse(self):
         mouse_so_far = None
         for mouse in self.world.mice:
-            if mouse_so_far is None or self.is_nearer(mouse, mouse_so_far):
+            if mouse_so_far is None or self.is_nearer(
+                    mouse, mouse_so_far):
                 mouse_so_far = mouse
         return mouse_so_far
 
@@ -143,11 +143,11 @@ class Cat(Agent):
 def worker(params):
     timesteps, num_mice = params
 
-    env = Environment(world=World(map='worlds/box15x15.txt',
+    env = Environment(world=World(outline='worlds/box15x15.txt',
                                   Cell=CasualCell))
 
     env.world.mice = []
-    for i in range(num_mice):
+    for _ in range(num_mice):
         mouse = Mouse()
         env.add_agent(mouse)
         env.world.mice.append(mouse)
@@ -165,8 +165,8 @@ def worker(params):
 
     losses = []
     wins = []
-    for now in range(1, timesteps + 1):
-        env.update(sum(mouse.eaten for mouse in env.world.mice), 
+    for _ in range(1, timesteps + 1):
+        env.update(sum(mouse.eaten for mouse in env.world.mice),
                    sum(mouse.fed for mouse in env.world.mice))
 
         losses.append(mouse.eaten)
@@ -180,5 +180,5 @@ def run(params, test_=True):
     global test
     test = test_
 
-    for run in range(runs):
+    for _ in range(runs):
         print(worker((timesteps, num_mice)))
