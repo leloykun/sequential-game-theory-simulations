@@ -1,4 +1,7 @@
 # Social Simulations with Reinforcement Learning
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ee723a36e510464aab4bd4fbe8ef1779)](https://www.codacy.com/app/leloykun/socialsims?utm_source=github.com&utm_medium=referral&utm_content=leloykun/socialsims&utm_campaign=badger)
+
 Simulations on specialization, migration, and cooperation
 
 <img src="https://github.com/leloykun/socialsims/blob/master/docs/experiments/4/1/plotloop.gif" alt="alt text" width="45%" height="45%"> <img src="https://github.com/leloykun/socialsims/blob/master/docs/experiments/6/1plot-both.png" alt="alt text" width="45%" height="45%">
