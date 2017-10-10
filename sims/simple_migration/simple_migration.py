@@ -8,6 +8,9 @@ from ...environment import Environment
 
 from ..utils import process
 
+import coverage
+coverage.process_startup()
+
 sim_name = 'simple_migration'
 output_dir = 'sims/' + sim_name + '/data/'
 
