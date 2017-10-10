@@ -9,7 +9,7 @@ from ...agent import Agent
 from ...world import World
 from ...qlearn import QLearn
 from ...cell import CasualCell
-from ...agent import Prey as Cheese
+from ...agent import DumbPrey as Cheese
 from ...environment import Environment
 
 sim_name = 'migration'

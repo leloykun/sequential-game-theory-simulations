@@ -65,6 +65,7 @@ class Agent:
         if self.cell == target:
             return
         best = None
+        bestDist = None
         for n in self.cell.neighbours:
             if n == target:
                 best = target
@@ -79,8 +80,8 @@ class Agent:
             self.cell = best
 
 
-class Prey(Agent):
-    colour = 'grey'
+class DumbPrey(Agent):
+    colour = 'yellow'
 
     def update(self):
         if self.move:
