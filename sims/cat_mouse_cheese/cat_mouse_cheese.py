@@ -118,7 +118,7 @@ class Cat(Agent):
 
 
 def worker(params):
-    alpha, gamma, timesteps, interval = params
+    alpha, gamma, timesteps, interval, test = params
 
     env = Environment(world=World(outline='worlds/waco.txt',
                                   Cell=CasualCell))
@@ -139,7 +139,8 @@ def worker(params):
     cheese.move = False
     env.world.cheese = cheese
 
-    # env.show()
+    if test:
+        env.show()
 
     losses = []
     wins = []
@@ -156,10 +157,8 @@ def worker(params):
     return str(alpha) + " " + str(gamma) + " " + losses + " " + wins
 
 
-def run(params, test_=False):
+def run(params, test=False):
     runs, timesteps, interval = process(params)
-    global test
-    test = test_
 
     for depth in range(1, max_visual_depth + 1):
         Mouse.visual_depth = depth
@@ -171,10 +170,10 @@ def run(params, test_=False):
             params = []
             for alpha in range(11):
                 for gamma in range(11):
-                    params.append((alpha, gamma, timesteps, interval))
+                    params.append((alpha, gamma, timesteps, interval, test))
 
             if test:
-                params = [(5, 5, timesteps, interval)]
+                params = [(5, 5, timesteps, interval, test)]
 
             with mp.Pool(mp.cpu_count()) as pool:
                 results = pool.map(worker, params)

@@ -6,11 +6,11 @@ from ..sims.migration import migration
 
 
 def test_cat_mouse():
-    cat_mouse.run("1 2 1", test_=True)
+    cat_mouse.run("1 2 1", test=True)
 
 
 def test_cat_mouse_cheese():
-    cat_mouse_cheese.run((1, 100, 100), test_=True)
+    cat_mouse_cheese.run((1, 100, 100), test=True)
 
 
 def test_route_choice():
