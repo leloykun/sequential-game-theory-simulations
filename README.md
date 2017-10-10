@@ -3,6 +3,7 @@
 ![Pisay](https://img.shields.io/badge/pshs-evc-blue.svg)
 [![Build Status](https://travis-ci.org/leloykun/socialsims.svg?branch=master)](https://travis-ci.org/leloykun/socialsims)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ee723a36e510464aab4bd4fbe8ef1779)](https://www.codacy.com/app/leloykun/socialsims?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=leloykun/socialsims&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/ee723a36e510464aab4bd4fbe8ef1779)](https://www.codacy.com/app/leloykun/socialsims?utm_source=github.com&utm_medium=referral&utm_content=leloykun/socialsims&utm_campaign=Badge_Coverage)
 
 Simulations on specialization, migration, and cooperation
 
