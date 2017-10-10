@@ -1,7 +1,4 @@
-import sys
 import time
-import random
-import importlib
 import multiprocessing as mp
 
 from ..utils import to_ordinal, process
@@ -81,7 +78,7 @@ class Cat(Agent):
 def worker(params):
     alpha, gamma, trials, steps = params
 
-    env = Environment(world=World(map='worlds/box10x10.txt',
+    env = Environment(world=World(outline='worlds/box10x10.txt',
                                   Cell=CasualCell))
 
     cat = Cat()

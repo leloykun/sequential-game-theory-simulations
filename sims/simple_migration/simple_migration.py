@@ -1,6 +1,3 @@
-import sys
-import time
-import random
 import multiprocessing as mp
 
 from ...agent import Agent
@@ -57,7 +54,7 @@ class Mouse(Agent):
 def worker(params):
     alpha, gamma, temp_power, timesteps, run, test = params
 
-    env = Environment(world=World(map='worlds/box20x10.txt',
+    env = Environment(world=World(outline='worlds/box20x10.txt',
                                   Cell=CasualCell))
 
     mouse = Mouse()

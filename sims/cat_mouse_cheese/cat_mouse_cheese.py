@@ -1,4 +1,3 @@
-import sys
 import time
 import random
 import multiprocessing as mp
@@ -121,7 +120,8 @@ class Cat(Agent):
 def worker(params):
     alpha, gamma, timesteps, interval = params
 
-    env = Environment(world=World(map='worlds/waco.txt', Cell=CasualCell))
+    env = Environment(world=World(outline='worlds/waco.txt',
+                                  Cell=CasualCell))
 
     mouse = Mouse()
     env.add_agent(mouse)

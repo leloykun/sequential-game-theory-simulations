@@ -1,9 +1,6 @@
-import sys
-import time
-import random
 import multiprocessing as mp
 
-from ..utils import to_ordinal, process
+from ..utils import process
 
 from ...world import World
 from ...qlearn import QLearn
