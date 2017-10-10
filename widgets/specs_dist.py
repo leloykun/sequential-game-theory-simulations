@@ -1,4 +1,3 @@
-import numpy as np
 import pylab as pl
 
 
@@ -9,7 +8,7 @@ class WdgSpecs():
         for agent in agents:
             data.append(agent.get_specialization() + 1)
 
-        fig, ax = pl.subplots(1, 1)
+        _, ax = pl.subplots(1, 1)
 
         bins = np.arange(1.0, 7.0, 1.0)
 

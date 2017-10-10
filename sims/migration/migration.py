@@ -1,4 +1,3 @@
-import sys
 import time
 import math
 import random
@@ -144,11 +143,11 @@ class Cat(Agent):
 def worker(params):
     timesteps, num_mice = params
 
-    env = Environment(world=World(map='worlds/box15x15.txt',
+    env = Environment(world=World(outline='worlds/box15x15.txt',
                                   Cell=CasualCell))
 
     env.world.mice = []
-    for i in range(num_mice):
+    for _ in range(num_mice):
         mouse = Mouse()
         env.add_agent(mouse)
         env.world.mice.append(mouse)
@@ -166,7 +165,7 @@ def worker(params):
 
     losses = []
     wins = []
-    for now in range(1, timesteps + 1):
+    for _ in range(1, timesteps + 1):
         env.update(sum(mouse.eaten for mouse in env.world.mice),
                    sum(mouse.fed for mouse in env.world.mice))
 
@@ -181,5 +180,5 @@ def run(params, test_=True):
     global test
     test = test_
 
-    for run in range(runs):
+    for _ in range(runs):
         print(worker((timesteps, num_mice)))
