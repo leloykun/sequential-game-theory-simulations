@@ -14,7 +14,7 @@ before_script:
   - ./cc-test-reporter before-build
 script:
   - pytest --cov-report term-missing --cov=./ tests/
-  - ./cc-test-reporter --file .coverage
+  - codeclimate-test-reporter --file .coverage
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 notifications:
