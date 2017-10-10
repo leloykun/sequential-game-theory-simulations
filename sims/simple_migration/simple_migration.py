@@ -9,6 +9,8 @@ from ...qlearn import QLearn
 from ...cell import CasualCell
 from ...environment import Environment
 
+from ..utils import process
+
 sim_name = 'simple_migration'
 output_dir = 'sims/' + sim_name + '/data/'
 
