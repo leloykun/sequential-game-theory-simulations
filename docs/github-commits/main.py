@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # Use this is generate log data for the default template
-# git log --pretty="format:[START commit][author=%an][time=%at][message=%s][hash=%H]" --shortstat > git-data.txt
+# git log --pretty="format:[START
+# commit][author=%an][time=%at][message=%s][hash=%H]" --shortstat >
+# git-data.txt
 from __future__ import print_function, unicode_literals
 
 import re

@@ -1,15 +1,12 @@
-import sys
-import time
-import random
 import multiprocessing as mp
-
-from ..utils import ord, process
 
 from ...agent import Agent
 from ...world import World
 from ...qlearn import QLearn
 from ...cell import CasualCell
 from ...environment import Environment
+
+from ..utils import process
 
 sim_name = 'simple_migration'
 output_dir = 'sims/' + sim_name + '/data/'
@@ -57,7 +54,7 @@ class Mouse(Agent):
 def worker(params):
     alpha, gamma, temp_power, timesteps, run, test = params
 
-    env = Environment(world=World(map='worlds/box20x10.txt',
+    env = Environment(world=World(outline='worlds/box20x10.txt',
                                   Cell=CasualCell))
 
     mouse = Mouse()
@@ -74,7 +71,7 @@ def worker(params):
 
     # env.show()
 
-    for now in range(1, timesteps + 1):
+    for _ in range(1, timesteps + 1):
         env.update(0, mouse.score)
 
         scores.append(mouse.score)

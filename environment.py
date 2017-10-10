@@ -24,9 +24,10 @@ class Environment:
         self.world.agents.append(agent)
         self.agents.append(agent)
 
-    def get_next_id(self):
-        for id in count(0):
-            yield id
+    @staticmethod
+    def get_next_id():
+        for cur_id in count(0):
+            yield cur_id
 
     def get_random_avail_cell(self):
         while True:

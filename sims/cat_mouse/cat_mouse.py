@@ -1,10 +1,7 @@
-import sys
 import time
-import random
-import importlib
 import multiprocessing as mp
 
-from ..utils import ord, process
+from ..utils import to_ordinal, process
 
 from ...agent import Agent
 from ...world import World
@@ -70,8 +67,8 @@ class Cat(Agent):
 
     def going_to_obstacle(self, action):
         cell = self.world.get_point_in_direction(self.cell.x,
-                                              self.cell.y,
-                                              action)
+                                                 self.cell.y,
+                                                 action)
         return self.world.get_cell(cell[0], cell[1]).wall
 
     def get_data(self):
@@ -81,7 +78,7 @@ class Cat(Agent):
 def worker(params):
     alpha, gamma, trials, steps = params
 
-    env = Environment(world=World(map='worlds/box10x10.txt',
+    env = Environment(world=World(outline='worlds/box10x10.txt',
                                   Cell=CasualCell))
 
     cat = Cat()
@@ -145,4 +142,10 @@ def run(params, test_=False):
                 savefile.write(to_save)
                 savefile.close()
 
-            print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
+            print(
+                "     ",
+                to_ordinal(run),
+                "runtime:",
+                time.time() -
+                run_start,
+                "secs")

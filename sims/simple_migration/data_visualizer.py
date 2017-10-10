@@ -1,6 +1,5 @@
 import numpy as np
 import pylab as pl
-import copy
 import seaborn as sns
 
 # pl.figure(figsize=(10, 10))

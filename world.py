@@ -2,7 +2,7 @@ from .displays import PygameDisplay
 
 
 class World:
-    map = None
+    outline = None
     width = None
     height = None
 
@@ -16,8 +16,8 @@ class World:
     agents = []
     age = 0
 
-    def __init__(self, map='worlds/box5v5', Cell=None, num_dir=8):
-        self.map = map
+    def __init__(self, outline='worlds/box5v5', Cell=None, num_dir=8):
+        self.outline = outline
         self.Cell = Cell
         self.num_dir = num_dir
 
@@ -30,9 +30,9 @@ class World:
 
     def rebuild(self, new_map=None):
         if new_map is not None:
-            self.map = new_map
+            self.outline = new_map
 
-        with open(self.map) as m:
+        with open(self.outline) as m:
             self.data = m.readlines()
         self.data = [row.rstrip() for row in self.data]
 

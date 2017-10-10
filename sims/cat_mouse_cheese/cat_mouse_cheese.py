@@ -1,9 +1,8 @@
-import sys
 import time
 import random
 import multiprocessing as mp
 
-from ..utils import ord, process
+from ..utils import to_ordinal, process
 
 from ...agent import Agent
 from ...world import World
@@ -95,15 +94,15 @@ class Mouse(Agent):
                 return 0
 
         return tuple([
-            cell_value(self.world.get_wrapped_cell(self.cell.x + j, 
-                                                   self.cell.y +i))
+            cell_value(self.world.get_wrapped_cell(self.cell.x + j,
+                                                   self.cell.y + i))
             for i, j in self.lookcells
         ])
 
     def going_to_obstacle(self, action):
         cell = self.world.get_point_in_direction(self.cell.x,
-                                              self.cell.y,
-                                              action)
+                                                 self.cell.y,
+                                                 action)
         return self.world.get_cell(cell[0], cell[1]).wall
 
 
@@ -121,7 +120,8 @@ class Cat(Agent):
 def worker(params):
     alpha, gamma, timesteps, interval = params
 
-    env = Environment(world=World(map='worlds/waco.txt', Cell=CasualCell))
+    env = Environment(world=World(outline='worlds/waco.txt',
+                                  Cell=CasualCell))
 
     mouse = Mouse()
     env.add_agent(mouse)
@@ -184,4 +184,10 @@ def run(params, test_=False):
                           ".txt", 'w') as f:
                     f.write("\n".join(results))
 
-            print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
+            print(
+                "     ",
+                to_ordinal(run),
+                "runtime:",
+                time.time() -
+                run_start,
+                "secs")

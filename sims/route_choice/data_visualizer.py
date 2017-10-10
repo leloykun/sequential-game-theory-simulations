@@ -17,7 +17,7 @@ def visualize(runs=10):
                 data[2].append(c)
                 data[3].append(d)
 
-        fig, ax = plt.subplots()
+        _, ax = plt.subplots()
 
         plt.xlim(1, 1000)
         plt.ylim(1, 50)
