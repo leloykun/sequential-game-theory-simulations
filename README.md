@@ -1,5 +1,6 @@
 # Social Simulations with Reinforcement Learning
 
+[![Build Status](https://travis-ci.org/leloykun/socialsims.svg?branch=master)](https://travis-ci.org/leloykun/socialsims)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ee723a36e510464aab4bd4fbe8ef1779)](https://www.codacy.com/app/leloykun/socialsims?utm_source=github.com&utm_medium=referral&utm_content=leloykun/socialsims&utm_campaign=badger)
 
 Simulations on specialization, migration, and cooperation
