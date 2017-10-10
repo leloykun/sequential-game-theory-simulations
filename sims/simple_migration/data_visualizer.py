@@ -1,12 +1,12 @@
-import numpy as np
-import pylab as pl
-import seaborn as sns
+import numpy as np  # pragma: no cover
+import pylab as pl  # pragma: no cover
+import seaborn as sns  # pragma: no cover
 
 # pl.figure(figsize=(10, 10))
-runs = 10
-temp_powers = 5
+runs = 10  # pragma: no cover
+temp_powers = 5  # pragma: no cover
 
-for temp_power in range(-temp_powers, temp_powers + 1):
+for temp_power in range(-temp_powers, temp_powers + 1):  # pragma: no cover
     for r in range(1, runs + 1):
         time = [0]
         data = [[1.0], [1.0]]

@@ -4,7 +4,7 @@ import pygame
 import collections
 
 
-class PygameDisplay:
+class PygameDisplay:  # pragma: no cover
     activated = False
     paused = False
     title = ''

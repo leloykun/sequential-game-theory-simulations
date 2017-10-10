@@ -99,6 +99,9 @@ def worker(params):
 def run(params, test=False):
     runs, timesteps, temp_powers = process(params)
 
+    if test:
+        worker((0.5, 0.5, 0, timesteps, 1, test))
+
     params = []
     for run in range(1, runs + 1):
         for power in range(-temp_powers, temp_powers + 1):

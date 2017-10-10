@@ -1,8 +1,8 @@
-import time
-from sklearn import linear_model
+import time  # pragma: no cover
+from sklearn import linear_model  # pragma: no cover
 
 
-def analyze(trials=100, steps=10, runs=10):
+def analyze(trials=100, steps=10, runs=10):  # pragma: no cover
     start = time.time()
 
     X = []
@@ -69,5 +69,5 @@ def analyze(trials=100, steps=10, runs=10):
     print("time taken:", time.time() - start)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     analyze()

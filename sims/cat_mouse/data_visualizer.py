@@ -1,13 +1,13 @@
-import time
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
+import time  # pragma: no cover
+import numpy as np  # pragma: no cover
+import seaborn as sns  # pragma: no cover
+import matplotlib.pyplot as plt  # pragma: no cover
 
-max_perf = 150
-bounds = [i for i in range(0, max_perf + 1)]
+max_perf = 150  # pragma: no cover
+bounds = [i for i in range(0, max_perf + 1)]  # pragma: no cover
 
 
-def visualize(trials=100, steps=10, runs=10):
+def visualize(trials=100, steps=10, runs=10):  # pragma: no cover
     layers = int(trials / steps)
 
     for depth in range(1, 5):
@@ -56,6 +56,6 @@ def visualize(trials=100, steps=10, runs=10):
         print("visual depth", depth, "run time:", time.time() - start)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     trials, steps, runs = map(int, input("params: ").split())
     visualize()
