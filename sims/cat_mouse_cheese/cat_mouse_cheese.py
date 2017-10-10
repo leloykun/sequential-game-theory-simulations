@@ -95,15 +95,15 @@ class Mouse(Agent):
                 return 0
 
         return tuple([
-            cell_value(self.world.get_wrapped_cell(self.cell.x + j, 
-                                                   self.cell.y +i))
+            cell_value(self.world.get_wrapped_cell(self.cell.x + j,
+                                                   self.cell.y + i))
             for i, j in self.lookcells
         ])
 
     def going_to_obstacle(self, action):
         cell = self.world.get_point_in_direction(self.cell.x,
-                                              self.cell.y,
-                                              action)
+                                                 self.cell.y,
+                                                 action)
         return self.world.get_cell(cell[0], cell[1]).wall
 
 
@@ -184,4 +184,10 @@ def run(params, test_=False):
                           ".txt", 'w') as f:
                     f.write("\n".join(results))
 
-            print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
+            print(
+                "     ",
+                ord(run),
+                "runtime:",
+                time.time() -
+                run_start,
+                "secs")

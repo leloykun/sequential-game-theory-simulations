@@ -70,8 +70,8 @@ class Cat(Agent):
 
     def going_to_obstacle(self, action):
         cell = self.world.get_point_in_direction(self.cell.x,
-                                              self.cell.y,
-                                              action)
+                                                 self.cell.y,
+                                                 action)
         return self.world.get_cell(cell[0], cell[1]).wall
 
     def get_data(self):
@@ -145,4 +145,10 @@ def run(params, test_=False):
                 savefile.write(to_save)
                 savefile.close()
 
-            print("     ", ord(run), "runtime:", time.time() - run_start, "secs")
+            print(
+                "     ",
+                ord(run),
+                "runtime:",
+                time.time() -
+                run_start,
+                "secs")
