@@ -10,7 +10,10 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - pytest --cov-report term-missing --cov=./ tests/
+  - pytest --cov-report term-missing --cov-report xml --cov=./ tests/
+  - coverage xml
+  - export CODACY_PROJECT_TOKEN=c52c99e242574c4e9588648a182cb862
+  - python-codacy-coverage -r coverage.xml
   - codeclimate-test-reporter --file .coverage
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
