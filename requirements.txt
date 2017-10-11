@@ -9,3 +9,4 @@ codacy-coverage
 sklearn
 scipy
 numpy
+seaborn
