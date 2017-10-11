@@ -76,10 +76,11 @@ def do_polynomial_regression(X, Y, degree):
 
     sign = -1 if coefs[0] < 0 else 1
     a = (abs(coefs[0])) ** (1 / degree)
-    b = coefs[1] / (degree * (a**(degree-1))) * sign
-    c = coefs[2] / (degree * (a**(degree-1))) * sign
-    d = coefs[3] / (degree * (a**(degree-1))) * sign
-    e = coefs[4] / (degree * (a**(degree-1))) * sign
+    denom = sign * degree * (a**(degree-1))
+    b = coefs[1] / denom
+    c = coefs[2] / denom
+    d = coefs[3] / denom
+    e = coefs[4] / denom
 
     print("  perf = (" + str(round(a, degree + 1)) + " + " +
                          str(round(b, degree + 1)) + "*step + " +
