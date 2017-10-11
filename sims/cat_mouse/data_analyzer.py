@@ -117,12 +117,11 @@ def analyze(trials=100, steps=10, runs=10):  # pragma: no cover
 
     for key in X_temp:
         X.append(list(key))
-        Y.append(int(X_temp[key] / 10))
+        Y.append(X_temp[key] / 10)
 
-    do_linear_regression(X, Y)
-    # do_logistic_regression(X, Y)
-    do_polynomial_regression(X, Y, 2)
-
+    lin_reg = do_linear_regression(X_full, Y_full)
+    # log_reg = do_logistic_regression(X, Y)
+    pol_reg = do_polynomial_regression(X_full, Y_full, 5)
     print("run time:", time.time() - start, "secs")
 
 
