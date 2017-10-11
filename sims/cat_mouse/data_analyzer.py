@@ -101,8 +101,11 @@ def do_polynomial_regression(X, Y, degree):
 def analyze(trials=100, steps=10, runs=10):  # pragma: no cover
     start = time.time()
 
-    X = []
-    Y = []
+    X_ave = []
+    Y_ave = []
+
+    X_full = []
+    Y_full = []
 
     X_temp = {}
 
@@ -120,14 +123,24 @@ def analyze(trials=100, steps=10, runs=10):  # pragma: no cover
                             X_temp[temp] += line[i]
                         else:
                             X_temp[temp] = line[i]
+                        X_full.append(temp)
+                        Y_full.append(line[i])
 
     for key in X_temp:
-        X.append(list(key))
-        Y.append(X_temp[key] / 10)
+        X_ave.append(list(key))
+        Y_ave.append(X_temp[key] / 10)
 
     lin_reg = do_linear_regression(X_full, Y_full)
     # log_reg = do_logistic_regression(X, Y)
-    pol_reg = do_polynomial_regression(X_full, Y_full, 5)
+    pol_reg = do_polynomial_regression(X_full, Y_full, 3)
+
+    print("Tests (start):")
+    X_test = [[10, 1, 0, 0], [100, 1, 1, 1]]
+    print("  Params:", X_test)
+    print("  Original:   =>", list(X_temp[tuple(x)]/10 for x in X_test))
+    print("  Linear:     =>", lin_reg.predict(X_test))
+    print("  Polynomial: =>", pol_reg.predict(X_test))
+    print("Tests (end)\n")
     print("run time:", time.time() - start, "secs")
 
 
