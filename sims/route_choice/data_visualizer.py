@@ -2,13 +2,16 @@ import numpy as np  # pragma: no cover
 import seaborn as sns  # pragma: no cover
 import matplotlib.pyplot as plt  # pragma: no cover
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 
 def visualize(runs=10):  # pragma: no cover
     for run in range(1, runs + 1):
         data = [[], [], [], []]
         time = []
 
-        with open('data/dis/' + str(run) + 'run.txt') as f:
+        dir_input = 'data/dis/' + str(run) + 'run.txt'
+        with open(os.path.join(dir_path, dir_input)) as f:
             for line in f.readlines():
                 a, b, c, d = map(int, line.split())
                 time.append(len(time) + 1)
@@ -32,7 +35,8 @@ def visualize(runs=10):  # pragma: no cover
                         n_boot=10000,
                         scatter=False)
 
-        plt.savefig('data/dis/' + str(run) + 'plot1K')
+        dir_output = 'data/dis/' + str(run) + 'plot1K.png'
+        plt.savefig(os.path.join(dir_path, dir_output))
         plt.close()
         print("done with run %d" % run)
 
