@@ -74,19 +74,18 @@ def do_polynomial_regression(X, Y, degree):
     print("  coefs:", coefs)
     print()
 
-    if degree == 2:
-        sign = -1 if coefs[0] < 0 else 1
-        a = math.sqrt(abs(coefs[0]))
-        b = coefs[1] / (2 * a) * sign
-        c = coefs[2] / (2 * a) * sign
-        d = coefs[3] / (2 * a) * sign
-        e = coefs[4] / (2 * a) * sign
+    sign = -1 if coefs[0] < 0 else 1
+    a = (abs(coefs[0])) ** (1 / degree)
+    b = coefs[1] / (degree * (a**(degree-1))) * sign
+    c = coefs[2] / (degree * (a**(degree-1))) * sign
+    d = coefs[3] / (degree * (a**(degree-1))) * sign
+    e = coefs[4] / (degree * (a**(degree-1))) * sign
 
-        print("  perf = (" + str(round(a, 3)) + " + " +
-                             str(round(b, 3)) + "*step + " +
-                             str(round(c, 3)) + "*depth + " +
-                             str(round(d, 3)) + "*alpha + " +
-                             str(round(e, 3)) + "*gamma) ^ 2")
+    print("  perf = (" + str(round(a, degree + 1)) + " + " +
+                         str(round(b, degree + 1)) + "*step + " +
+                         str(round(c, degree + 1)) + "*depth + " +
+                         str(round(d, degree + 1)) + "*alpha + " +
+                         str(round(e, degree + 1)) + "*gamma) ^ " + str(degree))
 
     print("  R-squared:", round(model.score(X, Y), 4))
     print("Polynomial Regression (end)\n")
