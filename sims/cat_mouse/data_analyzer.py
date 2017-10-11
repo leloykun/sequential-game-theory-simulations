@@ -66,9 +66,11 @@ def do_polynomial_regression(X, Y, degree):
     poly = PolynomialFeatures(degree=degree)
     X_test = [[2, 3, 5, 7]]
     print("  X's original structure:", ' '.join(map(str, X_test[0])))
+    print(["1", "x0", "x1", "x2", "x3"])
     Y_test = poly.fit_transform(X_test)
     Y_test = map(int, Y_test[0])
     print("  X's polynomial structure:", ' '.join(map(str, Y_test)))
+    print(poly.get_feature_names())
     print()
 
     model = Pipeline([('poly', PolynomialFeatures(degree=degree)),
