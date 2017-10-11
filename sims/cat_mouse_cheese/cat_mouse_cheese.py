@@ -162,9 +162,6 @@ def worker(params):
 def run(params, test=False):
     runs, timesteps, interval = process(params)
 
-    if test:
-        worker((0.5, 0.5, timesteps, interval, test))
-
     for depth in range(1, max_visual_depth + 1):
         Mouse.visual_depth = depth
         print("   visual depth:", Mouse.visual_depth)
