@@ -22,6 +22,8 @@ def do_linear_regression(X, Y):
     print("Linear Regression (end)")
     print("\n")
 
+    return lin_reg
+
 
 def do_logistic_regression(X, Y):
     print("Logistic Regression (start):")
@@ -52,6 +54,8 @@ def do_logistic_regression(X, Y):
     print(Y_test)
     print("Logistic Regression (end):")
     print("\n")
+
+    return log_reg
 
 
 def do_polynomial_regression(X, Y, degree):
@@ -90,6 +94,8 @@ def do_polynomial_regression(X, Y, degree):
 
     print("  R-squared:", round(model.score(X, Y), 4))
     print("Polynomial Regression (end)\n")
+
+    return model
 
 
 def analyze(trials=100, steps=10, runs=10):  # pragma: no cover
