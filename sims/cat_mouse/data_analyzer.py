@@ -137,7 +137,7 @@ def analyze(trials=100, steps=10, runs=10):  # pragma: no cover
     pol_reg = do_polynomial_regression(X_full, Y_full, 3)
 
     print("Tests (start):")
-    X_test = [[10, 1, 0, 0], [100, 1, 1, 1]]
+    X_test = [[10, 1, 0, 0], [50, 1, 0.5, 0.5], [100, 1, 1, 1]]
     print("  Params:", X_test)
     print("  Original:   =>", list(X_temp[tuple(x)]/10 for x in X_test))
     print("  Linear:     =>", lin_reg.predict(X_test))
