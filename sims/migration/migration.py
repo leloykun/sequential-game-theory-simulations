@@ -12,9 +12,6 @@ from ...cell import CasualCell
 from ...agent import DumbPrey as Cheese
 from ...environment import Environment
 
-import coverage
-coverage.process_startup()
-
 sim_name = 'migration'
 output_dir = 'sims/' + sim_name + '/data/'
 

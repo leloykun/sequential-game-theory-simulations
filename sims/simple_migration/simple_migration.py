@@ -8,9 +8,6 @@ from ...environment import Environment
 
 from ..utils import process
 
-import coverage
-coverage.process_startup()
-
 sim_name = 'simple_migration'
 output_dir = 'sims/' + sim_name + '/data/'
 
@@ -101,6 +98,9 @@ def worker(params):
 
 def run(params, test=False):
     runs, timesteps, temp_powers = process(params)
+
+    if test:
+        worker((0.5, 0.5, 0, timesteps, 1, test))
 
     params = []
     for run in range(1, runs + 1):

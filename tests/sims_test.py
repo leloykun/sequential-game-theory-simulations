@@ -22,5 +22,5 @@ def test_simple_migration():
 
 
 def test_migration():
-    migration.run((1, 100, 3), test_=True)
+    migration.run((1, 100, 3), test=True)
     # assert migration.__name__ == 'socialsims.sims.migration.migration'
