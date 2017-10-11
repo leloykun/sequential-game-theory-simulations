@@ -8,6 +8,6 @@ def test_data_analyzers():
     cat_mouse_analyzer.analyze()
 
 def test_data_visualizers():
-    cat_mouse_visualizer.visualize()
-    route_choice_visualizer.visualize()
+    cat_mouse_vis.visualize()
+    route_choice_vis.visualize()
     simple_mig_vis.visualize()
