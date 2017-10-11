@@ -25,7 +25,8 @@ for temp_power in range(-temp_powers, temp_powers + 1):
                 data[1].append(temp[i][1])
 
         num_states = []
-        with open('data/' + str(temp_power) + '/' + str(r) + "num_states.txt") as f:
+        dir_input = 'data/' + str(temp_power) + '/' + str(r) + "num_states.txt"
+        with open(os.path.join(dir_path, dir_input)) as f:
             num_states = list(map(int, f.readline().split()))
         for xc in range(1, 1000):
             if num_states[xc] != num_states[xc - 1]:
