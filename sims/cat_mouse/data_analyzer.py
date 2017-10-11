@@ -1,9 +1,15 @@
+import os
 import time
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression, LogisticRegression
-from sklearn.pipeline import Pipeline
-import numpy as np
 import math
+
+import numpy as np
+
+from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import PolynomialFeatures
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 def do_linear_regression(X, Y):
@@ -115,7 +121,8 @@ def analyze(trials=100, steps=10, runs=10):  # pragma: no cover
 
     for depth in range(1, 5):
         for run in range(1, runs + 1):
-            with open("data/" + str(depth) + "/data" + str(run) + ".txt") as f:
+            dir_input = "data/" + str(depth) + "/data" + str(run) + ".txt"
+            with open(os.path.join(dir_path, dir_input)) as f:
                 for line in f.readlines():
                     line = list(map(int, line.split()))
                     for i in range(2, 12):

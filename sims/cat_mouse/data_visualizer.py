@@ -1,10 +1,13 @@
-import time  # pragma: no cover
-import numpy as np  # pragma: no cover
-import seaborn as sns  # pragma: no cover
-import matplotlib.pyplot as plt  # pragma: no cover
+import os
+import time
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 max_perf = 150  # pragma: no cover
-bounds = [i for i in range(0, max_perf + 1)]  # pragma: no cover
+bounds = [i for i in range(0, max_perf + 1)]
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 def visualize(trials=100, steps=10, runs=10):  # pragma: no cover
@@ -17,7 +20,8 @@ def visualize(trials=100, steps=10, runs=10):  # pragma: no cover
                  for _ in range(11)]
                 for _ in range(11)]
         for i in range(1, runs + 1):
-            with open("data/" + str(depth) + "/data" + str(i) + ".txt") as f:
+            dir_input = "data/" + str(depth) + "/data" + str(i) + ".txt"
+            with open(os.path.join(dir_path, dir_input)) as f:
                 temp = f.readlines()
                 for line in temp:
                     alpha, gamma, *fed = map(int, line.split())
@@ -50,7 +54,8 @@ def visualize(trials=100, steps=10, runs=10):  # pragma: no cover
                          ticks=[],
                          extend='max')
             plt.tight_layout()
-            plt.savefig("data/" + str(depth) + "/plot" + str(layer + 1))
+            dir_output = "data/" + str(depth) + "/plot" + str(layer + 1) + ".png"
+            plt.savefig(os.path.join(dir_path, dir_input))
             plt.close()
 
         print("visual depth", depth, "run time:", time.time() - start)
