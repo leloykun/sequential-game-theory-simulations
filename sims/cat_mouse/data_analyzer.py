@@ -57,6 +57,8 @@ def do_logistic_regression(X, Y):
 def do_polynomial_regression(X, Y, degree):
     print("Polynomial Regression (start):")
 
+    print("  Degree of Polynomial:", degree, "\n")
+
     poly = PolynomialFeatures(degree=degree)
     X_test = [[2, 3, 5, 7]]
     print("  X's original structure:", ' '.join(map(str, X_test[0])))
@@ -72,21 +74,22 @@ def do_polynomial_regression(X, Y, degree):
     print("  coefs:", coefs)
     print()
 
-    a = math.sqrt(coefs[0])
-    b = coefs[1] / (2 * a)
-    c = coefs[2] / (2 * a)
-    d = coefs[3] / (2 * a)
-    e = coefs[4] / (2 * a)
+    if degree == 2:
+        sign = -1 if coefs[0] < 0 else 1
+        a = math.sqrt(abs(coefs[0]))
+        b = coefs[1] / (2 * a) * sign
+        c = coefs[2] / (2 * a) * sign
+        d = coefs[3] / (2 * a) * sign
+        e = coefs[4] / (2 * a) * sign
 
-    print("  perf = (" + str(round(a, 3)) + " + " +
-                       str(round(b, 3)) + "*step + " +
-                       str(round(c, 3)) + "*depth + " +
-                       str(round(d, 3)) + "*alpha + " +
-                       str(round(e, 3)) + "*gamma) ^ 2")
+        print("  perf = (" + str(round(a, 3)) + " + " +
+                             str(round(b, 3)) + "*step + " +
+                             str(round(c, 3)) + "*depth + " +
+                             str(round(d, 3)) + "*alpha + " +
+                             str(round(e, 3)) + "*gamma) ^ 2")
 
     print("  R-squared:", round(model.score(X, Y), 4))
-    print("Polynomial Regression (end):")
-    print("\n")
+    print("Polynomial Regression (end)\n")
 
 
 def analyze(trials=100, steps=10, runs=10):  # pragma: no cover
