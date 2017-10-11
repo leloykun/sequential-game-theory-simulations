@@ -7,3 +7,5 @@ pytest-cov
 pytest
 codacy-coverage
 sklearn
+scipy
+numpy
