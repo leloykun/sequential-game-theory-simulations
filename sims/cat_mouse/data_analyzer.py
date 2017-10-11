@@ -108,7 +108,7 @@ def do_polynomial_regression(X, Y, degree):
     return model
 
 
-def analyze(trials=100, steps=10, runs=10):  # pragma: no cover
+def analyze(trials=100, steps=10, runs=10):
     start = time.time()
 
     X_ave = []
