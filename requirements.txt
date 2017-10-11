@@ -6,3 +6,4 @@ codeclimate-test-reporter
 pytest-cov
 pytest
 codacy-coverage
+sklearn
