@@ -11,9 +11,6 @@ from ...cell import CasualCell
 from ...agent import DumbPrey as Cheese
 from ...environment import Environment
 
-import coverage
-coverage.process_startup()
-
 sim_name = 'cat_mouse_cheese'
 output_dir = 'sims/' + sim_name + '/data/'
 
@@ -161,6 +158,9 @@ def worker(params):
 
 def run(params, test=False):
     runs, timesteps, interval = process(params)
+
+    if test:
+        worker((0.5, 0.5, timesteps, interval, test))
 
     for depth in range(1, max_visual_depth + 1):
         Mouse.visual_depth = depth
