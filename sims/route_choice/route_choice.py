@@ -5,9 +5,6 @@ from ..utils import process
 from ...world import World
 from ...qlearn import QLearn
 
-import coverage
-coverage.process_startup()
-
 sim_name = 'route_choice'
 output_dir = 'sims/' + sim_name + '/data/'
 
@@ -105,6 +102,9 @@ def worker(params):
 
 def run(params, test=False):
     runs, timesteps, num_drivers, *road_cap = process(params)
+
+    if test:
+        worker((1, timesteps, num_drivers, road_cap, test))
 
     params = []
     for run in range(1, runs + 1):
