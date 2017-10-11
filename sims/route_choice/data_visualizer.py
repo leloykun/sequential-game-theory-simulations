@@ -1,11 +1,12 @@
-import numpy as np  # pragma: no cover
-import seaborn as sns  # pragma: no cover
-import matplotlib.pyplot as plt  # pragma: no cover
+import os
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
-def visualize(runs=10):  # pragma: no cover
+def visualize(runs=10):
     for run in range(1, runs + 1):
         data = [[], [], [], []]
         time = []

@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pylab as pl
 import seaborn as sns
@@ -9,7 +10,7 @@ temp_powers = 5
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
-for temp_power in range(-temp_powers, temp_powers + 1):  # pragma: no cover
+for temp_power in range(-temp_powers, temp_powers + 1):
     for r in range(1, runs + 1):
         time = [0]
         data = [[1.0], [1.0]]
