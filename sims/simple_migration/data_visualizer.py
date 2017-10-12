@@ -8,7 +8,7 @@ import seaborn as sns
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
-def visualize(runs=10, temp_powers=5):
+def visualize(runs=10, temp_powers=5, test=False):
     for temp_power in range(-temp_powers, temp_powers + 1):
         for r in range(1, runs + 1):
             time = [0]

@@ -6,16 +6,16 @@ from ..sims.simple_migration import data_visualizer as simple_mig_vis
 
 
 def test_cat_mouse_analyzer():
-    cat_mouse_ana.analyze()
+    cat_mouse_ana.analyze(test=True)
 
 
 def test_cat_mouse_visualizer():
-    cat_mouse_vis.visualize()
+    cat_mouse_vis.visualize(test=True)
 
 
 def test_route_choice_visualizer():
-    route_choice_vis.visualize()
+    route_choice_vis.visualize(test=True)
 
 
 def test_simple_migration_visualizer():
-    simple_mig_vis.visualize()
+    simple_mig_vis.visualize(test=True)
