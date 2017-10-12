@@ -10,7 +10,7 @@ bounds = [i for i in range(0, max_perf + 1)]
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
-def visualize(trials=100, steps=10, runs=10):
+def visualize(trials=100, steps=10, runs=10):  # pragma: no cover
     layers = int(trials / steps)
 
     for depth in range(1, 5):
@@ -61,6 +61,6 @@ def visualize(trials=100, steps=10, runs=10):
         print("visual depth", depth, "run time:", time.time() - start)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     trials, steps, runs = map(int, input("params: ").split())
     visualize()
