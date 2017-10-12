@@ -5,7 +5,7 @@ from ..sims.cat_mouse import data_analyzer as cat_mouse_ana
 # from ..sims.simple_migration import data_visualizer as simple_mig_vis
 
 def test_data_analyzers():
-    cat_mouse_analyzer.analyze()
+    cat_mouse_ana.analyze()
 
 def test_data_visualizers():
     # cat_mouse_vis.visualize()
