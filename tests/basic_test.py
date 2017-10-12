@@ -11,3 +11,4 @@ def test_data_visualizers():
     # cat_mouse_vis.visualize()
     # route_choice_vis.visualize()
     # simple_mig_vis.visualize()
+    pass
