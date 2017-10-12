@@ -10,7 +10,7 @@ install:
 #   - chmod +x ./cc-test-reporter
 #   - ./cc-test-reporter before-build
 script:
-  - pytest --cov-report term-missing --cov-report xml --cov=./ tests/
+  - pytest --cov-report term-missing --cov-report xml --cov=socialsims tests/
 #  - coverage xml
   - python-codacy-coverage -r coverage.xml
 #   - codeclimate-test-reporter --file .coverage
