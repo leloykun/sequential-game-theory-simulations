@@ -17,7 +17,7 @@ before_script:
 script:
   - pytest --cov-report term-missing --cov-report xml --cov=socialsims tests/
   - python-codacy-coverage -r coverage.xml
-  - codeclimate-test-reporter --file .coverage
+  # - codeclimate-test-reporter --file .coverage
 # after_script:
   # - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 notifications:
