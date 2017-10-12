@@ -1,12 +1,11 @@
 matplotlib
-pygame
-numpy
-coverage >=4.0, <4.4
-codeclimate-test-reporter
-pytest-cov
-pytest
-codacy-coverage
-sklearn
+seaborn
 scipy
 numpy
-seaborn
+sklearn
+pygame
+coverage >=4.0, <4.4
+pytest-cov
+pytest
+codeclimate-test-reporter
+codacy-coverage
