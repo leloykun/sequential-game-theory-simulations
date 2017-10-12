@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
-def visualize(runs=10):
+def visualize(runs=10):  # pragma: no cover
     for run in range(1, runs + 1):
         data = [[], [], [], []]
         time = []
