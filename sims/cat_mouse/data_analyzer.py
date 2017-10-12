@@ -31,7 +31,7 @@ def do_linear_regression(X, Y):
     return lin_reg
 
 
-def do_logistic_regression(X, Y):
+def do_logistic_regression(X, Y):  # pragma: no cover
     print("Logistic Regression (start):")
 
     print(len(X))
@@ -108,7 +108,7 @@ def do_polynomial_regression(X, Y, degree):
     return model
 
 
-def analyze(trials=100, steps=10, runs=10):
+def analyze(trials=100, steps=10, runs=10, test=False):
     start = time.time()
 
     X_ave = []
@@ -155,5 +155,5 @@ def analyze(trials=100, steps=10, runs=10):
     print("run time:", time.time() - start, "secs")
 
 
-if __name__ == '__main__':  # pragma: no cover
+if __name__ == '__main__':
     analyze()
