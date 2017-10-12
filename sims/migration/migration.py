@@ -9,13 +9,12 @@ from ...agent import Agent
 from ...world import World
 from ...qlearn import QLearn
 from ...cell import CasualCell
-from ...agent import Prey as Cheese
+from ...agent import DumbPrey as Cheese
 from ...environment import Environment
 
 sim_name = 'migration'
 output_dir = 'sims/' + sim_name + '/data/'
 
-test = False
 max_visual_depth = 4
 
 
@@ -141,7 +140,7 @@ class Cat(Agent):
 
 
 def worker(params):
-    timesteps, num_mice = params
+    timesteps, num_mice, test = params
 
     env = Environment(world=World(outline='worlds/box15x15.txt',
                                   Cell=CasualCell))
@@ -175,10 +174,8 @@ def worker(params):
     return ' '.join(map(str, losses + wins))
 
 
-def run(params, test_=True):
+def run(params, test=False):
     runs, timesteps, num_mice = process(params)
-    global test
-    test = test_
 
     for _ in range(runs):
-        print(worker((timesteps, num_mice)))
+        print(worker((timesteps, num_mice, test)))
