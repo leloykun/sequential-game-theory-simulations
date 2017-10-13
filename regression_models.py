@@ -64,7 +64,7 @@ def polynomial_regression(X,
     if verbose:
         print("  " + " + ".join(str(term[0]) + "*" + term[1] for term in func))
         print("  R-squared:", round(r_squared, round_to))
-        print("Linear Regression (end)\n")
+        print("Polynomial Regression (end)\n")
 
     return model, coefs, r_squared
 
