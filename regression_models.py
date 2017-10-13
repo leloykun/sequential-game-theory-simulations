@@ -30,7 +30,7 @@ def linear_regression(X,
     r_squared = lin_reg.score(X, Y)
 
     if verbose:
-        print("  " + " + ".join(str(term[0]) + "*" + term[1] for term in func))
+        print("  " + " + ".join(str(term[0]) + "*" + term[1] for term in func), "\n")
         print("  R-squared:", round(r_squared, round_to))
         print("Linear Regression (end)\n")
 
@@ -56,32 +56,15 @@ def polynomial_regression(X,
 
     if labels is None or len(labels) is n:
         labels = model.named_steps['poly'].get_feature_names()
+        labels = ['*'.join(label.split()) for label in labels]
 
     func = zip(coefs, labels)
 
     r_squared = model.score(X, Y)
 
     if verbose:
-        print("  " + " + ".join(str(term[0]) + "*" + term[1] for term in func))
+        print("  " + " + ".join(str(term[0]) + "*" + term[1] for term in func), "\n")
         print("  R-squared:", round(r_squared, round_to))
         print("Polynomial Regression (end)\n")
 
     return model, coefs, r_squared
-
-
-if __name__ == '__main__':
-    n = 10
-
-    X0 = np.arange(n)
-    X1 = np.random.random(n) * n
-    X = np.array(list(zip(X0, X1)))
-    Y = 5 + 3*X0 + 2*X1 + 4*X0**2 + 3*X0*X1 + X1**2
-
-    print(X0)
-    print(X1)
-    print(Y)
-    print()
-
-    lin_reg, coefs, r_squared = linear_regression(X, Y, verbose=True)
-    pol_reg, coefs, r_squared = polynomial_regression(X, Y, 2, verbose=True)
-
