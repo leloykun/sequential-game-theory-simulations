@@ -31,7 +31,7 @@ class Simulation:
     test = False
 
     def worker(self, params):
-        world = World(outline=self.world_outline, Cell=CasualCell))
+        world = World(outline=self.world_outline, Cell=CasualCell)
 
     def run(self, params, test=False):
         self.test = test
