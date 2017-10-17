@@ -15,7 +15,7 @@ before_script:
   # - chmod +x ./cc-test-reporter
   # - ./cc-test-reporter before-build
 script:
-  - pytest -n auto --cov-report term-missing --cov-report xml --cov=socialsims tests/
+  - pytest --cov-report term-missing --cov-report xml --cov=socialsims tests/
   - python-codacy-coverage -r coverage.xml
   # - codeclimate-test-reporter --file .coverage
 # after_script:
