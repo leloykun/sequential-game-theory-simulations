@@ -216,7 +216,7 @@ pip-log.txt
 .mr.developer.cfg
 
 __pycache__/*
-data/perf_vs_params/2D/depth_heatmap/*.jpeg
-data/perf_vs_params/3D/1/*.jpeg
-data/perf_vs_params/3D/2/*.jpeg
-data/perf_vs_params/3D/3/*.jpeg
+data/perf_vs_params/2D/depth_heatmap/frame*.jpeg
+data/perf_vs_params/3D/regression/degree1/frame*.jpeg
+data/perf_vs_params/3D/regression/degree2/frame*.jpeg
+data/perf_vs_params/3D/regression/degree3/frame*.jpeg
