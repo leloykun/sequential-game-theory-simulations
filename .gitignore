@@ -216,3 +216,7 @@ pip-log.txt
 .mr.developer.cfg
 
 __pycache__/*
+data/2D/depth_heatmap/*.jpeg
+data/3D/1/*.jpeg
+data/3D/2/*.jpeg
+data/3D/3/*.jpeg
