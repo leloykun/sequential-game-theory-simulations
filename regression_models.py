@@ -91,7 +91,7 @@ class PolynomialRegression:
         if Y is None:
             Y = cls.X[idx[1]]
         if Z is None:
-            Z = cls.Y if cls.Y_pred is None else cls.Y_pred
+            Z = cls.Y if cls.Y_pred == [] else cls.Y_pred
 
         if wireframe:
             p = ax.plot_wireframe(X, Y, Z,
