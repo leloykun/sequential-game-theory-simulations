@@ -6,7 +6,7 @@ from ..world import World
 from ..qlearn import QLearn
 
 sim_name = 'route_choice'
-output_dir = 'sims/' + sim_name + '/data/'
+output_dir = 'data/raw/' + sim_name + '/'
 
 
 class DriverWorld(World):
@@ -93,10 +93,10 @@ def worker(params):
         res_ent.append(' '.join(map(str, world.get_are())))
 
     if not test:
-        with open(output_dir + 'dis/' + str(run) + 'run.txt', 'w') as f:
+        with open(output_dir + 'dis/run' + str(run) + '.txt', 'w') as f:
             f.write('\n'.join(choice_dist))
 
-        with open(output_dir + 'are/' + str(run) + 'run.txt', 'w') as f:
+        with open(output_dir + 'are/run' + str(run) + '.txt', 'w') as f:
             f.write('\n'.join(res_ent))
 
 
