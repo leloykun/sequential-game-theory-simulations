@@ -1,12 +1,12 @@
 import multiprocessing as mp
 
-from ...agent import Agent
-from ...world import World
-from ...qlearn import QLearn
-from ...cell import CasualCell
-from ...environment import Environment
+from ..agent import Agent
+from ..world import World
+from ..qlearn import QLearn
+from ..cell import CasualCell
+from ..environment import Environment
 
-from ..utils import process
+from .utils import process
 
 sim_name = 'simple_migration'
 output_dir = 'sims/' + sim_name + '/data/'

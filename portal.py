@@ -26,7 +26,7 @@ if __name__ == '__main__':
                 print(sim, "starting with params:", params)
                 sim_start = time.time()
 
-                sim = importlib.import_module('sims.' + sim + '.' + sim)
+                sim = importlib.import_module('sims.' + sim)
                 sim.run(params)
 
                 print(

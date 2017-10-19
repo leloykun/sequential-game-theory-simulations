@@ -2,14 +2,14 @@ import time
 import random
 import multiprocessing as mp
 
-from ..utils import to_ordinal, process
+from .utils import to_ordinal, process
 
-from ...agent import Agent
-from ...world import World
-from ...qlearn import QLearn
-from ...cell import CasualCell
-from ...agent import DumbPrey as Cheese
-from ...environment import Environment
+from ..agent import Agent
+from ..world import World
+from ..qlearn import QLearn
+from ..cell import CasualCell
+from ..agent import DumbPrey as Cheese
+from ..environment import Environment
 
 sim_name = 'cat_mouse_cheese'
 output_dir = 'data/raw/' + sim_name + '/'
