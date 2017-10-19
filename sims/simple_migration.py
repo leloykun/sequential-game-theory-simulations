@@ -9,7 +9,7 @@ from ..environment import Environment
 from .utils import process
 
 sim_name = 'simple_migration'
-output_dir = 'sims/' + sim_name + '/data/'
+output_dir = 'data/raw/' + sim_name + '/'
 
 
 class Mouse(Agent):
@@ -80,7 +80,8 @@ def worker(params):
             str(mouse.ai.stat_are) + " " + str(mouse.ai.dyna_are))
         num_states.append(len(mouse.ai.states))
 
-    output_dir_dir = output_dir + str(temp_power) + "/" + str(run)
+    output_dir_dir = output_dir + "2^" + str(temp_power) + \
+                     "/run" + str(run)
 
     if not test:
         with open(output_dir_dir + "scores.txt", 'w') as f:
