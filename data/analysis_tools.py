@@ -11,16 +11,21 @@ from sklearn.preprocessing import PolynomialFeatures
 class PolynomialRegression:
     X = []
     Y = []
+
+    X_flat = []
+    Y_flat = []
+
     Y_pred = []
+
     labels = []
     n_params = 1
     dim = 10
 
     def __init__(self, X, Y, degree=None, labels=None, ravel=True):
-        self.X = X
-        self.Y = Y
+        self.X = np.copy(X)
+        self.Y = np.copy(Y)
 
-        self.n_params = len(X)
+        self.n_params = len(self.X)
         self.degree = degree
         self.dim = len(self.X[0])
         PolynomialRegression.dim = self.dim
@@ -28,11 +33,12 @@ class PolynomialRegression:
         self.labels = labels
 
         if ravel:
-            self.X_flat = np.column_stack(tuple(X[i].ravel() for i in range(self.n_params)))
-            self.Y_flat = Y.ravel()
+            self.X_flat = np.column_stack(tuple(self.X[i].ravel()
+                                          for i in range(self.n_params)))
+            self.Y_flat = self.Y.ravel()
         else:
-            self.X_flat = X
-            self.Y_flat = Y
+            self.X_flat = np.copy(X)
+            self.Y_flat = np.copy(Y)
 
         if degree is not None:
             self.regress(degree)
@@ -79,44 +85,43 @@ class PolynomialRegression:
 
         return Y_pred
 
-    @classmethod
-    def plot(cls, ax, X=None, Y=None, Z=None, idx=(0, 1),
-             wireframe=False, alpha=0.5,
-             show_contours=True,
+    def plot(self, ax, idx=(0, 1), X=None, Y=None, Z=None,
+             plot_type='surface', alpha=0.5,
+             show_contours=True, cmap=plt.cm.coolwarm,
              tight=False, lims=((-2, 10), (0, 12), (0, 10000)),
              show_labels=False, labels=("X0", "X1", "Y"),
              title=None):
         if X is None:
-            X = cls.X[idx[0]]
+            X = self.X[idx[0]]
         if Y is None:
-            Y = cls.X[idx[1]]
+            Y = self.X[idx[1]]
         if Z is None:
-            Z = cls.Y if cls.Y_pred == [] else cls.Y_pred
+            Z = self.Y if self.Y_pred == [] else self.Y_pred
 
-        if wireframe:
+        if plot_type == 'wireframe':
             p = ax.plot_wireframe(X, Y, Z,
-                                  rstride=cls.dim//10,
-                                  cstride=cls.dim//10,
+                                  rstride=self.dim//10,
+                                  cstride=self.dim//10,
                                   alpha=alpha)
-        else:
+        elif plot_type == 'surface':
             p = ax.plot_surface(X, Y, Z,
-                                rstride=cls.dim//10,
-                                cstride=cls.dim//10,
+                                rstride=self.dim//10,
+                                cstride=self.dim//10,
                                 alpha=alpha)
 
         if show_contours:
             cset = ax.contour(X, Y, Z,
                               zdir='x',
-                              offset=lims[0][0],
-                              cmap=plt.cm.coolwarm)
+                              offset=lims[0][1],
+                              cmap=cmap)
             cset = ax.contour(X, Y, Z,
                               zdir='y',
                               offset=lims[1][1],
-                              cmap=plt.cm.coolwarm)
+                              cmap=cmap)
             cset = ax.contour(X, Y, Z,
                               zdir='z',
                               offset=lims[2][0],
-                              cmap=plt.cm.coolwarm)
+                              cmap=cmap)
 
         if not tight:
             ax.set_xlim3d(lims[0][0], lims[0][1]);
