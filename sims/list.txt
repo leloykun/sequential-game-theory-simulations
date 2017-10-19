@@ -1,14 +1,14 @@
-# cat-mouse [runs] [trials] [steps]
-# cat-mouse 10 100 10
+# cat_mouse [runs] [trials] [steps]
+# cat_mouse 10 100 10
 # 
-# cat-mouse-cheese [runs] [timesteps] [interval]
-# cat-mouse-cheese 10 10000 100
+# cat_mouse_cheese [runs] [timesteps] [interval]
+# cat_mouse_cheese 10 10000 100
 # 
-# simple-migration [runs] [timesteps] [temp_powers]
-# simple-migration 10 10000 5
+# simple_migration [runs] [timesteps] [temp_powers]
+# simple_migration 10 10000 5
 # 
-# route-choice [runs] [timesteps] [num_drivers] [[road capacities]]
-# route-choice 10 1000 100 10 20 30 40
+# route_choice [runs] [timesteps] [num_drivers] [[road capacities]]
+# route_choice 10 1000 100 10 20 30 40
 # 
 # migration [runs] [timesteps] [num_mice]
-migration 1 100000 3
+# migration 1 100000 3
