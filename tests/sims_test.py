@@ -6,7 +6,7 @@ from ..sims.migration import migration
 
 
 def test_cat_mouse():
-    cat_mouse.run("1 2 1", test=True)
+    cat_mouse.run("1 2 1", test=True, to_save=True)
 
 
 def test_cat_mouse_cheese():
