@@ -11,7 +11,7 @@ from ...agent import DumbPrey as Mouse
 from ...environment import Environment
 
 sim_name = 'cat_mouse'
-output_dir = 'sims/' + sim_name + '/data/'
+output_dir = 'data/raw/' + sim_name + '/'
 
 max_visual_depth = 4
 
@@ -108,7 +108,7 @@ def worker(params):
     return result
 
 
-def run(params, test=False):
+def run(params, test=False, to_save=True):
     runs, trials, steps = process(params)
 
     if test:
@@ -133,13 +133,13 @@ def run(params, test=False):
             results = pool.map(func=worker, iterable=params)
             pool.close()
 
-            if not test:
-                to_save = ""
+            if to_save:
+                data = ""
                 for result in results:
-                    to_save += ' '.join(map(str, result)) + '\n'
-                savefile = open(output_dir + str(depth) + "/data" +
-                                str(run) + ".txt", 'w')
-                savefile.write(to_save)
+                    data += ' '.join(map(str, result)) + '\n'
+                savefile = open(output_dir + "depth" + str(depth) +
+                                "/run" + str(run) + ".txt", 'w')
+                savefile.write(data)
                 savefile.close()
 
             print(
