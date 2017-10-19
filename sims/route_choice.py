@@ -1,9 +1,9 @@
 import multiprocessing as mp
 
-from ..utils import process
+from .utils import process
 
-from ...world import World
-from ...qlearn import QLearn
+from ..world import World
+from ..qlearn import QLearn
 
 sim_name = 'route_choice'
 output_dir = 'sims/' + sim_name + '/data/'
