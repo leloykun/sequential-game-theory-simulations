@@ -1,11 +1,13 @@
 matplotlib
 seaborn
+
+sklearn
 scipy
 numpy
-sklearn
+
 pygame
+
 coverage >=4.0, <4.4
+codacy-coverage
 pytest-cov
 pytest
-codeclimate-test-reporter
-codacy-coverage
