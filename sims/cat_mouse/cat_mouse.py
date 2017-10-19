@@ -134,13 +134,10 @@ def run(params, test=False, to_save=True):
             pool.close()
 
             if to_save:
-                data = ""
-                for result in results:
-                    data += ' '.join(map(str, result)) + '\n'
-                savefile = open(output_dir + "depth" + str(depth) +
-                                "/run" + str(run) + ".txt", 'w')
-                savefile.write(data)
-                savefile.close()
+                with open(output_dir + "depth" + str(depth) +
+                          "/run" + str(run) + ".txt", 'w') as f:
+                    f.write('\n'.join(' '.join(map(str, result)) 
+                                      for result in results))
 
             print(
                 "     ",
