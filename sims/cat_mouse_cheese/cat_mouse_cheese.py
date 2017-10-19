@@ -12,7 +12,7 @@ from ...agent import DumbPrey as Cheese
 from ...environment import Environment
 
 sim_name = 'cat_mouse_cheese'
-output_dir = 'sims/' + sim_name + '/data/'
+output_dir = 'data/raw/' + sim_name + '/'
 
 test = False
 max_visual_depth = 4
@@ -150,13 +150,10 @@ def worker(params):
             losses.append(mouse.eaten)
             wins.append(mouse.fed)
 
-    losses = " ".join(map(str, losses))
-    wins = " ".join(map(str, wins))
-
-    return str(alpha) + " " + str(gamma) + " " + losses + " " + wins
+    return [alpha, gamma] + losses + wins
 
 
-def run(params, test=False):
+def run(params, test=False, to_save=True):
     runs, timesteps, interval = process(params)
 
     if test:
@@ -180,10 +177,11 @@ def run(params, test=False):
             with mp.Pool(mp.cpu_count()) as pool:
                 results = pool.map(worker, params)
 
-            if not test:
-                with open(output_dir + str(depth) + "/data" + str(run) +
-                          ".txt", 'w') as f:
-                    f.write("\n".join(results))
+            if to_save:
+                with open(output_dir + "depth" + str(depth) +
+                          "/run" + str(run) + ".txt", 'w') as f:
+                    f.write("\n".join(' '.join(map(str, result))
+                                      for result in results))
 
             print(
                 "     ",
