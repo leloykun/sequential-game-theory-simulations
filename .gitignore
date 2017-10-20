@@ -230,12 +230,12 @@ data/plots/regression/*
 
 !data/plots/regression/degree1/
 data/plots/regression/degree1/*
-!data/plots/regression/degree1/anim60_compressed.gif
+!data/plots/regression/degree1/anim60.mp4
 
 !data/plots/regression/degree2/
 data/plots/regression/degree2/*
-!data/plots/regression/degree2/anim60_compressed.gif
+!data/plots/regression/degree2/anim60.mp4
 
 !data/plots/regression/degree3/
 data/plots/regression/degree3/*
-!data/plots/regression/degree3/anim60_compressed.gif
+!data/plots/regression/degree3/anim60.mp4
