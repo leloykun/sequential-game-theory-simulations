@@ -223,7 +223,7 @@ data/plots/*
 
 !data/plots/depth_heatmap/
 data/plots/depth_heatmap/*
-!data/plots/depth_heatmap/anim_compressed.gif
+!data/plots/depth_heatmap/anim.mp4
 
 !data/plots/regression/
 data/plots/regression/*
