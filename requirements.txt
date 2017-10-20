@@ -6,6 +6,7 @@ scipy
 numpy
 
 pygame
+ffmpy
 
 ipython
 
