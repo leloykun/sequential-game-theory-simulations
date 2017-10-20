@@ -219,7 +219,7 @@ __pycache__/*
 
 data/plots/*
 
-!data/plots/normed_perf_dist.jpeg
+!data/plots/normed_perf_dist.png
 
 !data/plots/depth_heatmap/
 data/plots/depth_heatmap/*
