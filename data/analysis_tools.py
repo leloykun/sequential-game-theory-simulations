@@ -1,3 +1,4 @@
+import os
 import numpy as np
 
 import matplotlib.pyplot as plt
@@ -136,6 +137,39 @@ def plot_dist(X, ax, file_name,
     plt.savefig("%s.png" % file_name, transparent=True)
 
     return HTML('<img src="%s.png">' % file_name)
+
+
+def animate(input_files, output_file, fps=1, vid=True):
+    '''
+    Generates an animation from the given frames
+
+    Parameters
+    ----------
+    input_files : str
+        The format of the frames
+    output_file : str
+        The name of the output file
+    fps : int, optional
+        The number of frames per second of the animation,
+        by default '1'
+    vid : bool, optional
+        Option wether to use mp4 or gif,
+        by default 'True' or by using mp4
+
+    Returns
+    -------
+    {HTML<video>, HTML<img>}
+        The HTML format of the output file
+    '''
+    if vid:
+        os.system("ffmpeg -r {} -i {}%03d.png -codec:v mpeg4 -y {}.mp4".format(fps, input_files, output_file))
+        return HTML('<video controls autoplay loop> <source src="{}.mp4" type="video/mp4"> </video>'.format(output_file))
+    else:
+        images = []
+        for step in range(1, num_steps + 1):
+            images.append(imageio.imread("{}{:03d}.png".format(input_files, step)))
+        imageio.mimsave("{}.gif".format(output_file), images, fps=fps)
+        return HTML('<img src="{}.gif">'.format(output_file))
 
 
 class PolynomialRegression:
