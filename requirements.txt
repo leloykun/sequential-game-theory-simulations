@@ -7,6 +7,8 @@ numpy
 
 pygame
 
+ipython
+
 coverage >=4.0, <4.4
 codacy-coverage
 pytest-cov
