@@ -3,9 +3,139 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d.axes3d import Axes3D
 
+import seaborn as sns
+sns.set()
+
+from IPython.display import HTML
+import ffmpy
+
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import PolynomialFeatures
+
+from collections import namedtuple
+ArrayStats = namedtuple('ArrayStats', 'min ave max range')
+
+
+def get_stats(X):
+    '''
+    Calculate the minimum, average,
+    maximum, and range of an ndarray
+
+    Example
+    -------
+    Input: (X=[1, 2, 3, 4, 5])
+    Output: ArrayStats(min=1, ave=3, max=5, range=4)
+
+    Parameters
+    ----------
+    X : ndarray
+        The ndarray to be processed
+
+    Returns
+    -------
+    ArrayStats
+        A named tuple of the form (min, ave, max, range)
+    '''
+    xmin = np.amin(X)
+    xmax = np.amax(X)
+    return ArrayStats(xmin, sum(X.flatten()) / X.size, xmax, xmax - xmin)
+
+
+def normalize(X, stats, invert=False):
+    '''
+    Normalize the values of an ndarray
+    to the range [0, 1] based on the
+    stats of the trainer ndarray.
+
+    Invert the result when invert == True
+
+    Example
+    -------
+    Input: (X=[1, 2, 3, 4, 5], stats=(1, 3, 5, 4), invert=True)
+    Output: [1.00, 0.75, 0.50, 0.25, 0.00]
+
+    Parameters
+    ----------
+    X : ndarray
+        The ndarray to be normalized
+    stats: ArrayStats
+        The stats of the trainer ndarray
+    invert: bool, optional
+        Option to invert the result
+
+    Returns
+    -------
+    ndarray
+        The normalized ndarray X
+    '''
+    X = (X - stats.min) / stats.range
+    return 1 - X if invert else X
+
+
+def gif_to_mp4(file, fps):
+    '''
+    Create an mp4 version of the
+    inputted gif in the same directory
+
+    Parameters
+    ----------
+    file : string
+        The filename of the gif to be converted
+    fps : int
+        The number of frames per second of the output mp4
+    '''
+    ff = ffmpy.FFmpeg(inputs={'%s.gif' % file: '-y -r %d' % fps},
+                      outputs={'%s.mp4' % file: None})
+    ff.run()
+
+
+def plot_dist(X, ax, file_name,
+              hist=False, shade=True,
+              xticks=None, yticks=None):
+    '''
+    Plots the distribution of
+    the values of an ndarray
+
+    Parameters
+    ----------
+    X : ndarray
+        The ndarray to be plotted
+    ax : AxesSubplot
+        The axes to be plotted in
+    file_name: str
+        The filename of the output images
+    hist : bool, optional
+        Option to show the histogram, by default 'False'
+    shade : bool, optional
+        Option to shade the distribution plot, by default 'True'
+    xticks : array_like, optional
+        The xticks of the axes, by default 'None'.
+        If 'None' the xticks of the axes are set to the defaults
+    yticks : array_like, optional
+        The yticks of the axes, by default 'None'.
+        If 'None' the yticks of the axes are set to the defaults
+
+    Returns
+    -------
+    HTML
+        The HTML format of the saved image
+    '''
+    ax = sns.distplot(X,
+                      hist=hist,
+                      color="b",
+                      kde_kws={"shade": shade},
+                      ax=ax)
+
+    if xticks is not None:
+        ax.set_xticks(xticks)
+    if yticks is not None:
+        ax.set_yticks(yticks)
+
+    plt.tight_layout()
+    plt.savefig("%s.png" % file_name, transparent=True)
+
+    return HTML('<img src="%s.png">' % file_name)
 
 
 class PolynomialRegression:
