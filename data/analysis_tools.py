@@ -293,24 +293,19 @@ class PolynomialRegression:
     n_params = 1
     dim = 10
 
-    def __init__(self, X, Y, degree=None, labels=None, ravel=True):
+    def __init__(self, X, Y, degree=None, labels=None):
         self.X = np.copy(X)
         self.Y = np.copy(Y)
 
-        self.n_params = len(self.X)
         self.degree = degree
-        self.dim = len(self.X[0])
-        PolynomialRegression.dim = self.dim
 
+        self.n_params = len(self.X)
+        self.dim = len(self.X[0])
         self.labels = labels
 
-        if ravel:
-            self.X_flat = np.column_stack(tuple(self.X[i].ravel()
-                                          for i in range(self.n_params)))
-            self.Y_flat = self.Y.ravel()
-        else:
-            self.X_flat = np.copy(X)
-            self.Y_flat = np.copy(Y)
+        self.X_flat = np.column_stack(tuple(self.X[i].ravel()
+                                      for i in range(self.n_params)))
+        self.Y_flat = self.Y.ravel()
 
         if degree is not None:
             self.regress(degree)
@@ -348,7 +343,7 @@ class PolynomialRegression:
         if X is None:
             X = self.X
 
-        Y_pred = np.zeros((self.dim, self.dim))
+        Y_pred = np.zeros(self.Y.shape)
         for power in range(len(self.powers)):
             nomial = self.coefs[power]
             for i in range(self.n_params):
