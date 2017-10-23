@@ -1,14 +1,13 @@
-matplotlib
-seaborn
-
 sklearn
 scipy
 numpy
 
-pygame
-ffmpy
+matplotlib
+seaborn
 
 ipython
+pygame
+ffmpy
 
 coverage >=4.0, <4.4
 codacy-coverage
