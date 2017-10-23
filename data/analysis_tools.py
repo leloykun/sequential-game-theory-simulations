@@ -105,7 +105,7 @@ def plot_dist(X, ax, file_name,
     X : ndarray
         The ndarray to be plotted
     ax : AxesSubplot
-        The axes to be plotted in
+        The axis to be plotted in
     file_name: str
         The filename of the output images
     hist : bool, optional
@@ -239,6 +239,7 @@ def plot_3d_rotate(ax, save_file, degree):
     for ii in range(0, 360, 1):
         ax.view_init(elev=30., azim=ii)
         plt.savefig(save_file.format(degree, ii), transparent=True)
+
 
 def plot_3d_normed(model, degree, offsets=(1.5, 1.5, 0.0)):
     fig = plt.figure(figsize=(6, 6))
