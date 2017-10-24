@@ -343,7 +343,7 @@ class PolynomialRegression:
         if X is None:
             X = self.X
 
-        Y_pred = np.zeros(self.Y.shape)
+        Y_pred = np.zeros(X[0].shape)
         for power in range(len(self.powers)):
             nomial = self.coefs[power]
             for i in range(self.n_params):
