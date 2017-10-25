@@ -217,33 +217,33 @@ pip-log.txt
 
 __pycache__/*
 
-data/plots/*
+socialsims/data/plots/*
 
-!data/plots/normed_perf_dist.png
-!data/plots/normed_perf_dist_2.png
+!socialsims/data/plots/normed_perf_dist.png
+!socialsims/data/plots/normed_perf_dist_2.png
 
-!data/plots/depth_heatmap/
-data/plots/depth_heatmap/*
+!socialsims/data/plots/depth_heatmap/
+socialsims/data/plots/depth_heatmap/*
 
-!data/plots/depth_heatmap/cm/
-data/plots/depth_heatmap/cm/*
-!data/plots/depth_heatmap/cm/anim.mp4
+!socialsims/data/plots/depth_heatmap/cm/
+socialsims/data/plots/depth_heatmap/cm/*
+!socialsims/data/plots/depth_heatmap/cm/anim.mp4
 
-!data/plots/depth_heatmap/cmc/
-data/plots/depth_heatmap/cmc/*
-!data/plots/depth_heatmap/cmc/anim.mp4
+!socialsims/data/plots/depth_heatmap/cmc/
+socialsims/data/plots/depth_heatmap/cmc/*
+!socialsims/data/plots/depth_heatmap/cmc/anim.mp4
 
-!data/plots/regression/
-data/plots/regression/*
+!socialsims/data/plots/regression/
+socialsims/data/plots/regression/*
 
-!data/plots/regression/degree1/
-data/plots/regression/degree1/*
-!data/plots/regression/degree1/anim60.mp4
+!socialsims/data/plots/regression/degree1/
+socialsims/data/plots/regression/degree1/*
+!socialsims/data/plots/regression/degree1/anim60.mp4
 
-!data/plots/regression/degree2/
-data/plots/regression/degree2/*
-!data/plots/regression/degree2/anim60.mp4
+!socialsims/data/plots/regression/degree2/
+socialsims/data/plots/regression/degree2/*
+!socialsims/data/plots/regression/degree2/anim60.mp4
 
-!data/plots/regression/degree3/
-data/plots/regression/degree3/*
-!data/plots/regression/degree3/anim60.mp4
+!socialsims/data/plots/regression/degree3/
+socialsims/data/plots/regression/degree3/*
+!socialsims/data/plots/regression/degree3/anim60.mp4
