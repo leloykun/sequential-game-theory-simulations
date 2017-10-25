@@ -4,6 +4,8 @@ import time
 import inspect
 import importlib
 
+
+'''
 # add current directory to pythonpath
 cmd_folder = os.path.realpath(
     os.path.abspath(
@@ -13,8 +15,18 @@ if cmd_folder not in sys.path:
 
 # get list of simulations
 sims_list = sys.argv[1] if len(sys.argv) > 1 else 'sims/list.txt'
+'''
+
+
+def run_sims():
+    from .sims import cat_mouse_cheese as sim
+    sim.run((10, 10000, 1000))
+
 
 if __name__ == '__main__':
+    run_sims()
+    
+"""
     # run each simulation
     with open(sims_list) as f:
         sims_list = f.readlines()
@@ -35,3 +47,4 @@ if __name__ == '__main__':
                     time.time() -
                     sim_start,
                     "secs\n")
+"""

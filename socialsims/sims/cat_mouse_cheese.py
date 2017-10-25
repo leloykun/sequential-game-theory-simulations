@@ -1,3 +1,4 @@
+import os
 import time
 import random
 import multiprocessing as mp
@@ -12,7 +13,7 @@ from ..agent import DumbPrey as Cheese
 from ..environment import Environment
 
 sim_name = 'cat_mouse_cheese'
-output_dir = 'data/raw/' + sim_name + '/'
+output_dir = os.path.join(os.path.dirname( __file__ ), '..', 'data/raw/{}/'.format(sim_name))
 
 test = False
 max_visual_depth = 4
@@ -120,7 +121,7 @@ class Cat(Agent):
 def worker(params):
     alpha, gamma, timesteps, interval, test = params
 
-    env = Environment(world=World(outline='worlds/waco.txt',
+    env = Environment(world=World(outline=os.path.join(os.path.dirname( __file__ ), '..', 'worlds/waco.txt'),
                                   Cell=CasualCell))
 
     mouse = Mouse()
@@ -178,8 +179,7 @@ def run(params, test=False, to_save=True):
                 results = pool.map(worker, params)
 
             if to_save:
-                with open(output_dir + "depth" + str(depth) +
-                          "/run" + str(run) + ".txt", 'w') as f:
+                with open(os.path.join(output_dir, "depth{}/run{}.txt".format(depth, run)), 'w') as f:
                     f.write("\n".join(' '.join(map(str, result))
                                       for result in results))
 
