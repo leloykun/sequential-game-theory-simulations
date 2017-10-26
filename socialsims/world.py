@@ -1,3 +1,5 @@
+import os
+
 from .displays import PygameDisplay
 
 
@@ -17,7 +19,7 @@ class World:
     age = 0
 
     def __init__(self, outline='worlds/box5v5', Cell=None, num_dir=8):
-        self.outline = outline
+        self.outline = os.path.join(os.path.dirname(__file__), outline)
         self.Cell = Cell
         self.num_dir = num_dir
 
