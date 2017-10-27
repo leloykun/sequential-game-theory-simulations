@@ -1,4 +1,4 @@
-from socialsims import portal
+from src import portal
 
 
 if __name__ == '__main__':
