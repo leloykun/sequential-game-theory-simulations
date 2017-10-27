@@ -1,7 +1,7 @@
 import numpy as np
 
-from ..src.data.analysis_tools import linear_regression
-from ..src.data.analysis_tools import polynomial_regression
+from ..data.analysis_tools import linear_regression
+from ..data.analysis_tools import polynomial_regression
 
 
 eps = 1e-10
