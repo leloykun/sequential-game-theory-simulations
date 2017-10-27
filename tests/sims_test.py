@@ -1,8 +1,8 @@
-from ..socialsims.sims import cat_mouse
-from ..socialsims.sims import cat_mouse_cheese
-from ..socialsims.sims import route_choice
-from ..socialsims.sims import simple_migration
-from ..socialsims.sims import migration
+from ..src.sims import cat_mouse
+from ..src.sims import cat_mouse_cheese
+from ..src.sims import route_choice
+from ..src.sims import simple_migration
+from ..src.sims import migration
 
 
 def test_cat_mouse():
@@ -23,4 +23,3 @@ def test_simple_migration():
 
 def test_migration():
     migration.run((1, 100, 3), test=True)
-    # assert migration.__name__ == 'socialsims.sims.migration.migration'
