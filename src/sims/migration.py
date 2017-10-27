@@ -13,7 +13,8 @@ from ..agent import DumbPrey as Cheese
 from ..environment import Environment
 
 sim_name = 'migration'
-output_dir = 'sims/' + sim_name + '/data/'
+output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname( __file__ ))),
+                          'data/raw/{}/'.format(sim_name))
 
 max_visual_depth = 4
 
@@ -142,8 +143,9 @@ class Cat(Agent):
 def worker(params):
     timesteps, num_mice, test = params
 
-    env = Environment(world=World(outline='worlds/box15x15.txt',
-                                  Cell=CasualCell))
+    env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
+                                         'worlds/box15x15.txt'),
+                            CasualCell))
 
     env.world.mice = []
     for _ in range(num_mice):

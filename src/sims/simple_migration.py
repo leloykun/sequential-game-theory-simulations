@@ -9,7 +9,8 @@ from ..environment import Environment
 from .utils import process
 
 sim_name = 'simple_migration'
-output_dir = 'data/raw/' + sim_name + '/'
+output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname( __file__ ))),
+                          'data/raw/{}/'.format(sim_name))
 
 
 class Mouse(Agent):
@@ -54,8 +55,9 @@ class Mouse(Agent):
 def worker(params):
     alpha, gamma, temp_power, timesteps, run, test = params
 
-    env = Environment(world=World(outline='worlds/box20x10.txt',
-                                  Cell=CasualCell))
+    env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
+                                         'worlds/box20x10.txt'),
+                            CasualCell))
 
     mouse = Mouse()
     env.add_agent(mouse)

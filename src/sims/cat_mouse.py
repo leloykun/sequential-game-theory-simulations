@@ -11,7 +11,8 @@ from ..agent import DumbPrey as Mouse
 from ..environment import Environment
 
 sim_name = 'cat_mouse'
-output_dir = 'data/raw/' + sim_name + '/'
+output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname( __file__ ))),
+                          'data/raw/{}/'.format(sim_name))
 
 max_visual_depth = 4
 
@@ -77,8 +78,9 @@ class Cat(Agent):
 def worker(params):
     alpha, gamma, trials, steps, test = params
 
-    env = Environment(world=World(outline='worlds/box10x10.txt',
-                                  Cell=CasualCell))
+    env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
+                                         'worlds/box10x10.txt'),
+                            CasualCell))
 
     cat = Cat()
     env.add_agent(cat)
@@ -134,15 +136,9 @@ def run(params, test=False, to_save=True):
             pool.close()
 
             if to_save:
-                with open(output_dir + "depth" + str(depth) +
-                          "/run" + str(run) + ".txt", 'w') as f:
+                with open(os.path.join(output_dir, "depth{}/run{}.txt".format(depth, run)), 'w') as f:
                     f.write('\n'.join(' '.join(map(str, result)) 
                                       for result in results))
 
-            print(
-                "     ",
-                to_ordinal(run),
-                "runtime:",
-                time.time() -
-                run_start,
-                "secs")
+            print("      ", end="")
+            print(to_ordinal(run), "runtime:", time.time() - run_start, "secs")

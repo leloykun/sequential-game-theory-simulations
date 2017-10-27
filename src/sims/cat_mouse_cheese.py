@@ -13,7 +13,8 @@ from ..agent import DumbPrey as Cheese
 from ..environment import Environment
 
 sim_name = 'cat_mouse_cheese'
-output_dir = os.path.join(os.path.dirname( __file__ ), '..', 'data/raw/{}/'.format(sim_name))
+output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname( __file__ ))),
+                          'data/raw/{}/'.format(sim_name))
 
 test = False
 max_visual_depth = 4
@@ -121,8 +122,9 @@ class Cat(Agent):
 def worker(params):
     alpha, gamma, timesteps, interval, test = params
 
-    env = Environment(world=World(outline=os.path.join(os.path.dirname( __file__ ), '..', 'worlds/waco.txt'),
-                                  Cell=CasualCell))
+    env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
+                                         'worlds/waco.txt'),
+                            CasualCell))
 
     mouse = Mouse()
     env.add_agent(mouse)
