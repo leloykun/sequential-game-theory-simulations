@@ -1,14 +1,17 @@
+# data manipulation
 sklearn
 scipy
 numpy
 
+# data visualization
 matplotlib
 seaborn
-
 ipython
+jupyter
 pygame
 ffmpy
 
+# coverage
 coverage >=4.0, <4.4
 codacy-coverage
 pytest-cov
