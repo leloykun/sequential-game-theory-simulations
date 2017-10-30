@@ -228,10 +228,12 @@ data/plots/depth_heatmap/*
 !data/plots/depth_heatmap/cm/
 data/plots/depth_heatmap/cm/*
 !data/plots/depth_heatmap/cm/anim.mp4
+!data/plots/depth_heatmap/cm/anim_viewable.mp4
 
 !data/plots/depth_heatmap/cmc/
 data/plots/depth_heatmap/cmc/*
 !data/plots/depth_heatmap/cmc/anim.mp4
+!data/plots/depth_heatmap/cmc/anim_viewable.mp4
 
 !data/plots/regression/
 data/plots/regression/*
