@@ -19,9 +19,9 @@ ArrayStats = namedtuple('ArrayStats', 'min ave max range')
 
 
 def get_stats(X):
-    '''  Calculate the basic statistics of an ndarray
+    '''  Calculates statistics of an ndarray
 
-    Calculate the minimum, average,
+    Calculates the minimum, mean,
     maximum, and range of an ndarray
 
     Parameters
@@ -45,13 +45,13 @@ def get_stats(X):
 
 
 def normalize(X, stats, invert=False):
-    '''  Normalize an ndarray to the range [0, 1]
+    '''  Normalizes an ndarray to the range [0, 1]
 
-    Normalize the values of an ndarray
+    Normalizes the values of an ndarray
     to the range [0, 1] based on the
     stats of the trainer ndarray.
 
-    Invert the result when invert == True
+    Inverts the result when invert == True
 
     Parameters
     ----------
@@ -70,6 +70,8 @@ def normalize(X, stats, invert=False):
     Examples
     --------
     >>> X = np.linspace(1, 5, 5)
+    >>> normalize(X=X, stats=get_stats(X))
+    [0.00 0.25 0.50 0.75 1.00]
     >>> normalize(X=X, stats=get_stats(X), invert=True)
     [1.00 0.75 0.50 0.25 0.00]
     '''
@@ -80,7 +82,7 @@ def normalize(X, stats, invert=False):
 def gif_to_mp4(file, fps):
     '''  converts a gif into an mp4
 
-    Create an mp4 version of the
+    Creates an mp4 version of the
     inputted gif in the same directory
 
     Parameters
@@ -95,10 +97,14 @@ def gif_to_mp4(file, fps):
     ff.run()
 
 
-def plot_dist(X, ax, file_name,
-              hist=False, shade=True,
-              xticks=None, yticks=None):
-    '''  Plot the distribution of the values of an ndarray
+def plot_dist(X,
+              ax,
+              file_name,
+              hist=False,
+              shade=True,
+              xticks=None,
+              yticks=None):
+    '''  Plots the distribution of the values of an ndarray
 
     Parameters
     ----------
@@ -142,7 +148,7 @@ def plot_dist(X, ax, file_name,
 
 
 def animate(input_files, output_file, fps=1, vid=True):
-    '''  Generate an animation from the given frames
+    '''  Generates an animation from the given frames
 
     Generates an animation from the frames in the 'input_files'
 
@@ -236,12 +242,39 @@ def heatmap_preprocess(X,
 
 
 def plot_3d_rotate(ax, save_file, degree):
+    '''  rotates a 3d graph and saves each frame
+
+    Parameters
+    ----------
+    ax : Axes3D
+        The axes to be processed
+    save_file : str
+        The format of the save files of the frames
+    degree : int
+        The degree of the polynomial estimate. Only used for output
+    '''
     for ii in range(0, 360, 1):
         ax.view_init(elev=30., azim=ii)
         plt.savefig(save_file.format(degree, ii), transparent=True)
 
 
 def plot_3d_normed(model, degree, offsets=(1.5, 1.5, 0.0)):
+    '''  plots an animated heatmap into separate frames
+
+    Parameters
+    ----------
+    model : PolynomialRegression
+        
+    degree : int
+        
+    offsets : tuple, optional
+        
+
+    Returns
+    -------
+    ax : Axes3D
+        
+    '''
     fig = plt.figure(figsize=(6, 6))
     ax = fig.add_subplot(1, 1, 1, projection='3d')
     
