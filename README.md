@@ -7,7 +7,8 @@
 
 Simulations on specialization, migration, and cooperation
 
-<img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree1/frame315.jpeg" width="30%" height="30%"> <img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree2/frame315.jpeg" width="30%" height="30%"> <img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree3/frame315.jpeg" width="30%" height="30%">
+<img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree1/frame315.jpeg" width="45%" height="45%"> <img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree2/frame315.jpeg" width="45%" height="45%"> 
+<img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree3/frame315.jpeg" width="45%" height="45%"> <img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/logistic/frame315.jpeg" width="45%" height="45%">
 
 NOTE: This project is not finished yet. See the older version [here](https://github.com/leloykun/cultural-evolution/tree/master/miscSims).
 
