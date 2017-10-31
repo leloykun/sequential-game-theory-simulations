@@ -253,4 +253,9 @@ data/plots/regression/degree3/*
 !data/plots/regression/degree3/anim60.mp4
 !data/plots/regression/degree3/frame315.jpeg
 
+!data/plots/regression/logistic/
+data/plots/regression/logistic/*
+!data/plots/regression/logistic/anim60.mp4
+!data/plots/regression/logistic/frame315.jpeg
+
 data/tensorboard/*
