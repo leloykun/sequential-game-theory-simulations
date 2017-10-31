@@ -314,19 +314,24 @@ def plot_3d_normed(model, degree, offsets=(1.5, 1.5, 0.0)):
 
 
 class PolynomialRegression:
-    X = []
-    Y = []
-
-    X_flat = []
-    Y_flat = []
-
-    Y_pred = []
-
-    labels = []
-    n_params = 1
-    dim = 10
+    '''
+    
+    '''
 
     def __init__(self, X, Y, degree=None, labels=None):
+        '''
+        
+        Parameters
+        ----------
+        X : ndarray
+            
+        Y : ndarray
+            
+        degree : int, optional
+            
+        labels : list_like, optional
+            
+        '''
         self.X = np.copy(X)
         self.Y = np.copy(Y)
 
@@ -345,6 +350,13 @@ class PolynomialRegression:
             self.Y_pred = self.predict()
 
     def regress(self, degree=2):
+        '''
+        
+        Parameters
+        ----------
+        degree : int, optional
+            
+        '''
         self.model = Pipeline([('poly', PolynomialFeatures(degree=degree)),
                                ('linear', LinearRegression(fit_intercept=False))])
         self.model.fit(self.X_flat, self.Y_flat)
@@ -357,13 +369,34 @@ class PolynomialRegression:
         self.func = zip(self.coefs, self.labels)
 
     def calc_labels(self):
+        '''
+        
+        Returns
+        -------
+        list
+            
+        '''
         labels = self.model.named_steps['poly'].get_feature_names()
         return ['*'.join(label.split()) for label in labels]
 
     def print_func(self):
+        '''
+        
+        '''
         print(' + '.join("%lf*%s" % nomial for nomial in self.func))
 
     def process(self, degree=None):
+        '''
+        Parameters
+        ----------
+        degree : int, optional
+            
+        
+        Returns
+        -------
+        obj: PolynomialRegression
+            
+        '''
         if degree not in [self.degree, None]:
             self.degree = degree
             self.regress(degree)
@@ -373,6 +406,18 @@ class PolynomialRegression:
         return self
 
     def predict(self, X=None):
+        '''
+        
+        Parameters
+        ----------
+        X : ndarray, optional
+            
+        
+        Returns
+        -------
+        ndarray
+            
+        '''
         if X is None:
             X = self.X
 
@@ -392,6 +437,46 @@ class PolynomialRegression:
              offsets=(1.5, 1.5, 0),
              show_labels=False, labels=("X0", "X1", "Y"),
              title=None):
+        '''
+        
+        Parameters
+        ----------
+        ax : Axes3D
+            
+        idx : tuple of int, optional
+            
+        X : ndarray, optional
+            
+        Y : ndarray, optional
+            
+        Z : ndarray, optional
+            
+        plot_type : str, optional
+            
+        alpha : float, optional
+            
+        show_contours : bool, optional
+            
+        cmap : matplotlib.cm, optional
+            
+        tight : bool, optional
+            
+        lims : tuple of tuple of float, optional
+            
+        offsets : tuple of float, optional
+            
+        show_labels : bool, optional
+            
+        labels : tuple if str, optional
+            
+        title : str, optional
+            
+
+        Returns
+        -------
+        matplotlib.lines.Line2D
+            
+        '''
         if X is None:
             X = self.X[idx[0]]
         if Y is None:
@@ -441,6 +526,28 @@ class PolynomialRegression:
 
 
 def linear_regression(X, Y, verbose=False, labels=None, round_to=4):
+    '''
+    
+    Parameters
+    ----------
+    X : ndarray
+        
+    Y : ndarray
+        
+    verbose : bool, optional
+        
+    labels : list of str, optional
+        
+    round_to : int, optional
+        
+
+    Returns
+    -------
+    tuple(sklearn.linear_regression.LinearRegression,
+          list of float,
+          float)
+        
+    '''
     n = len(X)
 
     if verbose:
@@ -473,6 +580,29 @@ def polynomial_regression(X,
                           verbose=False,
                           labels=None,
                           round_to=4):
+    '''
+
+    Parameters
+    ----------
+    X : ndarray
+        
+    Y : ndarray
+        
+    degree : int
+        
+    verbose : bool, optional
+        
+    labels : list of str, optional
+        
+    round_to : int, optional
+        
+
+    Returns
+    -------
+    tuple(sklearn.pipeline.Pipeline,
+          list of float,
+          float)
+    '''
     n = len(X)
 
     if verbose:
