@@ -241,13 +241,25 @@ data/plots/regression/*
 !data/plots/regression/degree1/
 data/plots/regression/degree1/*
 !data/plots/regression/degree1/anim60.mp4
+<<<<<<< HEAD
+=======
+!data/plots/regression/degree1/frame315.jpeg
+>>>>>>> master
 
 !data/plots/regression/degree2/
 data/plots/regression/degree2/*
 !data/plots/regression/degree2/anim60.mp4
+<<<<<<< HEAD
+=======
+!data/plots/regression/degree2/frame315.jpeg
+>>>>>>> master
 
 !data/plots/regression/degree3/
 data/plots/regression/degree3/*
 !data/plots/regression/degree3/anim60.mp4
+<<<<<<< HEAD
+=======
+!data/plots/regression/degree3/frame315.jpeg
+>>>>>>> master
 
 data/tensorboard/*
