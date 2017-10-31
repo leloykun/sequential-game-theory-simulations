@@ -7,27 +7,16 @@
 
 Simulations on specialization, migration, and cooperation
 
-<img src="https://github.com/leloykun/socialsims/blob/master/docs/experiments/4/1/plotloop.gif" alt="alt text" width="45%" height="45%"> <img src="https://github.com/leloykun/socialsims/blob/master/docs/experiments/6/1plot-both.png" alt="alt text" width="45%" height="45%">
+<img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree1/frame315.jpeg" width="45%" height="45%"> <img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree2/frame315.jpeg" width="45%" height="45%"> 
+<img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree3/frame315.jpeg" width="45%" height="45%"> <img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/logistic/frame315.jpeg" width="45%" height="45%">
 
 NOTE: This project is not finished yet. See the older version [here](https://github.com/leloykun/cultural-evolution/tree/master/miscSims).
 
 ## Gettting started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
-
-#### Language
+### Language
 [Python 3.x](https://www.python.org/downloads/) (preferably [python 3.5](https://www.python.org/downloads/release/python-350/)) 
-
-#### Libraries
-Install the required libraries with pip:
-``` bash
-pip install -r requirements.txt
-```
-or
-``` bash
-pip3 install -r requirements.txt
-```
 
 ### Installation
 Download or clone the repository to your prefered directory using the big green button on the upper-right corner of the page
@@ -40,7 +29,16 @@ or
 ```
 git clone https://github.com/leloykun/socialsims.git
 ```
-And you're now ready to run the simulations!
+
+### Libraries
+Install the required libraries with pip:
+``` bash
+pip install -r requirements.txt
+```
+or
+``` bash
+pip3 install -r requirements.txt
+```
 
 ## Running the simulations
 You can run all of the simulations in one go with:
@@ -49,9 +47,7 @@ python main.py
 ```
 The raw data for each simulation can then be found in `data/raw/[name_of_simulation]`
 
-TODO: add better examples
-
-### Turning on visuals
+### Turning on the visuals
 The visuals are turned off by default to speed up the simulations.
 
 To turn them on, simply uncomment the line with `env.show()` in the source code of each simulation:
@@ -63,17 +59,6 @@ env.show()
 This is *NOT* recommended.
 
 TODO: centralize this option
-
-### Data visualization
-For each simulation, go to the directory of its data and run the following in the command line:
-```bash
-python data_visualizer.py
-```
-The graphs would then be automatically generated for you.
-
-Additionally, `data_visualizer.py` can easily be modified when needed.
-
-TODO: centralize data visualization
 
 ### Running the simulations individually
 You can comment out the simulations in `src/sims/list.txt` to exclude them from being run by `portal.py`. For example, with the following, only simulation `cat-mouse` would be run with parameters `100 10 10` as `[runs] [trials] [steps]`.
@@ -96,10 +81,13 @@ cat-mouse 10 100 10
 
 TODO: fix this
 
-### Running the tests
+### Testing
 ```bash
 pytest tests/
 ```
+
+## Data Analysis
+TODO
 
 ## Details
 TODO
