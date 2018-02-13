@@ -1,5 +1,5 @@
 # cat_mouse [runs] [trials] [steps]
-# cat_mouse 10 100 10
+cat_mouse 10 100 10
 # 
 # cat_mouse_cheese [runs] [timesteps] [interval]
 cat_mouse_cheese 10 10000 1000

@@ -5,7 +5,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ee723a36e510464aab4bd4fbe8ef1779)](https://www.codacy.com/app/leloykun/socialsims?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=leloykun/socialsims&amp;utm_campaign=Badge_Grade)
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/ee723a36e510464aab4bd4fbe8ef1779)](https://www.codacy.com/app/leloykun/socialsims?utm_source=github.com&utm_medium=referral&utm_content=leloykun/socialsims&utm_campaign=Badge_Coverage)
 
-Simulations on specialization, migration, and cooperation
+Simulations on the collective behavior of reinforcement learning agents
 
 <img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree1/frame315.jpeg" width="45%" height="45%"> <img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree2/frame315.jpeg" width="45%" height="45%"> 
 <img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/degree3/frame315.jpeg" width="45%" height="45%"> <img src="https://github.com/leloykun/socialsims/blob/master/data/plots/regression/logistic/frame315.jpeg" width="45%" height="45%">
@@ -19,14 +19,12 @@ These instructions will get you a copy of the project up and running on your loc
 [Python 3.x](https://www.python.org/downloads/) (preferably [python 3.5](https://www.python.org/downloads/release/python-350/)) 
 
 ### Installation
-Download or clone the repository to your prefered directory using the big green button on the upper-right corner of the page
-
-or by using git:
-```
+Download or clone the repository using the big green button on the upper-right corner of the page or by using git:
+```bash
 git clone git://github.com/leloykun/socialsims.git
 ```
 or
-```
+```bash
 git clone https://github.com/leloykun/socialsims.git
 ```
 
@@ -45,7 +43,13 @@ You can run all of the simulations in one go with:
 ```bash
 python main.py
 ```
-The raw data for each simulation can then be found in `data/raw/[name_of_simulation]`
+The raw data for each simulation can be found in `data/raw/[name of simulation]`
+
+### Testing
+Just run
+```bash
+pytest
+```
 
 ### Turning on the visuals
 The visuals are turned off by default to speed up the simulations.

@@ -77,7 +77,7 @@ class Cat(Agent):
 
 
 def worker(params):
-    alpha, gamma, trials, steps, test = params
+    alpha, gamma, trials, steps = params
 
     env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
                                          'worlds/box10x10.txt'),
@@ -111,11 +111,12 @@ def worker(params):
     return result
 
 
-def run(params, test=False, to_save=True):
+def run(params, grid_params=False, test=False, to_save=True):
     runs, trials, steps = process(params)
 
     if test:
-        worker((0.5, 0.5, trials, steps, test))
+        worker((5, 5, trials, steps))
+        return
 
     for depth in range(1, max_visual_depth + 1):
         Cat.visual_depth = depth
@@ -125,16 +126,15 @@ def run(params, test=False, to_save=True):
             run_start = time.time()
 
             params = []
-            for alpha in range(11):
-                for gamma in range(11):
-                    params.append((alpha, gamma, trials, steps, test))
+            if grid_params:
+                for alpha in range(11):
+                    for gamma in range(11):
+                        params.append((alpha, gamma, trials, steps))
+            else:
+                params = [(5, 5, trials, steps)]
 
-            if test:
-                params = [(5, 5, trials, steps, test)]
-
-            pool = mp.Pool(mp.cpu_count())
-            results = pool.map(func=worker, iterable=params)
-            pool.close()
+            with mp.Pool(mp.cpu_count()) as pool:
+                results = pool.map(worker, params)
 
             if to_save:
                 with open(os.path.join(output_dir, "depth{}/run{}.txt".format(depth, run)), 'w') as f:

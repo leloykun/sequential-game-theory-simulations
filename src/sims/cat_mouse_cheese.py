@@ -120,7 +120,7 @@ class Cat(Agent):
 
 
 def worker(params):
-    alpha, gamma, timesteps, interval, test = params
+    alpha, gamma, timesteps, interval = params
 
     env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
                                          'worlds/waco.txt'),
@@ -156,11 +156,12 @@ def worker(params):
     return [alpha, gamma] + losses + wins
 
 
-def run(params, test=False, to_save=True):
+def run(params, grid_params=False, test=False, to_save=True):
     runs, timesteps, interval = process(params)
 
     if test:
-        worker((0.5, 0.5, timesteps, interval, test))
+        worker((5, 5, timesteps, interval))
+        return
 
     for depth in range(1, max_visual_depth + 1):
         Mouse.visual_depth = depth
@@ -170,12 +171,12 @@ def run(params, test=False, to_save=True):
             run_start = time.time()
 
             params = []
-            for alpha in range(11):
-                for gamma in range(11):
-                    params.append((alpha, gamma, timesteps, interval, test))
-
-            if test:
-                params = [(5, 5, timesteps, interval, test)]
+            if grid_params:
+                for alpha in range(11):
+                    for gamma in range(11):
+                        params.append((alpha, gamma, timesteps, interval))
+            else:
+                params = [(5, 5, timesteps, interval)]
 
             with mp.Pool(mp.cpu_count()) as pool:
                 results = pool.map(worker, params)
@@ -185,10 +186,5 @@ def run(params, test=False, to_save=True):
                     f.write("\n".join(' '.join(map(str, result))
                                       for result in results))
 
-            print(
-                "     ",
-                to_ordinal(run),
-                "runtime:",
-                time.time() -
-                run_start,
-                "secs")
+            print("      ", end="")
+            print(to_ordinal(run), "runtime:", time.time() - run_start, "secs")
