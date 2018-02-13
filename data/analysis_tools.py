@@ -277,7 +277,7 @@ def plot_3d_normed(model, degree, offsets=(1.5, 1.5, 0.0)):
     '''
     fig = plt.figure(figsize=(6, 6))
     ax = fig.add_subplot(1, 1, 1, projection='3d')
-    
+
     p = model.plot(ax,
                    idx=(2, 3),
                    Z=model.Y, plot_type='wireframe',
