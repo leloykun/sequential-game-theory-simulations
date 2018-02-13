@@ -69,4 +69,4 @@ def run(list_file=os.path.join(os.path.dirname(__file__),
         else:
             raise("simulation %s not found".format(sim_name))
 
-        print(sim, "finished with runtime:", time.time() - sim_start, "secs\n")
+        print(sim_name, "finished with runtime:", time.time() - sim_start, "secs\n")
