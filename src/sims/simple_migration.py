@@ -104,12 +104,13 @@ def run(params, test=False):
     runs, timesteps, temp_powers = process(params)
 
     if test:
-        worker((0.5, 0.5, 0, timesteps, 1, test))
+        worker((5, 5, 0, timesteps, 1, test))
+        return
 
     params = []
     for run in range(1, runs + 1):
         for power in range(-temp_powers, temp_powers + 1):
-            params.append((0.5, 0.5, power, timesteps, run, test))
+            params.append((5, 5, power, timesteps, run, test))
 
     with mp.Pool(mp.cpu_count()) as pool:
         pool.map(func=worker, iterable=params)
