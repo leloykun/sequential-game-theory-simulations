@@ -85,11 +85,6 @@ cat-mouse 10 100 10
 
 TODO: fix this
 
-### Testing
-```bash
-pytest tests/
-```
-
 ## Data Analysis
 TODO
 
