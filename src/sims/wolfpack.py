@@ -17,7 +17,7 @@ output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname( __fil
 
 max_visual_depth = 4
 param_values = [p/10 for p in range(11)]
-print(param_values)
+#print(param_values)
 
 
 class Cat(Agent):
@@ -44,14 +44,22 @@ class Cat(Agent):
             for j in range(-self.visual_depth, self.visual_depth + 1):
                 self.lookcells.append((i, j))
 
+    def calc_reward(self):
+        reward = 0
+        if self.world.cats[0].can_capture_mouse():
+            reward += 50
+        if self.world.cats[0].can_capture_mouse():
+            reward += 50
+        return reward
+
     def update(self):
         state = self.calc_state()
         reward = -1
 
         # if self.cell == self.world.mouse.cell:
-        if self.dist_to_mouse() <= self.capture_radius:
-            self.fed += 1
-            reward = 50
+        if self.can_capture_mouse():
+            self.world.fed += 1
+            reward = self.calc_reward()
             self.world.mouse.cell = self.env.get_random_avail_cell()
 
         if self.last_state is not None:
@@ -68,17 +76,27 @@ class Cat(Agent):
 
         self.go_in_direction(action)
 
+    def can_capture_mouse(self):
+        return self.dist_to_mouse() <= self.capture_radius
+
     def dist_to_mouse(self):
         mouse = self.world.mouse
         return abs(self.cell.x - mouse.cell.x) + abs(self.cell.y - mouse.cell.y)
 
     # TODO: consider wrapping here
     def calc_state(self):
+        cats = self.world.cats
         mouse = self.world.mouse
 
         def cell_value(cell):
-            if mouse.cell is not None and (cell.x == mouse.cell.x and
-                                           cell.y == mouse.cell.y):
+            if cats[0].cell is not None and (cell.x == cats[0].cell.x and
+                                             cell.y == cats[0].cell.y):
+                return 4
+            elif cats[1].cell is not None and (cell.x == cats[1].cell.x and
+                                               cell.y == cats[1].cell.y):
+                return 3
+            elif mouse.cell is not None and (cell.x == mouse.cell.x and
+                                             cell.y == mouse.cell.y):
                 return 2
             elif cell.wall:
                 return 1
@@ -108,17 +126,25 @@ def worker(params):
                                          'worlds/waco2.txt'),
                             CasualCell))
 
-    cat = Cat()
-    env.add_agent(cat)
-    cat.ai.alpha = alpha
-    cat.ai.gamma = gamma
-    cat.ai.temp = 0.4
-    cat.capture_radius = depth
-    env.world.cat = cat
+    cat1 = Cat()
+    cat1.ai.alpha = alpha
+    cat1.ai.gamma = gamma
+    cat1.ai.temp = 0.4
+    cat1.capture_radius = depth
+    env.add_agent(cat1)
+
+    cat2 = Cat()
+    cat2.ai.alpha = alpha
+    cat2.ai.gamma = gamma
+    cat2.ai.temp = 0.4
+    cat2.capture_radius = depth
+    env.add_agent(cat2)
+
+    env.world.cats = [cat1, cat2]
 
     mouse = Mouse()
-    env.add_agent(mouse)
     mouse.move = True
+    env.add_agent(mouse)
     env.world.mouse = mouse
 
     # env.show()
@@ -127,7 +153,7 @@ def worker(params):
     prev_fed = 0
     result = [alpha, gamma]
     while env.world.fed < trials:
-        env.update(0, env.world.cat.fed)
+        env.update()
 
         if env.world.fed is not prev_fed and (
                 env.world.fed + 1) % steps == 0:
@@ -146,15 +172,15 @@ def run(params, grid_params=False, test=False, to_save=True):
 
     for depth in range(1, max_visual_depth + 1):
         # Cat.capture_radius = depth
-        print("   capture radius:", Cat.capture_radius)
+        print("   capture radius:", depth)
 
-        for run in range(1, runs + 1):
+        for run in range(1, 4):
             run_start = time.time()
 
             params = []
             if grid_params:
-                for alpha in range(11):
-                    for gamma in range(11):
+                for alpha in param_values:
+                    for gamma in param_values:
                         params.append((alpha, gamma, trials, steps, depth))
             else:
                 params = [(0.5, 0.5, trials, steps, depth)]
