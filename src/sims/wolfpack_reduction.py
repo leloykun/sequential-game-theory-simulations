@@ -12,7 +12,7 @@ from ..cell import CasualCell
 #from ..agent import DumbPrey as Mouse
 from ..environment import Environment
 
-sim_name = 'wolfpack'
+sim_name = 'wolfpack_reduction'
 output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname( __file__ ))),
                           'data/raw/{}/'.format(sim_name))
 
@@ -37,16 +37,19 @@ class Mouse(Agent):
 
 class Cat(Agent):
     colour = 'red'
-    visual_depth = 4
+    visual_depth = 6
     capture_radius = 2
     lookcells = []
 
     def __init__(self):
         self.ai = QLearn(actions=list(range(8)))
+        self.learning = True
         self.ai.agent = self
 
         self.eaten = 0
         self.fed = 0
+
+        self.total_rewards = 0
 
         self.last_action = None
         self.last_state = None
@@ -62,9 +65,9 @@ class Cat(Agent):
     def calc_reward(self):
         reward = 0
         if self.world.cats[0].can_capture_mouse():
-            reward += 50
+            reward += 100
         if self.world.cats[1].can_capture_mouse():
-            reward += 50
+            reward += 100
         return reward
 
     def update(self):
@@ -77,7 +80,9 @@ class Cat(Agent):
             self.world.mouse.mark = True
             # self.world.mouse.cell = self.env.get_random_avail_cell()
 
-        if self.last_state is not None:
+        self.total_rewards += reward
+
+        if self.last_state is not None and self.learning:
             self.ai.learn(self.last_state,
                           self.last_action,
                           reward,
@@ -134,8 +139,8 @@ class Cat(Agent):
         pass
 
 
-def worker(params):
-    alpha, gamma, trials, steps, depth = params
+def preworker(params):
+    alpha, gamma, trials, depth = params
 
     env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
                                          'worlds/waco2.txt'),
@@ -165,48 +170,66 @@ def worker(params):
     # env.show()
 
     env.world.fed = 0
-    prev_fed = 0
-    result = [alpha, gamma]
     while env.world.fed < trials:
         env.update()
 
-        if env.world.fed is not prev_fed and (
-                env.world.fed + 1) % steps == 0:
-            result.append(env.world.age)
-        prev_fed = env.world.fed
+    return env.world.cats
 
-    return result
+
+def postworker(params):
+    trials, cat1, cat2 = params
+
+    env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
+                                         'worlds/waco2.txt'),
+                            CasualCell))
+
+    cat1.total_rewards = 0
+    cat1.learning = False
+    env.add_agent(cat1)
+
+    cat2.total_rewards = 0
+    cat2.learning = False
+    env.add_agent(cat2)
+
+    env.world.cats = [cat1, cat2]
+
+    mouse = Mouse()
+    mouse.move = True
+    env.add_agent(mouse)
+    env.world.mouse = mouse
+
+    # env.show()
+
+    env.world.fed = 0
+    while env.world.fed < trials:
+        env.update()
+
+    return env.world.cats[0].total_rewards, env.world.cats[1].total_rewards
 
 
 def run(params, grid_params=False, test=False, to_save=True):
-    runs, trials, steps = process(params)
+    runs, trials = process(params)
 
     if test:
-        worker((0.5, 0.5, trials, steps, 2))
+        preworker((0.5, 0.5, trials, steps, 2))
         return
 
+    print("pre experiment")
+    cats = []
     for depth in range(1, max_visual_depth + 1):
-        # Cat.capture_radius = depth
-        print("   capture radius:", depth)
+        cats.append(preworker((0.5, 0.5, trials, depth)))
 
-        for run in range(1, runs + 1):
-            run_start = time.time()
+    for pair in cats:
+        print(pair[0].total_rewards, pair[1].total_rewards)
 
-            params = []
-            if grid_params:
-                for alpha in param_values:
-                    for gamma in param_values:
-                        params.append((alpha, gamma, trials, steps, depth))
-            else:
-                params = [(0.5, 0.5, trials, steps, depth)]
-
-            with mp.Pool(mp.cpu_count()) as pool:
-                results = pool.map(worker, params)
-
-            if to_save:
-                with open(os.path.join(output_dir, "depth{}/run{}.txt".format(depth, run)), 'w') as f:
-                    f.write('\n'.join(' '.join(map(str, result)) 
-                                      for result in results))
-
-            print("      ", end="")
-            print(to_ordinal(run), "runtime:", time.time() - run_start, "secs")
+    print("main experiment:")
+    idx = [1, 3]
+    for run in range(1, runs + 1):
+        print("run {}: ".format(run))
+        for i in idx:
+            for j in idx: 
+                res = postworker((trials, cats[i][0], cats[j][0]))
+                print("D" if i == 1 else "C",
+                      "D" if j == 1 else "C",
+                      res[0],
+                      res[1])
