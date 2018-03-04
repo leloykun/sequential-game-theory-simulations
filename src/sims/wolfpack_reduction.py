@@ -1,7 +1,10 @@
 import os
 import time
 import random
+import copy
 import multiprocessing as mp
+
+import numpy as np
 
 from .utils import to_ordinal, process
 
@@ -16,9 +19,7 @@ sim_name = 'wolfpack_reduction'
 output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname( __file__ ))),
                           'data/raw/{}/'.format(sim_name))
 
-max_visual_depth = 4
-param_values = [p/10 for p in range(11)]
-#print(param_values)
+param_values = np.linspace(0, 1, 11)
 
 
 class Mouse(Agent):
@@ -39,7 +40,9 @@ class Cat(Agent):
     colour = 'red'
     visual_depth = 6
     capture_radius = 2
+    reward_per_cat = 50
     lookcells = []
+    idx = -1;
 
     def __init__(self):
         self.ai = QLearn(actions=list(range(8)))
@@ -64,17 +67,17 @@ class Cat(Agent):
 
     def calc_reward(self):
         reward = 0
-        if self.world.cats[0].can_capture_mouse():
-            reward += 100
-        if self.world.cats[1].can_capture_mouse():
-            reward += 100
+        if self.world.can_cat_capture[0]:
+            reward += 50
+        if self.world.can_cat_capture[1]:
+            reward += 50
         return reward
 
     def update(self):
         state = self.calc_state()
         reward = -1
 
-        if self.can_capture_mouse():
+        if self.world.can_cat_capture[self.idx]:
             self.world.fed += 1
             reward = self.calc_reward()
             self.world.mouse.mark = True
@@ -139,97 +142,107 @@ class Cat(Agent):
         pass
 
 
-def preworker(params):
-    alpha, gamma, trials, depth = params
+def worker(params):
+    alpha, gamma, training_trials, test_trials, depth_a, depth_b, reward_per_cat = params
+
+    def prepare(world):
+        world.can_cat_capture = []
+        for cat in world.cats:
+            world.can_cat_capture.append(1 if cat.can_capture_mouse() else 0)
 
     env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
                                          'worlds/waco2.txt'),
                             CasualCell))
 
-    cat1 = Cat()
-    cat1.ai.alpha = alpha
-    cat1.ai.gamma = gamma
-    cat1.ai.temp = 0.4
-    cat1.capture_radius = depth
-    env.add_agent(cat1)
+    '''   Training Phase'''
+    cat_a = Cat()
+    cat_a.ai.alpha = alpha
+    cat_a.ai.gamma = gamma
+    cat_a.ai.temp = 0.4
+    cat_a.capture_radius = depth_a
+    cat_a.reward_per_cat = reward_per_cat
+    cat_a.idx = 0;
 
-    cat2 = Cat()
-    cat2.ai.alpha = alpha
-    cat2.ai.gamma = gamma
-    cat2.ai.temp = 0.4
-    cat2.capture_radius = depth
-    env.add_agent(cat2)
+    cat_b = Cat()
+    cat_b.ai.alpha = alpha
+    cat_b.ai.gamma = gamma
+    cat_b.ai.temp = 0.4
+    cat_b.capture_radius = depth_b
+    cat_b.reward_per_cat = reward_per_cat
+    cat_b.idx = 1;
 
-    env.world.cats = [cat1, cat2]
+    env.add_agent(cat_a)
+    env.add_agent(cat_b)
+    env.world.cats = [cat_a, cat_b]
 
     mouse = Mouse()
     mouse.move = True
+    mouse.id = 2;
+
     env.add_agent(mouse)
     env.world.mouse = mouse
 
     # env.show()
 
     env.world.fed = 0
-    while env.world.fed < trials:
+    while env.world.fed < training_trials:
+        prepare(env.world)
         env.update()
 
-    return env.world.cats
+    training_results = [env.world.cats[0].total_rewards, env.world.cats[1].total_rewards]
 
 
-def postworker(params):
-    trials, cat1, cat2 = params
-
+    '''   Testing Phase   '''
     env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
                                          'worlds/waco2.txt'),
                             CasualCell))
 
-    cat1.total_rewards = 0
-    cat1.learning = False
-    env.add_agent(cat1)
+    cat_a.total_rewards = 0
+    cat_a.learning = False
 
-    cat2.total_rewards = 0
-    cat2.learning = False
-    env.add_agent(cat2)
+    env.add_agent(cat_a)
+    env.add_agent(cat_b)
+    env.world.cats = [cat_a, cat_b]
 
-    env.world.cats = [cat1, cat2]
+    cat_b.total_rewards = 0
+    cat_b.learning = False
 
-    mouse = Mouse()
-    mouse.move = True
     env.add_agent(mouse)
     env.world.mouse = mouse
 
-    # env.show()
-
     env.world.fed = 0
-    while env.world.fed < trials:
+    while env.world.fed < test_trials:
+        prepare(env.world)
         env.update()
 
-    return env.world.cats[0].total_rewards, env.world.cats[1].total_rewards
+    test_results = [env.world.cats[0].total_rewards, env.world.cats[1].total_rewards]
+
+    return test_results
+    #return training_results, test_results
 
 
 def run(params, grid_params=False, test=False, to_save=True):
-    runs, trials = process(params)
+    runs, training_trials, test_trials = process(params)
 
     if test:
-        preworker((0.5, 0.5, trials, steps, 2))
+        preworker((0.5, 0.5, training_trials, test_trials, 2, 2, 50))
         return
 
-    print("pre experiment")
-    cats = []
-    for depth in range(1, max_visual_depth + 1):
-        cats.append(preworker((0.5, 0.5, trials, depth)))
+    depths = [2, 4]
+    rewards_per_cat = [20, 40, 60, 80, 100]
 
-    for pair in cats:
-        print(pair[0].total_rewards, pair[1].total_rewards)
+    params = []
+    for reward in rewards_per_cat:
+        for run in range(runs):
+            params.append((0.5, 0.5, training_trials, test_trials, 2, 2, reward))
+            params.append((0.5, 0.5, training_trials, test_trials, 2, 4, reward))
+            params.append((0.5, 0.5, training_trials, test_trials, 4, 4, reward))
 
-    print("main experiment:")
-    idx = [1, 3]
-    for run in range(1, runs + 1):
-        print("run {}: ".format(run))
-        for i in idx:
-            for j in idx: 
-                res = postworker((trials, cats[i][0], cats[j][0]))
-                print("D" if i == 1 else "C",
-                      "D" if j == 1 else "C",
-                      res[0],
-                      res[1])
+    with mp.Pool(mp.cpu_count()-1) as pool:
+        results = pool.map(worker, params)
+
+    results = np.array(results).reshape(len(rewards_per_cat), runs, 3, 2)
+    np.save(output_dir + 'run_test', results)
+
+    print(results.shape)
+    print(results)

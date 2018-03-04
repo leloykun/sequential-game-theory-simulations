@@ -16,5 +16,5 @@
 # wolfpack [runs] [trials] [steps]
 # wolfpack 10 100 1
 #
-# wolfpack_reduction [runs] [trials] [steps]
-wolfpack_reduction 10 100
+# wolfpack_reduction [runs] [training_trials] [test_trials]
+wolfpack_reduction 60 100 100
