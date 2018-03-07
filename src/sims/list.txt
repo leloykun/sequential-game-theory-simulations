@@ -14,7 +14,10 @@
 # migration 1 100000 3
 #
 # wolfpack [runs] [training_trials] [test_trials]
-wolfpack 10 100 100
+# wolfpack 10 100 100
 #
 # wolfpack_reduction [runs] [training_trials] [test_trials]
-# wolfpack_reduction 1 10 10
+# wolfpack_reduction 30 100 100
+#
+# wolfpack_scene [training_trials] [test_trials] [step]
+wolfpack_scene 1000 0 100

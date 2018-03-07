@@ -100,14 +100,15 @@ def worker(params):
 
     test_results = [env.world.cats[0].total_rewards, env.world.cats[1].total_rewards]
 
-    return test_results
+    print([training_results, test_results])
+    return [training_results, test_results]
 
 
 def run(params, grid_params=False, test=False, to_save=True):
     runs, training_trials, test_trials = process(params)
 
     if test:
-        preworker((0.5, 0.5, training_trials, test_trials, 2, 2, 50))
+        worker((0.5, 0.5, training_trials, test_trials, 2, 2, 50))
         return
 
     params = []
@@ -120,7 +121,7 @@ def run(params, grid_params=False, test=False, to_save=True):
     with mp.Pool(mp.cpu_count()-1) as pool:
         results = pool.map(worker, params)
 
-    results = np.array(results).reshape(len(rewards_per_cat), runs, 3, 2)
+    results = np.array(results).reshape(len(rewards_per_cat), runs, 3, 2, 2)
     np.save(output_dir + 'run_test', results)
 
     print(results.shape)

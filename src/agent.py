@@ -102,7 +102,7 @@ class DumbPrey(Agent):
 
 
 class WolfpackMouse(Agent):
-    colour = 'yellow'
+    colour = (41, 113, 177)
     mark = False
 
     def update(self):
@@ -117,7 +117,7 @@ class WolfpackMouse(Agent):
 
 
 class WolfpackCat(Agent):
-    colour = 'red'
+    colour = (185, 39, 50)
     visual_depth = 6
     capture_radius = 4
     reward_per_cat = 100
