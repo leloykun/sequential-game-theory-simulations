@@ -258,7 +258,7 @@ def plot_3d_rotate(ax, save_file, degree):
         plt.savefig(save_file.format(degree, ii), transparent=True)
 
 
-def plot_3d_normed(model, degree, offsets=(1.5, 1.5, 0.0),
+def plot_3d_normed(model, degree, offsets=(1.5, 1.5, 0.0), idx=(0, 1),
                    lims=((0.0, 1.5), (0.0, 1.5), (0.0, 1.5)),
                    cmap=plt.cm.coolwarm):
     '''  plots an animated heatmap into separate frames
@@ -281,12 +281,12 @@ def plot_3d_normed(model, degree, offsets=(1.5, 1.5, 0.0),
     ax = fig.add_subplot(1, 1, 1, projection='3d')
 
     p = model.plot(ax,
-                   idx=(2, 3),
+                   idx=idx,
                    Z=model.Y, plot_type='wireframe',
                    show_contours=False,
                    cmap=cmap)
     q = model.plot(ax,
-                   idx=(2, 3),
+                   idx=idx,
                    Z=model.process(degree=degree).predict(), 
                    lims=lims,
                    offsets=offsets,

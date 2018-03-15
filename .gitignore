@@ -217,6 +217,8 @@ pip-log.txt
 
 __pycache__/*
 
+*.exe
+
 data/plots/*
 
 !data/plots/normed_perf_dist.png

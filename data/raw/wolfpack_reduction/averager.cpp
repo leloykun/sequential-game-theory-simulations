@@ -16,9 +16,12 @@ int main() {
         }
     }
     
+    std::cout<<"NOTE TO SELF:\n";
+    std::cout<<"take the average of the\n";
+    std::cout<<"second and third lines\n\n";
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 2; ++j)
-            std::cout<<ar[i][j]<<" ";
+            std::cout<<ar[i][j]/14469.4<<" ";
         std::cout<<"\n";
     }
     

@@ -120,4 +120,4 @@ def run(params, grid_params=False, test=False, to_save=True):
         worker((0.5, 0.5, training_trials, test_trials, step, 2, 2, 50))
         return
 
-    worker((0.5, 0.5, training_trials, test_trials, step, 3, 3, 100))
+    worker((0.5, 0.5, training_trials, test_trials, step, 1, 1, 100))
