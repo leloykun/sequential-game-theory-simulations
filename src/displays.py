@@ -152,10 +152,7 @@ class PygameDisplay:  # pragma: no cover
             return c
         return pygame.color.Color(c)
 
-    def save_image(self, filename=None):
-        if filename is None:
-            filename = 'animations/test/' + '%03d.png' % (self.world.age +
-                                                          1)
+    def save_image(self, filename):
         pygame.image.save(self.screen, filename)
 
     def make_title(self):

@@ -258,7 +258,9 @@ def plot_3d_rotate(ax, save_file, degree):
         plt.savefig(save_file.format(degree, ii), transparent=True)
 
 
-def plot_3d_normed(model, degree, offsets=(1.5, 1.5, 0.0)):
+def plot_3d_normed(model, degree, offsets=(1.5, 1.5, 0.0), idx=(0, 1),
+                   lims=((0.0, 1.5), (0.0, 1.5), (0.0, 1.5)),
+                   cmap=plt.cm.coolwarm):
     '''  plots an animated heatmap into separate frames
 
     Parameters
@@ -275,37 +277,41 @@ def plot_3d_normed(model, degree, offsets=(1.5, 1.5, 0.0)):
     ax : Axes3D
         
     '''
-    fig = plt.figure(figsize=(6, 6))
+    fig = plt.figure(figsize=(8.6, 8.6))
     ax = fig.add_subplot(1, 1, 1, projection='3d')
 
     p = model.plot(ax,
-                   idx=(2, 3),
+                   idx=idx,
                    Z=model.Y, plot_type='wireframe',
-                   show_contours=False)
+                   show_contours=False,
+                   cmap=cmap)
     q = model.plot(ax,
-                   idx=(2, 3),
+                   idx=idx,
                    Z=model.process(degree=degree).predict(), 
-                   lims=((0.0, 1.5), (0.0, 1.5), (0.0, 1.0)),
+                   lims=lims,
                    offsets=offsets,
                    show_labels=True,
                    labels=("Learning Rate",
                            "Discount Rate",
-                           "Agent Performance"))
+                           "Agent Performance"),
+                   cmap=cmap)
 
     # formatter = ticker.ScalarFormatter(useMathText=True)
     # formatter.set_scientific(True) 
     # formatter.set_powerlimits((-1,1)) 
     # ax.zaxis.set_major_formatter(formatter)
 
-    ax.set_xticks(np.linspace(0, 1, 6))
-    ax.set_yticks(np.linspace(0, 1, 6))
-    ax.set_zticks([0.0, 1.0])
+    ax.set_xticks([])
+    ax.set_yticks([])
+    #ax.set_xticks(np.linspace(0, 1, 6))
+    #ax.set_yticks(np.linspace(0, 1, 6))
+    ax.set_zticks([lims[2][0], lims[2][1]])
     ax.set_zticklabels(['low', 'high'])
     
-    ax.invert_xaxis()
+    # ax.invert_xaxis()
     # ax.invert_yaxis()
     # ax.invert_zaxis()
-    
+
     fig.patch.set_alpha(0.)
     ax.patch.set_alpha(0.0)
     ax.grid(False)
@@ -515,9 +521,9 @@ class PolynomialRegression:
             ax.set_zlim3d(lims[2][0], lims[2][1]);
         
         if show_labels:
-            ax.set_xlabel(labels[0])
-            ax.set_ylabel(labels[1])
-            ax.set_zlabel(labels[2])
+            ax.set_xlabel(labels[0], fontsize=24)
+            ax.set_ylabel(labels[1], fontsize=24)
+            ax.set_zlabel(labels[2], fontsize=24)
 
         if title is not None:
             t = plt.title(title)

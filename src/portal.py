@@ -10,6 +10,9 @@ from .sims import route_choice
 from .sims import specialization
 from .sims import simple_migration
 from .sims import migration
+from .sims import wolfpack
+from .sims import wolfpack_reduction
+from .sims import wolfpack_scene
 
 
 sim_modules = {"cat_mouse" : cat_mouse,
@@ -17,7 +20,10 @@ sim_modules = {"cat_mouse" : cat_mouse,
                "route_choice" : route_choice,
                "specialization" : specialization,
                "simple_migration" : simple_migration,
-               "migration" : migration}
+               "migration" : migration,
+               "wolfpack" : wolfpack,
+               "wolfpack_reduction" : wolfpack_reduction,
+               "wolfpack_scene": wolfpack_scene}
 
 
 def load_sims(list_file=os.path.join(os.path.dirname(__file__),

@@ -18,6 +18,9 @@ class World:
     agents = []
     age = 0
 
+    eaten = 0
+    fed = 0;
+
     def __init__(self, outline='worlds/box5v5', Cell=None, num_dir=8):
         self.outline = os.path.join(os.path.dirname(__file__), outline)
         self.Cell = Cell
@@ -88,8 +91,10 @@ class World:
                     self.display.redraw_cell(old_cell.x, old_cell.y)
                 self.display.redraw_cell(agent.cell.x, agent.cell.y)
 
-        self.eaten = eaten
-        self.fed = fed
+        if eaten:
+            self.eaten = eaten
+        if fed:
+            self.fed = fed
 
         self.display.update()
         self.age += 1
