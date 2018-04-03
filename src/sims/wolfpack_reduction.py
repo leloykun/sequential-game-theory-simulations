@@ -2,8 +2,9 @@ import os
 import time
 import random
 import copy
-import multiprocessing as mp
+# import multiprocessing as mp
 
+import pathos.multiprocessing as mp
 import numpy as np
 
 from .utils import to_ordinal, process

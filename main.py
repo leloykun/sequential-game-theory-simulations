@@ -55,7 +55,7 @@ if __name__ == '__main__':
         sims = load_sims(list_file)
     elif args.simulation[0] in default_params:
         if len(args.simulation[1:]) != len(default_params[args.simulation[0]]):
-            print("invalid parameters")
+            print("using default parameters...")
             sims = {args.simulation[0]: default_params[args.simulation[0]]}
         else:
             sims = {args.simulation[0]: args.simulation[1:]}

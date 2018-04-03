@@ -2,6 +2,7 @@
 sklearn
 scipy
 numpy
+pathos
 
 # data visualization
 matplotlib

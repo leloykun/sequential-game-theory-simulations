@@ -2,8 +2,9 @@ import os
 import time
 import random
 import copy
-import multiprocessing as mp
+# import multiprocessing as mp
 
+import pathos.multiprocessing as mp
 import numpy as np
 
 from .utils import to_ordinal, process
@@ -115,43 +116,22 @@ def test_worker(params):
 
 def generate_cats(runs, alpha, gamma, training_trials, depth_defective,
                   depth_cooperative, base_reward):
-    defective_cats = []
-    cooperative_cats = []
-
-    params = []
+    cooperative_params = []
     for run in range(runs):
-        params.append((alpha, gamma, training_trials, depth_defective,
-                       depth_defective, base_reward))
-
-    for param in params:
-        cat_a, cat_b = train_worker(param)
-        print(cat_a.total_rewards, cat_b.total_rewards)
-        defective_cats.append(cat_a)
-        defective_cats.append(cat_b)
-
-    params = []
+        cooperative_params.append((alpha, gamma, training_trials,
+                                   depth_defective, depth_defective,
+                                   base_reward))
+    defective_params = []
     for run in range(runs):
-        params.append((alpha, gamma, training_trials, depth_defective,
-                       depth_cooperative, base_reward))
+        defective_params.append((alpha, gamma, training_trials,
+                                 depth_cooperative, depth_cooperative,
+                                 base_reward))
 
-    for param in params:
-        cat_a, cat_b = train_worker(param)
-        print(cat_a.total_rewards, cat_b.total_rewards)
-        defective_cats.append(cat_a)
-        cooperative_cats.append(cat_b)
+    with mp.Pool(mp.cpu_count()) as pool:
+        defective_cats = pool.map(train_worker, params)
+        cooperative_cats = pool.map(train_worker, params)
 
-    params = []
-    for run in range(runs):
-        params.append((alpha, gamma, training_trials, depth_cooperative,
-                       depth_cooperative, base_reward))
-
-    for param in params:
-        cat_a, cat_b = train_worker(param)
-        print(cat_a.total_rewards, cat_b.total_rewards)
-        cooperative_cats.append(cat_a)
-        cooperative_cats.append(cat_b)
-
-    return defective_cats, cooperative_cats
+    return np.ravel(defective_cats), np.ravel(cooperative_cats)
 
 
 def run(params, grid_params=False, test=False, to_save=True):
@@ -169,9 +149,11 @@ def run(params, grid_params=False, test=False, to_save=True):
         params.append((test_trials, np.random.choice(defective_cats), np.random.choice(cooperative_cats)))
         params.append((test_trials, np.random.choice(cooperative_cats), np.random.choice(cooperative_cats)))
 
-    results = []
-    for param in params:
-        results.append(test_worker(param))
+    #results = []
+    #for param in params:
+    #    results.append(test_worker(param))
+    with mp.Pool(mp.cpu_count()) as pool:
+        results = pool.map(test_worker, params)
 
     results = np.array(results).reshape(runs, 3, 2)
     np.save(output_dir + 'results', results)
