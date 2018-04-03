@@ -37,7 +37,7 @@ def train_worker(params):
     alpha, gamma, training_trials, depth_a, depth_b, reward_per_cat = params
 
     env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
-                                         'worlds/waco2.txt'),
+                                         'worlds/waco3.txt'),
                             CasualCell))
 
     '''   Training Phase'''
@@ -84,7 +84,7 @@ def test_worker(params):
 
     '''   Testing Phase   '''
     env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
-                                         'worlds/waco2.txt'),
+                                         'worlds/waco3.txt'),
                             CasualCell))
 
     cat_a.total_rewards = 0
