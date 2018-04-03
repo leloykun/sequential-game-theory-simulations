@@ -19,8 +19,8 @@
 # wolfpack_reduction [runs] [training_trials] [test_trials] [base_reward]
 # wolfpack_reduction 10 20 20 50
 #
-# wolfpack_reduction_2 [runs] [training_trials] [test_trials] [base_reward]
-# wolfpack_reduction_2 10 20 20 50
+# wolfpack_reduction_2 [runs] [training_trials] [test_trials] [depth_defective] [depth_cooperative] [base_reward]
+# wolfpack_reduction_2 10 20 20 2 4 50
 #
 # wolfpack_scene [training_trials] [test_trials] [step]
 # wolfpack_scene 1000 0 100

@@ -155,13 +155,13 @@ def generate_cats(runs, alpha, gamma, training_trials, depth_defective,
 
 
 def run(params, grid_params=False, test=False, to_save=True):
-    runs, training_trials, test_trials, base_reward = process(params)
+    runs, training_trials, test_trials, depth_defective, depth_cooperative, base_reward = process(params)
 
     if test:
-        worker((0.5, 0.5, training_trials, test_trials, 2, 2, base_reward))
+        worker((0.5, 0.5, training_trials, test_trials, depth_defective, depth_cooperative, base_reward))
         return
 
-    defective_cats, cooperative_cats = generate_cats(runs, 0.5, 0.5, training_trials, 2, 4, base_reward)
+    defective_cats, cooperative_cats = generate_cats(runs, 0.5, 0.5, training_trials, depth_defective, depth_cooperative, base_reward)
 
     params = []
     for run in range(runs):

@@ -44,7 +44,7 @@ default_params = {"cat_mouse" : [10, 100, 10],
                   "migration" : [1, 100000, 3],
                   "wolfpack" : [10, 100, 100],
                   "wolfpack_reduction" : [10, 20, 20, 50],
-                  "wolfpack_reduction_2" : [10, 20, 20, 50],
+                  "wolfpack_reduction_2" : [10, 20, 20, 2, 4, 50],
                   "wolfpack_scene": [1000, 0, 100]}
 
 
