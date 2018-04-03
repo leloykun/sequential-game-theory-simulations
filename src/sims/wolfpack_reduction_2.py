@@ -118,12 +118,12 @@ def generate_cats(runs, alpha, gamma, training_trials, depth_defective,
                   depth_cooperative, base_reward):
     defective_params = []
     for run in range(runs):
-        cooperative_params.append((alpha, gamma, training_trials,
+        defective_params.append((alpha, gamma, training_trials,
                                    depth_defective, depth_defective,
                                    base_reward))
     cooperative_params = []
     for run in range(runs):
-        defective_params.append((alpha, gamma, training_trials,
+        cooperative_params.append((alpha, gamma, training_trials,
                                  depth_cooperative, depth_cooperative,
                                  base_reward))
 
