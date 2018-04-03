@@ -119,7 +119,7 @@ def generate_cats(runs, alpha, gamma, training_trials, depth_defective,
     cooperative_cats = []
 
     params = []
-    for run in range(runs//2):
+    for run in range(runs):
         params.append((alpha, gamma, training_trials, depth_defective,
                        depth_defective, base_reward))
 
@@ -141,7 +141,7 @@ def generate_cats(runs, alpha, gamma, training_trials, depth_defective,
         cooperative_cats.append(cat_b)
 
     params = []
-    for run in range(runs//2):
+    for run in range(runs):
         params.append((alpha, gamma, training_trials, depth_cooperative,
                        depth_cooperative, base_reward))
 
