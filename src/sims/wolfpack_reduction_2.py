@@ -25,13 +25,14 @@ depths = [2, 4]
 rewards_per_cat = [20, 40, 60, 80, 100]
 
 
+def prepare(world):
+    world.can_cat_capture = []
+    for cat in world.cats:
+        world.can_cat_capture.append(1 if cat.can_capture_mouse() else 0)
+
+
 def train_worker(params):
     alpha, gamma, training_trials, depth_a, depth_b, reward_per_cat = params
-
-    def prepare(world):
-        world.can_cat_capture = []
-        for cat in world.cats:
-            world.can_cat_capture.append(1 if cat.can_capture_mouse() else 0)
 
     env = Environment(World(os.path.join(os.path.dirname(os.path.dirname( __file__ )),
                                          'worlds/waco2.txt'),
