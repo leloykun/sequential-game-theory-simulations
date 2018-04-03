@@ -105,7 +105,7 @@ def worker(params):
 
 
 def run(params, grid_params=False, test=False, to_save=True):
-    runs, training_trials, test_trials = process(params)
+    runs, training_trials, test_trials, base_reward = process(params)
 
     if test:
         worker((0.5, 0.5, training_trials, test_trials, 2, 2, 50))
@@ -113,9 +113,9 @@ def run(params, grid_params=False, test=False, to_save=True):
 
     params = []
     for run in range(runs):
-        params.append((0.5, 0.5, training_trials, test_trials, 2, 2, 50))
-        params.append((0.5, 0.5, training_trials, test_trials, 2, 4, 50))
-        params.append((0.5, 0.5, training_trials, test_trials, 4, 4, 50))
+        params.append((0.5, 0.5, training_trials, test_trials, 2, 2, base_reward))
+        params.append((0.5, 0.5, training_trials, test_trials, 2, 4, base_reward))
+        params.append((0.5, 0.5, training_trials, test_trials, 4, 4, base_reward))
 
     with mp.Pool(mp.cpu_count()-1) as pool:
         results = pool.map(worker, params)
