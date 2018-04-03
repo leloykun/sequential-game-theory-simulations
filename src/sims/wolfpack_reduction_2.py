@@ -2,6 +2,7 @@ import os
 import time
 import random
 import copy
+import math
 # import multiprocessing as mp
 
 import pathos.multiprocessing as mp
@@ -117,19 +118,26 @@ def test_worker(params):
 def generate_cats(runs, alpha, gamma, training_trials, depth_defective,
                   depth_cooperative, base_reward):
     defective_params = []
-    for run in range(runs):
+    for run in range(math.ceil(runs/2.0)):
         defective_params.append((alpha, gamma, training_trials,
                                    depth_defective, depth_defective,
                                    base_reward))
+    defective_cats = []
+    for param in defective_params:
+        defective_cats.append(train_worker(param))
+
     cooperative_params = []
-    for run in range(runs):
+    for run in range(math.ceil(runs/2.0)):
         cooperative_params.append((alpha, gamma, training_trials,
                                  depth_cooperative, depth_cooperative,
                                  base_reward))
+    cooperative_cats = []
+    for param in cooperative_params:
+        cooperative_cats.append(train_worker(param))
 
-    with mp.Pool(mp.cpu_count()) as pool:
+    '''with mp.ParallelPool(mp.cpu_count()) as pool:
         defective_cats = pool.map(train_worker, defective_params)
-        cooperative_cats = pool.map(train_worker, cooperative_params)
+        cooperative_cats = pool.map(train_worker, cooperative_params)'''
 
     return np.ravel(defective_cats), np.ravel(cooperative_cats)
 
@@ -152,7 +160,7 @@ def run(params, grid_params=False, test=False, to_save=True):
     #results = []
     #for param in params:
     #    results.append(test_worker(param))
-    with mp.Pool(mp.cpu_count()) as pool:
+    with mp.ProcessPool(mp.cpu_count()) as pool:
         results = pool.map(test_worker, params)
 
     results = np.array(results).reshape(runs, 3, 2)
