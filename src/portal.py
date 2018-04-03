@@ -12,6 +12,7 @@ from .sims import simple_migration
 from .sims import migration
 from .sims import wolfpack
 from .sims import wolfpack_reduction
+from .sims import wolfpack_reduction_2
 from .sims import wolfpack_scene
 
 
@@ -23,6 +24,7 @@ sim_modules = {"cat_mouse" : cat_mouse,
                "migration" : migration,
                "wolfpack" : wolfpack,
                "wolfpack_reduction" : wolfpack_reduction,
+               "wolfpack_reduction_2" : wolfpack_reduction_2,
                "wolfpack_scene": wolfpack_scene}
 
 
