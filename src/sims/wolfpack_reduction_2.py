@@ -149,7 +149,7 @@ def run(params, grid_params=False, test=False, to_save=True):
         results.append(test_worker(param))
 
     results = np.array(results).reshape(runs, 3, 2)
-    np.save(output_dir + 'run_test', results)
+    np.save(output_dir + 'results', results)
 
     print(results.shape)
     print(results)
