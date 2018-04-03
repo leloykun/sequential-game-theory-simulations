@@ -1,15 +1,15 @@
 # cat_mouse [runs] [trials] [steps]
 # cat_mouse 10 100 10
-# 
+#
 # cat_mouse_cheese [runs] [timesteps] [interval]
 # cat_mouse_cheese 10 10000 1000
-# 
+#
 # route_choice [runs] [timesteps] [num_drivers] [[road capacities]]
 # route_choice 10 1000 100 10 20 30 40
-# 
+#
 # simple_migration [runs] [timesteps] [temp_powers]
 # simple_migration 10 10000 5
-# 
+#
 # migration [runs] [timesteps] [num_mice]
 # migration 1 100000 3
 #
@@ -17,7 +17,7 @@
 # wolfpack 10 100 100
 #
 # wolfpack_reduction [runs] [training_trials] [test_trials]
-# wolfpack_reduction 30 100 100
+# wolfpack_reduction 10 20 20
 #
 # wolfpack_scene [training_trials] [test_trials] [step]
-wolfpack_scene 1000 0 100
+# wolfpack_scene 1000 0 100

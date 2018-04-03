@@ -26,44 +26,16 @@ sim_modules = {"cat_mouse" : cat_mouse,
                "wolfpack_scene": wolfpack_scene}
 
 
-def load_sims(list_file=os.path.join(os.path.dirname(__file__),
-                                     'sims/list.txt')):
+def run(sims):
     """
-    
+
     Parameters
     ----------
     list_file : str
-        
 
-    Returns
-    -------
-    dict {str : list of str}
-        
     """
-    sims = {}
+    # sims = load_sims(list_file)
 
-    with open(list_file) as f:
-        sims_list = f.readlines()
-
-        for line in sims_list:
-            if line[0] != '#':
-                sim_name, *params = line.split()
-                sims[sim_name] = params
-
-    return sims
-
-
-def run(list_file=os.path.join(os.path.dirname(__file__),
-                               'sims/list.txt')):
-    """
-    
-    Parameters
-    ----------
-    list_file : str
-        
-    """
-    sims = load_sims(list_file)
-    
     for sim_name in sims:
         params = sims[sim_name]
 
