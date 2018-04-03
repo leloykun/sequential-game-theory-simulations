@@ -143,6 +143,9 @@ def run(params, grid_params=False, test=False, to_save=True):
         params.append((test_trials, np.random.choice(defective_cats), np.random.choice(cooperative_cats)))
         params.append((test_trials, np.random.choice(cooperative_cats), np.random.choice(cooperative_cats)))
 
+    with mp.Pool(mp.cpu_count()-1) as pool:
+        results = pool.map(test_worker, params)
+
     results = np.array(results).reshape(runs, 3, 2, 2)
     np.save(output_dir + 'run_test', results)
 
