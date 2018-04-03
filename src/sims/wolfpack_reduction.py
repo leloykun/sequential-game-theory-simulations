@@ -112,16 +112,15 @@ def run(params, grid_params=False, test=False, to_save=True):
         return
 
     params = []
-    for reward in rewards_per_cat:
-        for run in range(runs):
-            params.append((0.5, 0.5, training_trials, test_trials, 2, 2, reward))
-            params.append((0.5, 0.5, training_trials, test_trials, 2, 4, reward))
-            params.append((0.5, 0.5, training_trials, test_trials, 4, 4, reward))
+    for run in range(runs):
+        params.append((0.5, 0.5, training_trials, test_trials, 2, 2, 50))
+        params.append((0.5, 0.5, training_trials, test_trials, 2, 4, 50))
+        params.append((0.5, 0.5, training_trials, test_trials, 4, 4, 50))
 
     with mp.Pool(mp.cpu_count()-1) as pool:
         results = pool.map(worker, params)
 
-    results = np.array(results).reshape(len(rewards_per_cat), runs, 3, 2, 2)
+    results = np.array(results).reshape(runs, 3, 2, 2)
     np.save(output_dir + 'run_test', results)
 
     print(results.shape)
