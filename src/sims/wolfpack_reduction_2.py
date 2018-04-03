@@ -113,19 +113,45 @@ def test_worker(params):
     return test_results
 
 
-def generate_cats(runs, alpha, gamma, training_trials, depth_a, depth_b, base_reward):
-    params = []
-    for run in range(runs):
-        params.append((alpha, gamma, training_trials, depth_a, depth_b, base_reward))
+def generate_cats(runs, alpha, gamma, training_trials, depth_defective,
+                  depth_cooperative, base_reward):
+    defective_cats = []
+    cooperative_cats = []
 
-    cats = []
+    params = []
+    for run in range(runs//2):
+        params.append((alpha, gamma, training_trials, depth_defective,
+                       depth_defective, base_reward))
+
     for param in params:
         cat_a, cat_b = train_worker(param)
         print(cat_a.total_rewards, cat_b.total_rewards)
-        cats.append(cat_a)
-        cats.append(cat_b)
+        defective_cats.append(cat_a)
+        defective_cats.append(cat_b)
 
-    return cats
+    params = []
+    for run in range(runs):
+        params.append((alpha, gamma, training_trials, depth_defective,
+                       depth_cooperative, base_reward))
+
+    for param in params:
+        cat_a, cat_b = train_worker(param)
+        print(cat_a.total_rewards, cat_b.total_rewards)
+        defective_cats.append(cat_a)
+        cooperative_cats.append(cat_b)
+
+    params = []
+    for run in range(runs//2):
+        params.append((alpha, gamma, training_trials, depth_cooperative,
+                       depth_cooperative, base_reward))
+
+    for param in params:
+        cat_a, cat_b = train_worker(param)
+        print(cat_a.total_rewards, cat_b.total_rewards)
+        cooperative_cats.append(cat_a)
+        cooperative_cats.append(cat_b)
+
+    return defective_cats, cooperative_cats
 
 
 def run(params, grid_params=False, test=False, to_save=True):
@@ -135,8 +161,7 @@ def run(params, grid_params=False, test=False, to_save=True):
         worker((0.5, 0.5, training_trials, test_trials, 2, 2, base_reward))
         return
 
-    defective_cats = generate_cats(runs, 0.5, 0.5, training_trials, 2, 2, base_reward)
-    cooperative_cats = generate_cats(runs, 0.5, 0.5, training_trials, 4, 4, base_reward)
+    defective_cats, cooperative_cats = generate_cats(runs, 0.5, 0.5, training_trials, 2, 4, base_reward)
 
     params = []
     for run in range(runs):
