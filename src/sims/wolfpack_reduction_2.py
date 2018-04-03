@@ -116,20 +116,20 @@ def test_worker(params):
 
 def generate_cats(runs, alpha, gamma, training_trials, depth_defective,
                   depth_cooperative, base_reward):
-    cooperative_params = []
+    defective_params = []
     for run in range(runs):
         cooperative_params.append((alpha, gamma, training_trials,
                                    depth_defective, depth_defective,
                                    base_reward))
-    defective_params = []
+    cooperative_params = []
     for run in range(runs):
         defective_params.append((alpha, gamma, training_trials,
                                  depth_cooperative, depth_cooperative,
                                  base_reward))
 
     with mp.Pool(mp.cpu_count()) as pool:
-        defective_cats = pool.map(train_worker, params)
-        cooperative_cats = pool.map(train_worker, params)
+        defective_cats = pool.map(train_worker, defective_params)
+        cooperative_cats = pool.map(train_worker, cooperative_params)
 
     return np.ravel(defective_cats), np.ravel(cooperative_cats)
 
