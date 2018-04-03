@@ -148,9 +148,9 @@ class WolfpackCat(Agent):
     def calc_reward(self):
         reward = 0
         if self.world.can_cat_capture[0]:
-            reward += 50
+            reward += self.reward_per_cat
         if self.world.can_cat_capture[1]:
-            reward += 50
+            reward += self.reward_per_cat
         return reward
 
     def update(self):
