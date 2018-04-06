@@ -118,7 +118,7 @@ def test_worker(params):
 def generate_cats(runs, alpha, gamma, training_trials, depth_defective,
                   depth_cooperative, base_reward):
     defective_params = []
-    for run in range(math.ceil(runs/2.0)):
+    for run in range(math.ceil(math.sqrt(runs))):
         defective_params.append((alpha, gamma, training_trials,
                                    depth_defective, depth_defective,
                                    base_reward))
@@ -129,7 +129,7 @@ def generate_cats(runs, alpha, gamma, training_trials, depth_defective,
         defective_cats.append([cat_a, cat_b])
 
     cooperative_params = []
-    for run in range(math.ceil(runs/2.0)):
+    for run in range(math.ceil(math.sqrt(runs))):
         cooperative_params.append((alpha, gamma, training_trials,
                                  depth_cooperative, depth_cooperative,
                                  base_reward))
