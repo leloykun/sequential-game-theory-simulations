@@ -219,54 +219,9 @@ __pycache__/*
 
 *.exe
 
-data/plots/*
-
-!data/plots/normed_perf_dist.png
-!data/plots/normed_perf_dist_2.png
-
-!data/plots/depth_heatmap/
+data/plots/cmc_regression/*
 data/plots/depth_heatmap/*
-
-!data/plots/depth_heatmap/cm/
-data/plots/depth_heatmap/cm/*
-!data/plots/depth_heatmap/cm/anim.mp4
-!data/plots/depth_heatmap/cm/anim_viewable.mp4
-
-!data/plots/depth_heatmap/cmc/
-data/plots/depth_heatmap/cmc/*
-!data/plots/depth_heatmap/cmc/anim.mp4
-!data/plots/depth_heatmap/cmc/anim_viewable.mp4
-
-!data/plots/regression/
+data/plots/english/*
 data/plots/regression/*
-
-!data/plots/regression/degree1/
-data/plots/regression/degree1/*
-!data/plots/regression/degree1/anim60.mp4
-<<<<<<< HEAD
-=======
-!data/plots/regression/degree1/frame315.jpeg
->>>>>>> master
-
-!data/plots/regression/degree2/
-data/plots/regression/degree2/*
-!data/plots/regression/degree2/anim60.mp4
-<<<<<<< HEAD
-=======
-!data/plots/regression/degree2/frame315.jpeg
->>>>>>> master
-
-!data/plots/regression/degree3/
-data/plots/regression/degree3/*
-!data/plots/regression/degree3/anim60.mp4
-<<<<<<< HEAD
-=======
-!data/plots/regression/degree3/frame315.jpeg
->>>>>>> master
-
-!data/plots/regression/logistic/
-data/plots/regression/logistic/*
-!data/plots/regression/logistic/anim60.mp4
-!data/plots/regression/logistic/frame315.jpeg
 
 data/tensorboard/*
