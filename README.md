@@ -1,4 +1,4 @@
-# Social Simulations with Reinforcement Learning
+# Simulations of Sequential Games with Multi-agent Reinforcement Learning
 
 [![Pisay](https://img.shields.io/badge/pshs-evc-blue.svg)](http://evc.pshs.edu.ph/)
 [![Build Status](https://travis-ci.org/leloykun/socialsims.svg?branch=master)](https://travis-ci.org/leloykun/socialsims)
